@@ -1,13 +1,58 @@
-<p>Titre: {{titre}}</p> <!--titre vient du fichier .ts-->
+<div id="toolbar">
+        <a routerLink="/home"><mat-icon aria-hidden="false" fontIcon="home"></mat-icon></a>
+        <a routerLink="/log"><mat-icon aria-hidden="false" fontIcon="perm_identity"></mat-icon></a>
+</div>
 
-<!--[ngStyle]="{'color': assignment.rendu ? 'green' : 'red'}"  (sans utiliser les classes en css)-->
+<mat-sidenav-container id="sidenav" mode="side">
+    <mat-list>
+        <mat-nav-list><a routerLink="/">Liste des devoirs</a></mat-nav-list>
+        <mat-nav-list><a routerLink="/">Ajout d'un devoir</a></mat-nav-list>
+        <mat-nav-list><a routerLink="/">Modification d'un devoir</a></mat-nav-list>
+        <mat-nav-list><a routerLink="/">Suppression d'un devoir</a></mat-nav-list>
+        <mat-nav-list><a routerLink="/">Génération de données de test</a></mat-nav-list>
+    </mat-list>
+</mat-sidenav-container>
+<p>{{titre}}</p> <!--titre vient du fichier .ts-->
+
+<form ngForm (submit)="onSubmit(); assignmentForm.reset"     #assignmentForm> <!-- un racourci pour écrire un id-->
+    <mat-form-field> <!--créer un champ de formulaire-->
+        <input matInput 
+               #nomAssignment placeholder="Nom du devoir"
+               [(ngModel)]="nomDevoir" 
+               name="nom" 
+        >
+        <!--ngModel est binding bi-directionnel pour afficher le nomDevoir-->
+    </mat-form-field>
+    
+    <mat-form-field>
+        <input matInput [matDatepicker]="picker"
+        [(ngModel)]="dateRendu"
+        name="date"
+        placeholder="Date de rendu"    
+    >
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker">
+    </mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    
+    <button mat-stroked-button 
+            color="primary" 
+            [disabled]="!ajoutActive"
+    >
+        Ajouter un devoir
+    </button>
+</form>
+<p dRendu *ngIf="dateRendu">{{nomDevoir}} date de rendu =  {{dateRendu}}</p><!--le binding bi-directionnel-->
+
+<!--[ngStyle]="{'color': assignment.rendu ? 'green' : 'red'}"  (sans utiliser les classes en css) on met ça à l'intérieur du <div....>-->
+<!-- [ngClass]="{'rendu':assignment.rendu, 'nonRendu': !assignment.rendu}" (en utilisant des clases) on met ça à l'intérieur du <div....-->
 <div *ngFor="let assignment of assignments"
      
-     [ngClass]="{'rendu':assignment.rendu, 'nonRendu': !assignment.rendu}"
-
 ><!--assignments est le nom du tableau dans .ts -->
     <ul>
-        <li *ngIf="assignment.rendu; else nonSoumis">
+        <li appRendu *ngIf="assignment.rendu; else nonSoumis">
             Devoir initulé {{assignment.nom}}, à rendre le {{assignment.dateDeRendu}}, soumis par l'élève: {{assignment.rendu}}.
         </li>
         <ng-template #nonSoumis> <!--on créer un template avec l'identifiant nonsoumis-->

@@ -6,3 +6,34 @@
     color: red;
     border: 1px solid black;
 }
+form {
+   display:flex;
+   flex-direction: column;
+   margin:5px;
+   width: 40%;
+}
+header{
+    background-color: aqua;
+}
+#toolbar{
+    display: flex;
+    justify-content: space-between;
+}
+.mat-icon{
+    height: 50px;
+    width: 50px;
+}
+.material-icons{
+    font-size: 3rem;
+}
+#sidenav{
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: end;
+} 
+
+.mat-list-base{
+    display: inline-block;
+    margin-right: 2rem;
+}
