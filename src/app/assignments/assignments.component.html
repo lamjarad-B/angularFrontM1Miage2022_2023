@@ -5,11 +5,11 @@
 
 <mat-sidenav-container id="sidenav" mode="side">
     <mat-list>
-        <mat-nav-list><a routerLink="/">Liste des devoirs</a></mat-nav-list>
-        <mat-nav-list><a routerLink="/">Ajout d'un devoir</a></mat-nav-list>
-        <mat-nav-list><a routerLink="/">Modification d'un devoir</a></mat-nav-list>
-        <mat-nav-list><a routerLink="/">Suppression d'un devoir</a></mat-nav-list>
-        <mat-nav-list><a routerLink="/">Génération de données de test</a></mat-nav-list>
+        <mat-nav-list class="menuNav"><a routerLink="/">Liste des devoirs</a></mat-nav-list>
+        <mat-nav-list class="menuNav"><a routerLink="/">Ajout d'un devoir</a></mat-nav-list>
+        <mat-nav-list class="menuNav"><a routerLink="/">Modification d'un devoir</a></mat-nav-list>
+        <mat-nav-list class="menuNav"><a routerLink="/">Suppression d'un devoir</a></mat-nav-list>
+        <mat-nav-list class="menuNav"><a routerLink="/">Génération de données de test</a></mat-nav-list>
     </mat-list>
 </mat-sidenav-container>
 <p>{{titre}}</p> <!--titre vient du fichier .ts-->
@@ -44,21 +44,24 @@
         Ajouter un devoir
     </button>
 </form>
-<p dRendu *ngIf="dateRendu">{{nomDevoir}} date de rendu =  {{dateRendu}}</p><!--le binding bi-directionnel-->
+<p *ngIf="dateRendu">{{nomDevoir}} date de rendu =  {{dateRendu | date}}</p><!--le binding bi-directionnel-->
 
 <!--[ngStyle]="{'color': assignment.rendu ? 'green' : 'red'}"  (sans utiliser les classes en css) on met ça à l'intérieur du <div....>-->
 <!-- [ngClass]="{'rendu':assignment.rendu, 'nonRendu': !assignment.rendu}" (en utilisant des clases) on met ça à l'intérieur du <div....-->
-<div *ngFor="let assignment of assignments"
-     
-><!--assignments est le nom du tableau dans .ts -->
-    <ul>
+<mat-list *ngFor="let assignment of assignments"><!--assignments est le nom du tableau dans .ts -->
+    <h3 mat-subheader>{{assignment.dateDeRendu | date}}</h3>
+    <mat-list-item (click)="assignmentClique(assignment)">
         <li appRendu *ngIf="assignment.rendu; else nonSoumis">
-            Devoir initulé {{assignment.nom}}, à rendre le {{assignment.dateDeRendu}}, soumis par l'élève: {{assignment.rendu}}.
+            Devoir initulé {{assignment.nom}}, à rendre le {{assignment.dateDeRendu | date}}, soumis par l'élève: {{assignment.rendu}}.
         </li>
         <ng-template #nonSoumis> <!--on créer un template avec l'identifiant nonsoumis-->
-            <li>Le devoir {{assignment.nom}} n'a pas été rendu.</li>
+            <li class="nonSoumis">Le devoir {{assignment.nom}} n'a pas été rendu.</li>
         </ng-template>
+        <mat-divider></mat-divider>
         
-    </ul>
-</div>
+    </mat-list-item>
+</mat-list>
 
+<app-assignment-detail>
+
+</app-assignment-detail>

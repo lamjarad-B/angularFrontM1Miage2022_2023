@@ -15,6 +15,9 @@ export class AssignmentsComponent implements OnInit {
   nomDevoir=""; // Pour récupérer la valeur du champs nom
 
   dateRendu!: Date; // Pour récupérer la valeur du champs dateDeRendu
+  
+  //
+  assignementSelectionne!:Assignment;
 
   assignments = [
     {
@@ -33,6 +36,8 @@ export class AssignmentsComponent implements OnInit {
       rendu: true
     },
   ]
+
+  
   constructor() { }
 
   ngOnInit(): void {
@@ -50,6 +55,8 @@ export class AssignmentsComponent implements OnInit {
 
     this.assignments.push(newAssignment);
   }
- 
+  assignmentClique(assignment:Assignment) {
+    this.assignementSelectionne = assignment;
+  }
   
 }

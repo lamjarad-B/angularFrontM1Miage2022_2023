@@ -16,13 +16,15 @@ import { FormsModule } from '@angular/forms';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatListModule} from '@angular/material/list'; 
+import {MatListModule} from '@angular/material/list';
+import { AssignmentDetailComponent } from './assignment-detail/assignment-detail.component'; 
 @NgModule({
   declarations: [
     //Tous les composants dans src/app peuvent utiliser ces modules
     AppComponent,
     AssignmentsComponent,
-    RenduDirective
+    RenduDirective,
+    AssignmentDetailComponent
   ],
   imports: [
     //Pour angular material

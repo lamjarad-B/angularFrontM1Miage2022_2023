@@ -33,7 +33,13 @@ header{
     text-align: end;
 } 
 
-.mat-list-base{
+.menuNav{
     display: inline-block;
     margin-right: 2rem;
+}
+
+.nonSoumis{
+    background-color: red;
+    border: 1px solid black;
+
 }
