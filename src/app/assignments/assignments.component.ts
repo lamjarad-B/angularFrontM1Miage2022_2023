@@ -17,7 +17,10 @@ export class AssignmentsComponent implements OnInit {
   dateRendu!: Date; // Pour récupérer la valeur du champs dateDeRendu
   
   //
-  assignementSelectionne!:Assignment;
+  assignmentSelectionne!:Assignment;
+  //
+
+  formVisible=false;
 
   assignments = [
     {
@@ -46,17 +49,16 @@ export class AssignmentsComponent implements OnInit {
     }, 2000)
   }
 
-  onSubmit() {
-    console.log(this.nomDevoir + "date de rendu = " + this.dateRendu);
-    const newAssignment = new Assignment();
-    newAssignment.nom = this.nomDevoir;
-    newAssignment.dateDeRendu = this.dateRendu;
-    newAssignment.rendu = false;
-
-    this.assignments.push(newAssignment);
-  }
+ 
   assignmentClique(assignment:Assignment) {
-    this.assignementSelectionne = assignment;
+    this.assignmentSelectionne = assignment;
   }
   
+  onAddAssignmentBtnClick(){
+    this.formVisible = true;
+  }
+  onNouvelAssignment(event:Assignment){
+    this.assignments.push(event);
+    this.formVisible = false;
+  }
 }

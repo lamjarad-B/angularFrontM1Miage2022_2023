@@ -6,12 +6,7 @@
     color: red;
     border: 1px solid black;
 }
-form {
-   display:flex;
-   flex-direction: column;
-   margin:5px;
-   width: 40%;
-}
+
 header{
     background-color: aqua;
 }
@@ -42,4 +37,11 @@ header{
     background-color: red;
     border: 1px solid black;
 
+}
+.container{
+    display: flex;
+    flex-direction: column;
+}
+.ajouterBtn{
+    align-self: flex-end;
 }

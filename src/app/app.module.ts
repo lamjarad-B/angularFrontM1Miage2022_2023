@@ -17,14 +17,20 @@ import { FormsModule } from '@angular/forms';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
-import { AssignmentDetailComponent } from './assignment-detail/assignment-detail.component'; 
+import { AssignmentDetailComponent } from './assignments/assignment-detail/assignment-detail.component'; 
+
+import {MatCardModule} from '@angular/material/card';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { AddAssignmentComponent } from './assignments/add-assignment/add-assignment.component'; 
+
 @NgModule({
   declarations: [
     //Tous les composants dans src/app peuvent utiliser ces modules
     AppComponent,
     AssignmentsComponent,
     RenduDirective,
-    AssignmentDetailComponent
+    AssignmentDetailComponent,
+    AddAssignmentComponent
   ],
   imports: [
     //Pour angular material
@@ -41,7 +47,9 @@ import { AssignmentDetailComponent } from './assignment-detail/assignment-detail
 
     MatToolbarModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatCardModule, // des cartes de presentation
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

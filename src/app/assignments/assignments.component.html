@@ -14,54 +14,42 @@
 </mat-sidenav-container>
 <p>{{titre}}</p> <!--titre vient du fichier .ts-->
 
-<form ngForm (submit)="onSubmit(); assignmentForm.reset"     #assignmentForm> <!-- un racourci pour écrire un id-->
-    <mat-form-field> <!--créer un champ de formulaire-->
-        <input matInput 
-               #nomAssignment placeholder="Nom du devoir"
-               [(ngModel)]="nomDevoir" 
-               name="nom" 
-        >
-        <!--ngModel est binding bi-directionnel pour afficher le nomDevoir-->
-    </mat-form-field>
-    
-    <mat-form-field>
-        <input matInput [matDatepicker]="picker"
-        [(ngModel)]="dateRendu"
-        name="date"
-        placeholder="Date de rendu"    
-    >
-    <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matSuffix [for]="picker">
-    </mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-
-    
-    <button mat-stroked-button 
-            color="primary" 
-            [disabled]="!ajoutActive"
-    >
-        Ajouter un devoir
+<main class="container" *ngIf="!formVisible">
+    <!--Boutton pour afficher le formulaire-->
+    <button class="ajouterBtn" mat-flat-button color="accent"
+    (click)="onAddAssignmentBtnClick()"
+    >   Ajouter Assignment
     </button>
-</form>
-<p *ngIf="dateRendu">{{nomDevoir}} date de rendu =  {{dateRendu | date}}</p><!--le binding bi-directionnel-->
+    <mat-list *ngFor="let assignment of assignments"></mat-list>
 
-<!--[ngStyle]="{'color': assignment.rendu ? 'green' : 'red'}"  (sans utiliser les classes en css) on met ça à l'intérieur du <div....>-->
-<!-- [ngClass]="{'rendu':assignment.rendu, 'nonRendu': !assignment.rendu}" (en utilisant des clases) on met ça à l'intérieur du <div....-->
-<mat-list *ngFor="let assignment of assignments"><!--assignments est le nom du tableau dans .ts -->
+
+    <p *ngIf="dateRendu">{{nomDevoir}} date de rendu =  {{dateRendu | date}}</p><!--le binding bi-directionnel-->
+
+    <!--[ngStyle]="{'color': assignment.rendu ? 'green' : 'red'}"  (sans utiliser les classes en css) on met ça à l'intérieur du <div....>-->
+    <!-- [ngClass]="{'rendu':assignment.rendu, 'nonRendu': !assignment.rendu}" (en utilisant des clases) on met ça à l'intérieur du <div....-->
+    <mat-list *ngFor="let assignment of assignments"><!--assignments est le nom du tableau dans .ts -->
     <h3 mat-subheader>{{assignment.dateDeRendu | date}}</h3>
-    <mat-list-item (click)="assignmentClique(assignment)">
-        <li appRendu *ngIf="assignment.rendu; else nonSoumis">
-            Devoir initulé {{assignment.nom}}, à rendre le {{assignment.dateDeRendu | date}}, soumis par l'élève: {{assignment.rendu}}.
-        </li>
-        <ng-template #nonSoumis> <!--on créer un template avec l'identifiant nonsoumis-->
-            <li class="nonSoumis">Le devoir {{assignment.nom}} n'a pas été rendu.</li>
-        </ng-template>
-        <mat-divider></mat-divider>
-        
+    <mat-list-item (click)="assignmentClique(assignment)"><!--quand je clique, j'appelle la méthode assignmentClique()-->
+    <li appRendu *ngIf="assignment.rendu; else nonSoumis">
+        Devoir initulé {{assignment.nom}}, à rendre le {{assignment.dateDeRendu | date}}, soumis par l'élève.
+    </li>
+    <ng-template #nonSoumis> <!--on créer un template avec l'identifiant nonsoumis-->
+        <li class="nonSoumis">Le devoir {{assignment.nom}} n'a pas été rendu.</li>
+    </ng-template>
+    <mat-divider></mat-divider> <!--pour faire un trait horizontal-->
+    
     </mat-list-item>
-</mat-list>
+    </mat-list>
 
-<app-assignment-detail>
+    <app-assignment-detail [assignmentTransmis]="assignmentSelectionne">
 
-</app-assignment-detail>
+    </app-assignment-detail>
+</main>
+
+<!--event est l'assignment transmis par le fils
+    onNouvelAssignment est une méthode du père qui récupère les données émises
+-->
+<app-add-assignment (nouvelAssignment)="onNouvelAssignment($event)" 
+    *ngIf="formVisible"
+>
+</app-add-assignment>

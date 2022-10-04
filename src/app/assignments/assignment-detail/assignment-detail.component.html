@@ -1,0 +1,18 @@
+
+<div class="container">
+    <mat-card *ngIf="assignmentTransmis"><!--Le *ngIf est là car sans lui lors du chargement initial de la page, assignementTransmis est undefined et une erreur s’affichait dans la console.
+    -->
+        <mat-card-title>
+            {{assignmentTransmis.nom}}
+        </mat-card-title>
+        <mat-card-subtitle>
+            {{assignmentTransmis.dateDeRendu | date}}
+        </mat-card-subtitle>
+        
+        <mat-checkbox *ngIf="!assignmentTransmis.rendu"
+                        (click)="onAssignmentRendu()"
+        >
+            Devoir rendu
+        </mat-checkbox>
+    </mat-card>
+</div>
