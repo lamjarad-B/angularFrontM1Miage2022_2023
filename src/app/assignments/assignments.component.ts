@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AssignmentsService } from '../shared/assignments.service';
 import { Assignment } from './assignment.model';
 @Component({
   selector: 'app-assignments',
@@ -22,33 +23,19 @@ export class AssignmentsComponent implements OnInit {
 
   formVisible=false;
 
-  assignments = [
-    {
-      nom:"TP1 web components",
-      dateDeRendu: new Date("2022-09-29"),
-      rendu: true
-    },
-    {
-      nom:"TP2 Angular",
-      dateDeRendu: new Date("2022-10-13"),
-      rendu: false
-    },
-    {
-      nom:"Mini projet angular",
-      dateDeRendu: new Date("2023-01-05"),
-      rendu: true
-    },
-  ]
-
+  assignments!:Assignment[];
   
-  constructor() { }
+  constructor(private assignmentService: AssignmentsService) { } //Ingection des services
 
   ngOnInit(): void {
-    setTimeout(() => { // ça permet d'activer le button après 2 secodes
-      this.ajoutActive = true;
-    }, 2000)
+    //this.assignments = this.assignmentsServices.getAssignments();// utilisation des services
+    this.getAssignment();
   }
 
+  getAssignment(){// Renvoie un Observable
+    this.assignmentService.getAssignments()
+    .subscribe(assignments => this.assignments = assignments);
+  }
  
   assignmentClique(assignment:Assignment) {
     this.assignmentSelectionne = assignment;
@@ -58,7 +45,13 @@ export class AssignmentsComponent implements OnInit {
     this.formVisible = true;
   }
   onNouvelAssignment(event:Assignment){
-    this.assignments.push(event);
+    //this.assignments.push(event);
+    this.assignmentService.addAssignment(event)
+    .subscribe(message => console.log(message)
+    );
     this.formVisible = false;
   }
+
+ 
+  
 }
