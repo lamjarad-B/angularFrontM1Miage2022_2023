@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Assignment } from '../assignments/assignment.model';
 import { Observable, of } from 'rxjs';
+import { LoggingService } from './logging.service';
 
-@Injectable({
+@Injectable({ // injecter tous les services qui ont provideIn root à la racine directement
+  // Permet d'éviter d'ajouter les services dans les modules
   providedIn: 'root'
 })
 export class AssignmentsService {
 
-  assignments = [
+  assignments:Assignment[] = [
     {
       nom:"TP1 web components",
       dateDeRendu: new Date("2022-09-29"),
@@ -25,7 +27,7 @@ export class AssignmentsService {
     },
   ]
 
-  constructor() { }
+  constructor(private loggingService:LoggingService) { }
   
   getAssignments():Observable<Assignment[]>{
     return of(this.assignments); // Tranforme le tableau en un observable
@@ -34,6 +36,9 @@ export class AssignmentsService {
   // Ajout d'un assignment
   addAssignment(assignment: Assignment): Observable<string>{
     this.assignments.push(assignment); // Ajout d'un assignment
+
+    this.loggingService.log(assignment.nom, "ajouté");
+
     return of('Assignment ajouté'); // on retourne une chaine de caractère
   }
 

@@ -34,7 +34,7 @@ export class AssignmentsComponent implements OnInit {
 
   getAssignment(){// Renvoie un Observable
     this.assignmentService.getAssignments()
-    .subscribe(assignments => this.assignments = assignments);
+      .subscribe(assignments => this.assignments = assignments);
   }
  
   assignmentClique(assignment:Assignment) {
