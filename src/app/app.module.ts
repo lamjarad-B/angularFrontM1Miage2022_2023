@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';// L'application de base
+import { Component, NgModule } from '@angular/core';// L'application de base
 import { BrowserModule } from '@angular/platform-browser';// Permet d'afficher l'application dans un navigateur
 
 import { AppComponent } from './app.component';
@@ -22,6 +22,19 @@ import { AssignmentDetailComponent } from './assignments/assignment-detail/assig
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AddAssignmentComponent } from './assignments/add-assignment/add-assignment.component'; 
+
+import { HttpClientModule } from '@angular/common/http';
+
+//import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes : Routes = [
+  //home page, ce qui sera affiché avec http://localhost:4200/
+  //ou http://localhost:4200/
+  {path:'', component:AssignmentsComponent},
+  //ou http://localhost:4200/home
+  {path:'home', component:AssignmentsComponent }
+];
 
 @NgModule({
   declarations: [
@@ -49,7 +62,11 @@ import { AddAssignmentComponent } from './assignments/add-assignment/add-assignm
     MatSidenavModule,
     MatListModule,
     MatCardModule, // des cartes de presentation
-    MatCheckboxModule
+    MatCheckboxModule,
+
+    RouterModule.forRoot(routes),
+
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

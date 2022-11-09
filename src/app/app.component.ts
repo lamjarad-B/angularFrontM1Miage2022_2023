@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']// Le style de ce composant
 })
 export class AppComponent {
-  title = 'assignment-app';
+  title = 'Application de gestion des devoirs à rendre (Assignments)';
 }
 
 
