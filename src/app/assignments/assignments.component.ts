@@ -23,13 +23,40 @@ export class AssignmentsComponent implements OnInit {
 
   formVisible=false;
 
+  // Pour la pagination
+
+  page: number=1;
+  limit: number=10;
+  totalDocs!: number;
+  totalPages!: number;
+  hasPrevPage!: boolean;
+  prevPage!: number;
+  hasNextPage!: boolean;
+  nextPage!: number;
+
   assignments!:Assignment[];
+
   
   constructor(private assignmentService: AssignmentsService) { } //Ingection des services
 
   ngOnInit(): void {
     //this.assignments = this.assignmentsServices.getAssignments();// utilisation des services
-    this.getAssignment();
+    //this.getAssignment();
+
+    this.assignmentService.getAssignmentsPagine(this.page, this.limit)
+    .subscribe(data => {
+      this.assignments = data.docs;
+      this.page = data.page;
+      this.limit = data.limit;
+      this.totalDocs = data.totalDocs;
+      this.totalPages = data.totalPages;
+      this.hasPrevPage = data.hasPrevPage;
+      this.prevPage = data.prevPage;
+      this.hasNextPage = data.hasNextPage;
+      this.nextPage = data.nextPage;
+      console.log("données reçues");
+    });
+
   }
 
   getAssignment(){// Renvoie un Observable

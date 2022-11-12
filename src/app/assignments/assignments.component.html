@@ -13,14 +13,22 @@
     </mat-list>
 </mat-sidenav-container>
 <p>{{titre}}</p> <!--titre vient du fichier .ts-->
+<p>Nb total de pages: {{totalPages}}</p>
+<p>Nb total d'assignments: {{totalDocs}}</p>
 
+<div class="containerButtonPreviousNext">
+    <button mat-raised-button color="primary"><<</button>&nbsp;
+    <button mat-raised-button color="primary"><</button>&nbsp;
+    <button mat-raised-button color="primary">></button>&nbsp;
+    <button mat-raised-button color="primary">>></button>&nbsp;
+</div>
 <main class="container" *ngIf="!formVisible">
     <!--Boutton pour afficher le formulaire-->
     <button class="ajouterBtn" mat-flat-button color="accent"
     (click)="onAddAssignmentBtnClick()"
     >   Ajouter Assignment
     </button>
-    <mat-list *ngFor="let assignment of assignments"></mat-list>
+    <!-- <mat-list *ngFor="let assignment of assignments"></mat-list> -->
 
 
     <p *ngIf="dateRendu">{{nomDevoir}} date de rendu =  {{dateRendu | date:'dd/MM/yyyy'}}</p><!--le binding bi-directionnel-->

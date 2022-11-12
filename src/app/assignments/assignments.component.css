@@ -45,3 +45,7 @@ header{
 .ajouterBtn{
     align-self: flex-end;
 }
+
+.containerButtonPreviousNext{
+    text-align: center;
+}

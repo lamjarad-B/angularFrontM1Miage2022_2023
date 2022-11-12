@@ -501,4 +501,3 @@ const bdInitialAssignments = [{"id":1,"nom":"Lexie","dateDeRendu":"1/9/2022","re
 
 export { bdInitialAssignments };
 
-import { bdInitialAssignments } from './data';

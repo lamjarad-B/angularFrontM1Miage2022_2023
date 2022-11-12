@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Assignment } from '../assignments/assignment.model';
-import { Observable, of } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
 import { LoggingService } from './logging.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import{ catchError, map, tap } from 'rxjs/operators';
+import { bdInitialAssignments } from './data';
 
 @Injectable({ // injecter tous les services qui ont provideIn root à la racine directement
   // Permet d'éviter d'ajouter les services dans les modules
@@ -28,6 +29,10 @@ export class AssignmentsService {
     //return of(this.assignments); // Tranforme le tableau en un observable
   }
 
+  getAssignmentsPagine(page:number, limit:number):Observable<any>{
+    return this.http.get<any>(this.url + "?page=" + page + "&limit=" + limit);
+  }
+
   getAssignment(id:number):Observable<Assignment|undefined>{
     return this.http.get<Assignment>(this.url + "/" + id).
     pipe(map(a => {
@@ -37,7 +42,8 @@ export class AssignmentsService {
     tap(_ => {
       console.log("tap: assignment avec id = " + id + " requête GET envoyée sur MongDB cloud");
     }),
-    catchError(this.handleError<Assignment>(`getAssignment(id=${id})`))
+    catchError(this.handleError<any>('### catchError: getAssignments by id avec id=' + id))
+    //catchError(this.handleError<Assignment>(`getAssignment(id=${id})`))
     );
   }
 
@@ -76,4 +82,40 @@ export class AssignmentsService {
     let deleteURI = this.url + '/' + assignment._id;
     return this.http.delete(deleteURI);
   }
+
+//   peuplerBD() {
+//  bdInitialAssignments.forEach(a => {
+//      let nouvelAssignment = new Assignment();
+//      nouvelAssignment.nom = a.nom;
+//      nouvelAssignment.id = a.id;
+//      nouvelAssignment.dateDeRendu = new Date(a.dateDeRendu);
+//      nouvelAssignment.rendu = a.rendu;
+
+//      this.addAssignment(nouvelAssignment)
+//      .subscribe(reponse => {
+//        console.log(reponse.message);
+//      })
+//    });
+
+//    console.log("### TOUS LES ASSIGNMENTS SONT AJOUTES !! ###");
+   
+//  }
+
+peuplerBDAvecForkJoin(): Observable<any> {
+  const appelsVersAddAssignment:any = [];
+
+  bdInitialAssignments.forEach((a) => {
+    const nouvelAssignment:any = new Assignment();
+
+    nouvelAssignment.id = a.id;
+    nouvelAssignment.nom = a.nom;
+    nouvelAssignment.dateDeRendu = new Date(a.dateDeRendu);
+    nouvelAssignment.rendu = a.rendu;
+
+    appelsVersAddAssignment.push(this.addAssignment(nouvelAssignment));
+  });
+  return forkJoin(appelsVersAddAssignment); // renvoie un seul Observable pour dire que c'est fini
+}
+
+
 }
