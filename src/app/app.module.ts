@@ -12,18 +12,18 @@ import { MatDatepickerModule } from '@angular/material/datepicker';// On récup�
 import { MatNativeDateModule } from '@angular/material/core';
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { RenduDirective } from './shared/rendu.directive'; // Correspond au module qu'on a créer
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormControl, Validators } from '@angular/forms';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
-import { AssignmentDetailComponent } from './assignments/assignment-detail/assignment-detail.component'; 
+import { AssignmentDetailComponent } from './assignments/assignment-detail/assignment-detail.component';
 
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { AddAssignmentComponent } from './assignments/add-assignment/add-assignment.component'; 
-import { AssignmentsService } from './shared/assignments.service'; 
-import { AuthGuard } from './shared/auth.guard'; 
+import { AddAssignmentComponent } from './assignments/add-assignment/add-assignment.component';
+import { AssignmentsService } from './shared/assignments.service';
+import { AuthGuard } from './shared/auth.guard';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -73,11 +73,11 @@ const routes : Routes = [
     MatCardModule, // des cartes de presentation
     MatCheckboxModule,
     MatSlideToggleModule,
-    
+
     RouterModule.forRoot(routes),
 
     HttpClientModule,
-    
+
   ],
   providers: [],
   bootstrap: [AppComponent]
