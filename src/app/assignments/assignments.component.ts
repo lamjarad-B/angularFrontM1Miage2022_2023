@@ -66,7 +66,7 @@ export class AssignmentsComponent implements OnInit {
 			.subscribe(assignments => this.assignments = assignments);
 	}
 
-	assignmentClique(assignment:Assignment) {
+	assignmentClique(assignment: Assignment) {
 		this.assignmentSelectionne = assignment;
 	}
 

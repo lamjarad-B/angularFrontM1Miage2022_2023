@@ -47,21 +47,19 @@
 	<!-- [ngClass]="{'rendu':assignment.rendu, 'nonRendu': !assignment.rendu}" (en utilisant des clases) on met ça à l'intérieur du <div....-->
 	<mat-list *ngFor="let assignment of assignments"><!--assignments est le nom du tableau dans .ts -->
 		<nav>
-			<a routerLink="/assignment/{{assignment.id}}">
+			<a routerLink="/assignment/{{assignment.id}}" [style.pointer-events]="isLogged ? 'none' : 'auto'" >
 				<h3 mat-subheader>{{assignment.dateDeRendu | date:'dd/MM/yyyy'}}</h3>
 
 				<mat-list-item (click)="assignmentClique(assignment)"><!--quand je clique, j'appelle la méthode assignmentClique()-->
-
 					<li appRendu *ngIf="assignment.rendu; else nonSoumis">
-					Devoir intitulé {{assignment.nom}}, à rendre le {{assignment.dateDeRendu | date:'dd/MM/yyyy'}}, soumis par l'élève.
-				</li>
+						Devoir intitulé {{assignment.nom}}, à rendre le {{assignment.dateDeRendu | date:'dd/MM/yyyy'}}, soumis par l'élève.
+					</li>
 
-				<ng-template #nonSoumis> <!--on créer un template avec l'identifiant nonsoumis-->
-					<li class="nonSoumis">Le devoir {{assignment.nom}} n'a pas été rendu.</li>
-				</ng-template>
+					<ng-template #nonSoumis> <!--on créer un template avec l'identifiant nonsoumis-->
+						<li class="nonSoumis">Le devoir {{assignment.nom}} n'a pas été rendu.</li>
+					</ng-template>
 
-				<mat-divider></mat-divider> <!--pour faire un trait horizontal-->
-
+					<mat-divider></mat-divider> <!--pour faire un trait horizontal-->
 				</mat-list-item>
 			</a>
 		</nav>
