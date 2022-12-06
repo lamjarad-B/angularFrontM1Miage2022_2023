@@ -47,7 +47,7 @@
 	<!-- [ngClass]="{'rendu':assignment.rendu, 'nonRendu': !assignment.rendu}" (en utilisant des clases) on met ça à l'intérieur du <div....-->
 	<mat-list *ngFor="let assignment of assignments"><!--assignments est le nom du tableau dans .ts -->
 		<nav>
-			<a routerLink="/assignment/{{assignment.id}}" [style.pointer-events]="isLogged ? 'none' : 'auto'" >
+			<a routerLink="/assignment/{{assignment.id}}" [style.pointer-events]="isLogged ? 'auto' : 'none'" >
 				<h3 mat-subheader>{{assignment.dateDeRendu | date:'dd/MM/yyyy'}}</h3>
 
 				<mat-list-item (click)="assignmentClique(assignment)"><!--quand je clique, j'appelle la méthode assignmentClique()-->
