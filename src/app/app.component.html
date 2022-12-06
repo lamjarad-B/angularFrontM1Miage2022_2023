@@ -1,7 +1,10 @@
 
-<h1>
-    <nav><a routerLink="/home">{{title}}</a></nav>
-</h1>
+<div class="container">
+    <h1>
+        <nav><a routerLink="/home">{{title}}</a></nav>
+    </h1>
+    <mat-slide-toggle color="primary" (click)="login()">Login</mat-slide-toggle>
+</div>
 
 <button mat-flat-button color="primary" (click)="initialiserLaBaseAvecDonneesDeTest()">PeuplerBD</button>
 <router-outlet></router-outlet> <!--Affiche le composant correspondant à la route!  -->

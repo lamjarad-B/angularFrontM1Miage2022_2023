@@ -23,6 +23,7 @@ export class AssignmentsService {
               private http:HttpClient) { }
 
   url = "http://localhost:8010/api/assignments";
+  //url = "https://api-cours-angular-2023.herokuapp.com/api/assignments";
   
   getAssignments():Observable<Assignment[]>{
     return this.http.get<Assignment[]>(this.url)
@@ -69,6 +70,7 @@ export class AssignmentsService {
 
   // Modification d'un assignment
   updateAssignment(assignment: Assignment): Observable<any>{
+    //this.loggingService.log(assignment.nom, "modifié !");
     return this.http.put<Assignment>(this.url, assignment);
     //return of('Assignment service: assignment modifié !'); // on retourne une chaine de caractère
   }

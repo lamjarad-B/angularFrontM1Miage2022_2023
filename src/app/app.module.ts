@@ -22,18 +22,26 @@ import { AssignmentDetailComponent } from './assignments/assignment-detail/assig
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AddAssignmentComponent } from './assignments/add-assignment/add-assignment.component'; 
+import { AssignmentsService } from './shared/assignments.service'; 
+import { AuthGuard } from './shared/auth.guard'; 
 
 import { HttpClientModule } from '@angular/common/http';
 
 //import { Routes } from '@angular/router';
 import { RouterModule, Routes } from '@angular/router';
+import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assignment.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 const routes : Routes = [
   //home page, ce qui sera affiché avec http://localhost:4200/
   //ou http://localhost:4200/
   {path:'', component:AssignmentsComponent},
   //ou http://localhost:4200/home
-  {path:'home', component:AssignmentsComponent }
+  {path:'home', component:AssignmentsComponent },
+  {path:'add', component:AddAssignmentComponent },
+  {path:'assignment/:id', component:AddAssignmentComponent },
+  {path:'assignment/:id/edit', component:EditAssignmentComponent, canActivate:[AuthGuard] },
+
 ];
 
 @NgModule({
@@ -43,7 +51,8 @@ const routes : Routes = [
     AssignmentsComponent,
     RenduDirective,
     AssignmentDetailComponent,
-    AddAssignmentComponent
+    AddAssignmentComponent,
+    EditAssignmentComponent
   ],
   imports: [
     //Pour angular material
@@ -63,10 +72,12 @@ const routes : Routes = [
     MatListModule,
     MatCardModule, // des cartes de presentation
     MatCheckboxModule,
-
+    MatSlideToggleModule,
+    
     RouterModule.forRoot(routes),
 
-    HttpClientModule
+    HttpClientModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
