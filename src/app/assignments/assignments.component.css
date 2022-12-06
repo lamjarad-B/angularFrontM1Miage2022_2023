@@ -1,51 +1,56 @@
 .rendu{
-    color: green;
-    border: 1px solid black;
+	color: green;
+	border: 1px solid black;
 }
+
 .nonRendu{
-    color: red;
-    border: 1px solid black;
+	color: red;
+	border: 1px solid black;
 }
 
 header{
-    background-color: aqua;
+	background-color: aqua;
 }
+
 #toolbar{
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
+
 .mat-icon{
-    height: 50px;
-    width: 50px;
+	height: 50px;
+	width: 50px;
 }
+
 .material-icons{
-    font-size: 3rem;
+	font-size: 3rem;
 }
+
 #sidenav{
-    width: auto;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: end;
-} 
+	width: auto;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: end;
+}
 
 .menuNav{
-    display: inline-block;
-    margin-right: 2rem;
+	display: inline-block;
+	margin-right: 2rem;
 }
 
 .nonSoumis{
-    background-color: red;
-    border: 1px solid black;
+	background-color: red;
+	border: 1px solid black;
 
 }
 .container{
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 .ajouterBtn{
-    align-self: flex-end;
+	align-self: flex-end;
 }
 
 .containerButtonPreviousNext{
-    text-align: center;
+	text-align: center;
 }

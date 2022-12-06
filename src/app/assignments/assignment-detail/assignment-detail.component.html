@@ -1,26 +1,23 @@
-
 <div class="container">
-    <mat-card *ngIf="assignmentTransmis"><!--Le *ngIf est là car sans lui lors du chargement initial de la page, assignementTransmis est undefined et une erreur s’affichait dans la console.
-    -->
-        <mat-card-title>{{assignmentTransmis.nom}}</mat-card-title>
-        <mat-card-subtitle>{{assignmentTransmis.dateDeRendu|date}}</mat-card-subtitle>
-    
-        <div id="bottom">
-        <mat-checkbox *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()">
-            Devoir rendu
-        </mat-checkbox>
-        <nav><a routerLink="/assignment/{{assignmentTransmis.id}}/edit">
-            <button mat-stroked-button
-                    color="primary"
-                    type="submit"
-                    [disabled]="!isAdmin()"
-            >
-            EDIT
-        </button>
-            </a></nav>
-        <button mat-flat-button color="warn" (click)="onDelete()">
-            DELETE
-        </button>
-        </div>
-    </mat-card>
+	<mat-card *ngIf="assignmentTransmis"><!--Le *ngIf est là car sans lui lors du chargement initial de la page, assignementTransmis est undefined et une erreur s’affichait dans la console.
+	-->
+		<mat-card-title>{{assignmentTransmis.nom}}</mat-card-title>
+		<mat-card-subtitle>{{assignmentTransmis.dateDeRendu|date}}</mat-card-subtitle>
+
+		<div id="bottom">
+			<mat-checkbox *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()">
+				Devoir rendu
+			</mat-checkbox>
+
+			<nav>
+				<a routerLink="/assignment/{{assignmentTransmis.id}}/edit">
+					<button mat-stroked-button color="primary" type="submit" [disabled]="!isAdmin()">EDIT</button>
+				</a>
+			</nav>
+
+			<button mat-flat-button color="warn" (click)="onDelete()">
+				DELETE
+			</button>
+		</div>
+	</mat-card>
 </div>

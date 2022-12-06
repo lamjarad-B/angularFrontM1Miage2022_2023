@@ -1,29 +1,21 @@
 <form ngForm (submit)="onSubmit(); assignmentForm.reset" #assignmentForm> <!-- un racourci pour écrire un id-->
-    <mat-form-field> <!--créer un champ de formulaire-->
-        <input matInput 
-               #nomAssignment placeholder="Nom du devoir"
-               [(ngModel)]="nomDevoir" 
-               name="nom" 
-        >
-        <!--ngModel est binding bi-directionnel pour afficher le nomDevoir-->
-    </mat-form-field>
-    
-    <mat-form-field>
-        <input matInput [matDatepicker]="picker"
-        [(ngModel)]="dateRendu"
-        name="date"
-        placeholder="Date de rendu"    
-    >
-    <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matSuffix [for]="picker">
-    </mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+	<mat-form-field>
+		<!--créer un champ de formulaire-->
+		<input matInput #nomAssignment placeholder="Nom du devoir" [(ngModel)]="nomDevoir" name="nom" />
+		<!--ngModel est binding bi-directionnel pour afficher le nomDevoir-->
+	</mat-form-field>
 
-    
-    <button mat-stroked-button 
-            color="primary" 
-    >
-        Ajouter un devoir
-    </button>
+	<mat-form-field>
+		<input matInput [matDatepicker]="picker" [(ngModel)]="dateRendu" name="date" placeholder="Date de rendu" />
+
+		<mat-hint>MM/DD/YYYY</mat-hint>
+
+		<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+
+		<mat-datepicker #picker></mat-datepicker>
+	</mat-form-field>
+
+	<button mat-stroked-button color="primary">
+		Ajouter un devoir
+	</button>
 </form>
