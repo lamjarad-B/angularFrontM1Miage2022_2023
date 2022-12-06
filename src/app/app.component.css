@@ -1,49 +1,49 @@
 
 h1{
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 section {
-    display: table;
-  }
+	display: table;
+}
 
-  .example-label {
-    display: table-cell;
-    font-size: 14px;
-    margin-left: 8px;
-    min-width: 120px;
-  }
+.example-label {
+	display: table-cell;
+	font-size: 14px;
+	margin-left: 8px;
+	min-width: 120px;
+}
 
-  .example-button-row {
-    display: table-cell;
-    width: 490px;
-  }
+.example-button-row {
+	display: table-cell;
+	width: 490px;
+}
 
-  .example-button-row .mat-button-base {
-    margin: 8px 8px 8px 0;
-  }
+.example-button-row .mat-button-base {
+	margin: 8px 8px 8px 0;
+}
 
-  .example-flex-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
+.example-flex-container {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
 
-  .example-button-container {
-    display: flex;
-    justify-content: center;
-    width: 120px;
-  }
+.example-button-container {
+	display: flex;
+	justify-content: center;
+	width: 120px;
+}
 
-  .login mat-form-field + mat-form-field {
-    margin-left: 8px;
-  }
+.login mat-form-field + mat-form-field {
+	margin-left: 8px;
+}
 
-  .example-right-align {
-    text-align: right;
-  }
+.example-right-align {
+	text-align: right;
+}
 
-  input.example-right-align::-webkit-outer-spin-button,
-  input.example-right-align::-webkit-inner-spin-button {
-    display: none;
-  }
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+	display: none;
+}

@@ -1,34 +1,34 @@
 
 <div class="container">
-    <h1>
-        <nav><a routerLink="/home">{{title}}</a></nav>
-    </h1>
+	<h1>
+		<nav><a routerLink="/home">{{title}}</a></nav>
+	</h1>
 
-    <!-- Bouton de connexion/déconnexion -->
-    <button class="ajouterBtn" mat-flat-button color="accent" (click)="showLogin()" *ngIf="!loginVisible && !isLogged">Se connecter</button>
-    <button class="ajouterBtn" mat-flat-button color="accent" (click)="showLogin()" *ngIf="isLogged">Se déconnecter</button>
+	<!-- Bouton de connexion/déconnexion -->
+	<button class="ajouterBtn" mat-flat-button color="accent" (click)="showLogin()" *ngIf="!loginVisible && !isLogged">Se connecter</button>
+	<button class="ajouterBtn" mat-flat-button color="accent" (click)="logout()" *ngIf="isLogged">Se déconnecter</button>
 
-    <!-- Formulaire de connexion -->
-    <div class="login" *ngIf="loginVisible">
-        <!-- Email -->
-        <mat-form-field appearance="fill">
-            <mat-label>Entrer votre email</mat-label>
-            <input matInput [(ngModel)]="email" required>
-            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-        </mat-form-field>
+	<!-- Formulaire de connexion -->
+	<div class="login" *ngIf="loginVisible">
+		<!-- Email -->
+		<mat-form-field appearance="fill">
+			<mat-label>Entrer votre email</mat-label>
+			<input matInput [(ngModel)]="email" required>
+			<mat-error *ngIf="validator.invalid">{{getErrorMessage()}}</mat-error>
+		</mat-form-field>
 
-        <!-- Password -->
-        <mat-form-field appearance="fill">
-            <mat-label>Entrer votre mot de passe</mat-label>
-            <input matInput [(ngModel)]="password" [type]="hide ? 'password' : 'text'">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-        </mat-form-field>
+		<!-- Password -->
+		<mat-form-field appearance="fill">
+			<mat-label>Entrer votre mot de passe</mat-label>
+			<input matInput [(ngModel)]="password" [type]="hide ? 'password' : 'text'">
+			<button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+				<mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+			</button>
+		</mat-form-field>
 
-        <!-- Bouton "se connecter" -->
-        <button class="ajouterBtn" mat-flat-button color="accent" (click)="login()">Se connecter</button>
-    </div>
+		<!-- Bouton "se connecter" -->
+		<button class="ajouterBtn" mat-flat-button color="accent" (click)="login()">Se connecter</button>
+	</div>
 </div>
 
 <button mat-flat-button color="primary" (click)="initialiserLaBaseAvecDonneesDeTest()">PeuplerBD</button>

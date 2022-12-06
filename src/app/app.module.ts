@@ -33,53 +33,52 @@ import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assi
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 const routes : Routes = [
-  //home page, ce qui sera affiché avec http://localhost:4200/
-  //ou http://localhost:4200/
-  {path:'', component:AssignmentsComponent},
-  //ou http://localhost:4200/home
-  {path:'home', component:AssignmentsComponent },
-  {path:'add', component:AddAssignmentComponent },
-  {path:'assignment/:id', component:AddAssignmentComponent },
-  {path:'assignment/:id/edit', component:EditAssignmentComponent, canActivate:[AuthGuard] },
-
+	//home page, ce qui sera affiché avec http://localhost:4200/
+	//ou http://localhost:4200/
+	{path:'', component:AssignmentsComponent},
+	//ou http://localhost:4200/home
+	{path:'home', component:AssignmentsComponent },
+	{path:'add', component:AddAssignmentComponent },
+	{path:'assignment/:id', component:AddAssignmentComponent },
+	{path:'assignment/:id/edit', component:EditAssignmentComponent, canActivate:[AuthGuard] },
 ];
 
 @NgModule({
-  declarations: [
-    //Tous les composants dans src/app peuvent utiliser ces modules
-    AppComponent,
-    AssignmentsComponent,
-    RenduDirective,
-    AssignmentDetailComponent,
-    AddAssignmentComponent,
-    EditAssignmentComponent
-  ],
-  imports: [
-    //Pour angular material
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatButtonModule,//on utilise le module button
-    MatIconModule,//on utilise le module icon
-    MatDividerModule,//on utilise le module divider
-    MatInputModule,
-    MatFormFieldModule,
-    FormsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
+	declarations: [
+		//Tous les composants dans src/app peuvent utiliser ces modules
+		AppComponent,
+		AssignmentsComponent,
+		RenduDirective,
+		AssignmentDetailComponent,
+		AddAssignmentComponent,
+		EditAssignmentComponent
+	],
+	imports: [
+		//Pour angular material
+		BrowserModule,
+		BrowserAnimationsModule,
+		MatButtonModule,//on utilise le module button
+		MatIconModule,//on utilise le module icon
+		MatDividerModule,//on utilise le module divider
+		MatInputModule,
+		MatFormFieldModule,
+		FormsModule,
+		MatDatepickerModule,
+		MatNativeDateModule,
 
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule,
-    MatCardModule, // des cartes de presentation
-    MatCheckboxModule,
-    MatSlideToggleModule,
+		MatToolbarModule,
+		MatSidenavModule,
+		MatListModule,
+		MatCardModule, // des cartes de presentation
+		MatCheckboxModule,
+		MatSlideToggleModule,
 
-    RouterModule.forRoot(routes),
+		RouterModule.forRoot(routes),
 
-    HttpClientModule,
-
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+		HttpClientModule,
+	],
+	providers: [],
+	bootstrap: [AppComponent]
 })
+
 export class AppModule { }

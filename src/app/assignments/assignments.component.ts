@@ -20,12 +20,12 @@ export class AssignmentsComponent implements OnInit {
 	dateRendu!: Date; // Pour récupérer la valeur du champs dateDeRendu
 
 	//
-	assignmentSelectionne!:Assignment;
+	assignmentSelectionne!: Assignment;
+
 	//
 	formVisible=false;
 
 	// Pour la pagination
-
 	page: number=1;
 	limit: number=10;
 	totalDocs!: number;
@@ -37,32 +37,28 @@ export class AssignmentsComponent implements OnInit {
 
 	assignments!:Assignment[];
 
-	isLogged = false;
-
+	// Récupère l'état de la connexion.
+	isLogged = this.authService.loggedIn;
 
 	constructor(private authService:AuthService, private assignmentService: AssignmentsService) { } //Ingection des services
 
 	ngOnInit(): void {
 		//this.assignments = this.assignmentsServices.getAssignments();// utilisation des services
 		//this.getAssignment();
-
-		// On récupère l'état de la connexion à l'initialisation du composant.
-		this.isLogged = this.authService.loggedIn;
-
 		this.assignmentService.getAssignmentsPagine(this.page, this.limit)
-		.subscribe(data => {
-			this.assignments = data.docs;
-			this.page = data.page;
-			this.limit = data.limit;
-			this.totalDocs = data.totalDocs;
-			this.totalPages = data.totalPages;
-			this.hasPrevPage = data.hasPrevPage;
-			this.prevPage = data.prevPage;
-			this.hasNextPage = data.hasNextPage;
-			this.nextPage = data.nextPage;
-			console.log("données reçues");
-		});
+			.subscribe(data => {
+				this.assignments = data.docs;
+				this.page = data.page;
+				this.limit = data.limit;
+				this.totalDocs = data.totalDocs;
+				this.totalPages = data.totalPages;
+				this.hasPrevPage = data.hasPrevPage;
+				this.prevPage = data.prevPage;
+				this.hasNextPage = data.hasNextPage;
+				this.nextPage = data.nextPage;
 
+				console.log("données reçues");
+			});
 	}
 
 	getAssignment(){// Renvoie un Observable
@@ -77,6 +73,7 @@ export class AssignmentsComponent implements OnInit {
 	onAddAssignmentBtnClick(){
 		// this.formVisible = true;
 	}
+
 	// onNouvelAssignment(event:Assignment){
 	//   //this.assignments.push(event);
 	//   this.assignmentService.addAssignment(event)
