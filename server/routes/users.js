@@ -16,44 +16,41 @@ function checkCredentials(request, result)
 			.status(400)
 			.send("Mauvaise requête");
 	} else {
-		// Génération du hash du mot de passe.
-		// Source : https://coderrocketfuel.com/article/store-passwords-in-mongodb-with-node-js-mongoose-and-bcrypt
-		bcrypt.genSalt(saltRounds, function (saltError, salt) {
-			if (saltError) {
-				throw saltError
-			} else {
-				bcrypt.hash(password, salt, function(hashError, hash) {
-					if (hashError) {
-						throw hashError
+		// Recherche de l'utilisateur dans la base de données.
+		UserSchema.findOne({
+			email: email
+		}, (err, user) => {
+			if (err) {
+				// Erreur interne de la base de données.
+				console.log(err);
+				result
+					.status(500)
+					.send(err.message)
+			} else if (user) {
+				// Comparaison du mot de passe (hash).
+				// Source : https://coderrocketfuel.com/article/store-passwords-in-mongodb-with-node-js-mongoose-and-bcrypt
+				bcrypt.compare(password, user.password, function(error, isMatch) {
+					if (error) {
+						throw error
+					} else if (!isMatch) {
+						// Mot de passe incorrect.
+						result
+							.status(401)
+							.send("Mot de passe incorrect");
 					} else {
-						// Recherche de l'utilisateur dans la base de données.
-						UserSchema.findOne({
-							email: email,
-							password: hash
-						}, (err, user) => {
-							if (err) {
-								// Erreur interne de la base de données.
-								console.log(err);
-								result
-									.status(500)
-									.send("Erreur interne du serveur");
-							} else if (user) {
-								// Utilisateur trouvé.
-								result
-									.status(200)
-									.send("Utilisateur trouvé");
-							} else {
-								// Utilisateur introuvable.
-								result
-									.status(404)
-									.send("Utilisateur introuvable");
-							}
-						});
-
+						// Utilisateur trouvé.
+						result
+							.status(200)
+							.json({found: true, admin: user.admin})
 					}
 				})
+			} else {
+				// Utilisateur introuvable.
+				result
+					.status(404)
+					.send("Utilisateur introuvable");
 			}
-		})
+		});
 	}
 }
 

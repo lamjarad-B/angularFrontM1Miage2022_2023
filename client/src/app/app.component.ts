@@ -34,12 +34,12 @@ export class AppComponent {
 
 	constructor(private authService:AuthService, private router:Router, private assignmentService: AssignmentsService){}
 
-	login() {
+	async login() {
 		// Vérification de la présence d'un email/password
 		if (!this.email || !this.password) { return; }
 
 		// Appel du service d'authentification
-		this.authService.logIn(this.email, this.password);
+		await this.authService.logIn(this.email, this.password);
 
 		// Vérifie si l'utilisateur a été authentifié.
 		if (this.authService.loggedIn) {
