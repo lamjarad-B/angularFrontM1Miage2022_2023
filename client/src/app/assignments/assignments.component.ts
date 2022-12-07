@@ -20,7 +20,7 @@ export class AssignmentsComponent implements OnInit {
 	dateRendu!: Date; // Pour récupérer la valeur du champs dateDeRendu
 
 	// Devoir sélectionné par l'utilisateur.
-	assignmentSelectionne!: Assignment;
+	assignmentSelectionne!: Assignment | undefined;
 
 	// Affichage ou non du formulaire d'ajout d'un devoir.
 	formVisible = false;
@@ -67,7 +67,13 @@ export class AssignmentsComponent implements OnInit {
 	}
 
 	assignmentClique(assignment: Assignment) {
-		this.assignmentSelectionne = assignment;
+		if (this.assignmentSelectionne === assignment) {
+			// Si le devoir est déjà sélectionné, on cache alors ses détails.
+			this.assignmentSelectionne = undefined;
+		} else {
+			// Dans le cas contraire, on met à jour les détails du devoir.
+			this.assignmentSelectionne = assignment;
+		}
 	}
 
 	onAddAssignmentBtnClick() {
