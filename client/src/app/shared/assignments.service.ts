@@ -1,20 +1,20 @@
-import { Injectable } from '@angular/core';
-import { Assignment } from '../assignments/assignment.model';
-import { forkJoin, Observable, of } from 'rxjs';
-import { LoggingService } from './logging.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import{ catchError, map, tap } from 'rxjs/operators';
-import { bdInitialAssignments } from './data';
+import { Injectable } from "@angular/core";
+import { Assignment } from "../assignments/assignment.model";
+import { forkJoin, Observable, of } from "rxjs";
+import { LoggingService } from "./logging.service";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import{ catchError, map, tap } from "rxjs/operators";
+import { bdInitialAssignments } from "./data";
 
 @Injectable({ // injecter tous les services qui ont provideIn root à la racine directement
 	// Permet d'éviter d'ajouter les services dans les modules
-	providedIn: 'root'
+	providedIn: "root"
 })
 
 export class AssignmentsService {
 	private HttpOptions ={
 		headers: new HttpHeaders({
-			'Content-Type': 'application/json'
+			"Content-Type": "application/json"
 		})
 	};
 
@@ -44,7 +44,7 @@ export class AssignmentsService {
 		tap(_ => {
 			console.log("tap: assignment avec id = " + id + " requête GET envoyée sur MongDB cloud");
 		}),
-		catchError(this.handleError<any>('### catchError: getAssignments by id avec id=' + id))
+		catchError(this.handleError<any>("### catchError: getAssignments by id avec id= " + id))
 		//catchError(this.handleError<Assignment>(`getAssignment(id=${id})`))
 		);
 	}
@@ -64,7 +64,7 @@ export class AssignmentsService {
 
 		// this.loggingService.log(assignment.nom, "ajouté");
 
-		// return of('Assignment ajouté'); // on retourne une chaine de caractère
+		// return of("Assignment ajouté"); // on retourne une chaine de caractère
 		return this.http.post<Assignment>(this.url, assignment, this.HttpOptions);
 	}
 
@@ -72,7 +72,7 @@ export class AssignmentsService {
 	updateAssignment(assignment: Assignment): Observable<any>{
 		//this.loggingService.log(assignment.nom, "modifié !");
 		return this.http.put<Assignment>(this.url, assignment);
-		//return of('Assignment service: assignment modifié !'); // on retourne une chaine de caractère
+		//return of("Assignment service: assignment modifié !"); // on retourne une chaine de caractère
 	}
 
 	// Supprimer

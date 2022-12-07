@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AssignmentsService } from 'src/app/shared/assignments.service';
-import { Assignment } from '../assignment.model';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AssignmentsService } from "src/app/shared/assignments.service";
+import { Assignment } from "../assignment.model";
 
 @Component({
- selector: 'app-edit-assignment',
- templateUrl: './edit-assignment.component.html',
- styleUrls: ['./edit-assignment.component.css'],
+ selector: "app-edit-assignment",
+ templateUrl: "./edit-assignment.component.html",
+ styleUrls: ["./edit-assignment.component.css"],
 })
 
 export class EditAssignmentComponent implements OnInit {
@@ -27,7 +27,7 @@ export class EditAssignmentComponent implements OnInit {
 	getAssignment() {
 		// on récupère l'id dans le snapshot passé par le routeur
 		// le "+" force l'id de type string en "number"
-		const id = +this.route.snapshot.params['id'];
+		const id = +this.route.snapshot.params["id"];
 
 		this.assignmentsService.getAssignment(id).subscribe((assignment) => {
 			if (!assignment) return;
@@ -51,7 +51,7 @@ export class EditAssignmentComponent implements OnInit {
 				console.log(message);
 
 				// navigation vers la home page
-				this.router.navigate(['/home']);
+				this.router.navigate(["/home"]);
 			});
 	}
 }

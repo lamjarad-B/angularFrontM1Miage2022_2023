@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../shared/auth.service';
-import { AssignmentsService } from '../shared/assignments.service';
-import { Assignment } from './assignment.model';
+import { Component, OnInit } from "@angular/core";
+import { AuthService } from "../shared/auth.service";
+import { AssignmentsService } from "../shared/assignments.service";
+import { Assignment } from "./assignment.model";
 
 @Component({
-	selector: 'app-assignments',
-	templateUrl: './assignments.component.html',
-	styleUrls: ['./assignments.component.css']
+	selector: "app-assignments",
+	templateUrl: "./assignments.component.html",
+	styleUrls: ["./assignments.component.css"]
 })
 
 export class AssignmentsComponent implements OnInit {

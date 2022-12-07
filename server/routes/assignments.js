@@ -1,4 +1,4 @@
-let Assignment = require('../model/assignment');
+let Assignment = require("../model/assignment");
 
 // Récupérer tous les assignments (GET)
 // function getAssignments(req, res){
@@ -27,7 +27,7 @@ function getAssignments(req, res) {
       }
     );
    }
-   
+
 
 // Récupérer un assignment par son id (GET)
 function getAssignment(req, res){
@@ -52,7 +52,7 @@ function postAssignment(req, res){
 
     assignment.save( (err) => {
         if(err){
-            res.send('cant post assignment ', err);
+            res.send("cant post assignment ", err);
         }
         res.json({ message: `${assignment.nom} saved!`})
     })
@@ -67,10 +67,10 @@ function updateAssignment(req, res) {
             console.log(err);
             res.send(err)
         } else {
-          res.json({message: 'updated'})
+          res.json({message: "updated'})
         }
 
-      // console.log('updated ', assignment)
+      // console.log("updated ", assignment)
     });
 
 }

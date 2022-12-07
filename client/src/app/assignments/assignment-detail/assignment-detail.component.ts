@@ -1,13 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Assignment } from '../assignment.model';
-import { AssignmentsService } from 'src/app/shared/assignments.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/shared/auth.service';
+import { Component, Input, OnInit } from "@angular/core";
+import { Assignment } from "../assignment.model";
+import { AssignmentsService } from "src/app/shared/assignments.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AuthService } from "src/app/shared/auth.service";
 
 @Component({
-	selector: 'app-assignment-detail',
-	templateUrl: './assignment-detail.component.html',
-	styleUrls: ['./assignment-detail.component.css']
+	selector: "app-assignment-detail",
+	templateUrl: "./assignment-detail.component.html",
+	styleUrls: ["./assignment-detail.component.css"]
 })
 
 export class AssignmentDetailComponent implements OnInit {
@@ -28,7 +28,7 @@ export class AssignmentDetailComponent implements OnInit {
 
 		this.assignmentsService.updateAssignment(this.assignmentTransmis)
 			.subscribe(message => {console.log(message);
-				this.router.navigate(["/home"]);
+				this.router.navigate(["/home"])
 			});
 	}
 
@@ -38,7 +38,9 @@ export class AssignmentDetailComponent implements OnInit {
 
 		this.assignmentsService.deleteAssignment(this.assignmentTransmis)
 			.subscribe((message)=> {console.log(message);
-				this.router.navigate(["/home"]);
+				this.router.navigateByUrl("/", {skipLocationChange: true}).then(()=>
+					this.router.navigate(["/home"])
+				);
 			});
 
 		this.assignmentTransmis = undefined; // Il faut mettre l’assignmentTransmis à null pour que la carte n’affiche plus le détail !
@@ -55,10 +57,10 @@ export class AssignmentDetailComponent implements OnInit {
 	onClickEdit(){
 		if (!this.assignmentTransmis || !this.isAdmin()) return;
 
-		this.router.navigate(["/assignment", this.assignmentTransmis.id, 'edit'], {
+		this.router.navigate(["/assignment", this.assignmentTransmis.id, "edit"], {
 			queryParams: {
 				nom: this.assignmentTransmis.nom
-			}, fragment:'edition'
+			}, fragment: "edition"
 		});
 	}
 }

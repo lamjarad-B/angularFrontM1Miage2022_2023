@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable({
-	providedIn: 'root'
+	providedIn: "root"
 })
 
 export class AuthService {
@@ -13,12 +13,12 @@ export class AuthService {
 
 	// Liste des administrateurs
 	admins: any = {
-		'brahim@gmail.com': '1234',
+		"brahim@gmail.com": "1234",
 	}
 
 	// Liste des utilisateurs
 	users: any = {
-		'yannis@gmail.com': '1234',
+		"yannis@gmail.com": "1234",
 	}
 
 	constructor() { }

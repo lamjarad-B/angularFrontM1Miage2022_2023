@@ -1,11 +1,11 @@
-import { Component, OnInit} from '@angular/core';
-import { AssignmentsService } from 'src/app/shared/assignments.service';
-import { Assignment } from '../assignment.model';
+import { Component, OnInit} from "@angular/core";
+import { AssignmentsService } from "src/app/shared/assignments.service";
+import { Assignment } from "../assignment.model";
 
 @Component({
-	selector: 'app-add-assignment',
-	templateUrl: './add-assignment.component.html',
-	styleUrls: ['./add-assignment.component.css']
+	selector: "app-add-assignment",
+	templateUrl: "./add-assignment.component.html",
+	styleUrls: ["./add-assignment.component.css"]
 })
 
 export class AddAssignmentComponent implements OnInit {

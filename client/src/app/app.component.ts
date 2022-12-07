@@ -1,24 +1,24 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from './shared/auth.service';
-import { AssignmentsService } from './shared/assignments.service';
-import {FormControl, Validators} from '@angular/forms';
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthService } from "./shared/auth.service";
+import { AssignmentsService } from "./shared/assignments.service";
+import {FormControl, Validators} from "@angular/forms";
 
 @Component({
 	//Des propriétés
-	selector: 'app-root', //Le nom du component(il se trouve dans l'index)
-	templateUrl: './app.component.html',// template qui correspond à l'affichage de ce composant
-	styleUrls: ['./app.component.css']// Le style de ce composant
+	selector: "app-root", //Le nom du component(il se trouve dans l'index)
+	templateUrl: "./app.component.html",// template qui correspond à l'affichage de ce composant
+	styleUrls: ["./app.component.css"]// Le style de ce composant
 })
 
 export class AppComponent {
 	// Titre du composant
-	title = 'Application de gestion des devoirs à rendre (Assignments)';
+	title = "Application de gestion des devoirs à rendre (Assignments)";
 
 	// Propriétés de l'email/password
-	email = '';
-	password = '';
-	validator = new FormControl('', [Validators.required, Validators.email])
+	email = "";
+	password = "";
+	validator = new FormControl("", [Validators.required, Validators.email])
 
 	// Bouton pour montrer/cache le mot de passe
 	hide = true;
@@ -53,8 +53,8 @@ export class AppComponent {
 			this.isAdmin = this.authService.admin;
 
 			// Redirection vers la page d'accueil.
-			this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-				this.router.navigate(['/home'])
+			this.router.navigateByUrl("/", {skipLocationChange: true}).then(()=>
+				this.router.navigate(["/home"])
 			);
 		}
 		else
@@ -63,8 +63,8 @@ export class AppComponent {
 		}
 
 		// Réinitialisation du formulaire
-		this.email = '';
-		this.password = '';
+		this.email = "";
+		this.password = "";
 	}
 
 	logout() {
@@ -76,8 +76,8 @@ export class AppComponent {
 		this.authService.logOut();
 
 		// Redirection vers la page d'accueil.
-		this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-			this.router.navigate(['/home'])
+		this.router.navigateByUrl("/", {skipLocationChange: true}).then(()=>
+			this.router.navigate(["/home"])
 		);
 	}
 
@@ -87,11 +87,11 @@ export class AppComponent {
 	}
 
 	getErrorMessage() {
-		if (this.validator?.hasError('required')) {
-			return 'Vous devez entrer une valeur';
+		if (this.validator?.hasError("required")) {
+			return "Vous devez entrer une valeur";
 		}
 
-		return this.validator?.hasError('email') ? "Ce n'est pas une adresse email valide" : '';
+		return this.validator?.hasError("email") ? "Ce n'est pas une adresse email valide" : "";
 	}
 
 	initialiserLaBaseAvecDonneesDeTest(){
@@ -103,8 +103,8 @@ export class AppComponent {
 				// Marche plus avec la dernière version d’angular
 			//  this.router.navigate(["/home"], {replaceUrl:true});
 
-			this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-				this.router.navigate(['/home'])
+			this.router.navigateByUrl("/", {skipLocationChange: true}).then(()=>
+				this.router.navigate(["/home"])
 			);
 		 })
 	}

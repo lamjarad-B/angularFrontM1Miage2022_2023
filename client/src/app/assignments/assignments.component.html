@@ -38,8 +38,8 @@
 	<!-- <mat-list *ngFor="let assignment of assignments"></mat-list> -->
 	<p *ngIf="dateRendu">{{nomDevoir}} date de rendu =  {{dateRendu | date:'dd/MM/yyyy'}}</p><!--le binding bi-directionnel-->
 
-	<!--[ngStyle]="{'color': assignment.rendu ? 'green' : 'red'}"  (sans utiliser les classes en css) on met ça à l'intérieur du <div....>-->
-	<!-- [ngClass]="{'rendu':assignment.rendu, 'nonRendu': !assignment.rendu}" (en utilisant des clases) on met ça à l'intérieur du <div....-->
+	<!--[ngStyle]="{'color": assignment.rendu ? 'green' : "red'}"  (sans utiliser les classes en css) on met ça à l'intérieur du <div....>-->
+	<!-- [ngClass]="{'rendu":assignment.rendu, 'nonRendu": !assignment.rendu}" (en utilisant des clases) on met ça à l'intérieur du <div....-->
 	<mat-list *ngFor="let assignment of assignments"><!--assignments est le nom du tableau dans .ts -->
 		<nav>
 			<h3 mat-subheader>{{assignment.dateDeRendu | date:'dd/MM/yyyy'}}</h3>

@@ -2,7 +2,7 @@
 /* Le code ci-dessous pour le reset css de l'application*/
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css'; /* Le theme qu'on va utiliser */
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css"; /* Le theme qu'on va utiliser */
 
 /*
 deeppurple-amber.css
@@ -14,7 +14,3 @@ purple-green.css
 body{
     margin: 20px;
 }
-
-
-
-
