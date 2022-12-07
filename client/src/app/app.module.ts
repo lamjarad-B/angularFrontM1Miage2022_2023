@@ -1,5 +1,6 @@
-import { Component, NgModule } from '@angular/core';// L'application de base
+import { Component, NgModule, Inject } from '@angular/core';// L'application de base
 import { BrowserModule } from '@angular/platform-browser';// Permet d'afficher l'application dans un navigateur
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -77,7 +78,9 @@ const routes : Routes = [
 
 		HttpClientModule,
 	],
-	providers: [],
+	providers: [
+		{provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
+	],
 	bootstrap: [AppComponent]
 })
 
