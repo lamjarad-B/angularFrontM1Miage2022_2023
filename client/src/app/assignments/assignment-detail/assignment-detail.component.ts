@@ -11,18 +11,18 @@ import { AuthService } from 'src/app/shared/auth.service';
 })
 
 export class AssignmentDetailComponent implements OnInit {
-	/*@Input()*/ assignmentTransmis?:Assignment;
+	@Input() assignmentTransmis?: Assignment;
 
 	constructor(private assignmentsService: AssignmentsService,
 		private route: ActivatedRoute,
-		private authService:AuthService,
-		private router:Router) { }// Pour utiliser le service
+		private authService: AuthService,
+		private router: Router) { }// Pour utiliser le service
 
 	ngOnInit(): void {}
 
 	onAssignmentRendu()
 	{
-		if (!this.assignmentTransmis) return;
+		if (!this.assignmentTransmis || !this.isLogged()) return;
 
 		this.assignmentTransmis.rendu = true;
 
@@ -34,24 +34,30 @@ export class AssignmentDetailComponent implements OnInit {
 
 	onDelete()
 	{
-		if(!this.assignmentTransmis) return;
+		if (!this.assignmentTransmis || !this.isAdmin()) return;
 
 		this.assignmentsService.deleteAssignment(this.assignmentTransmis)
 			.subscribe((message)=> {console.log(message);
 				this.router.navigate(["/home"]);
 			});
 
-		 // this.assignmentTransmis = undefined; // Il faut mettre l’assignmentTransmis à null pour que la carte n’affiche plus le détail !
+		this.assignmentTransmis = undefined; // Il faut mettre l’assignmentTransmis à null pour que la carte n’affiche plus le détail !
 	}
 
-	isAdmin(): boolean {
+	isLogged(): boolean {
 		return this.authService.loggedIn;
 	}
 
+	isAdmin(): boolean {
+		return this.isLogged() && this.authService.admin;
+	}
+
 	onClickEdit(){
-		this.router.navigate(["/assignment", this.assignmentTransmis?.id, 'edit'], {
+		if (!this.assignmentTransmis || !this.isAdmin()) return;
+
+		this.router.navigate(["/assignment", this.assignmentTransmis.id, 'edit'], {
 			queryParams: {
-				nom: this.assignmentTransmis?.nom
+				nom: this.assignmentTransmis.nom
 			}, fragment:'edition'
 		});
 	}

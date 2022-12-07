@@ -15,7 +15,7 @@ export class AssignmentsComponent implements OnInit {
 	ajoutActive = false; // pour le button dans le fichier html
 
 	//Proprietes du formulaire
-	nomDevoir=""; // Pour récupérer la valeur du champs nom
+	nomDevoir = ""; // Pour récupérer la valeur du champs nom
 
 	dateRendu!: Date; // Pour récupérer la valeur du champs dateDeRendu
 
@@ -40,7 +40,7 @@ export class AssignmentsComponent implements OnInit {
 	// Récupère l'état de la connexion.
 	isLogged = this.authService.loggedIn;
 
-	constructor(private authService:AuthService, private assignmentService: AssignmentsService) { } //Ingection des services
+	constructor(private authService: AuthService, private assignmentService: AssignmentsService) { } //Ingection des services
 
 	ngOnInit(): void {
 		//this.assignments = this.assignmentsServices.getAssignments();// utilisation des services

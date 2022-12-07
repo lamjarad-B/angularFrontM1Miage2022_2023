@@ -25,8 +25,6 @@ export class AddAssignmentComponent implements OnInit {
 		newAssignment.dateDeRendu = this.dateRendu;
 		newAssignment.rendu = false;
 
-		//this.assignments.push(newAssignment);
-		//this.nouvelAssignment.emit(newAssignment);
 		this.assignmentsService.addAssignment(newAssignment).subscribe(message => console.log(message));
 	}
 }
