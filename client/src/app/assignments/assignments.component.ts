@@ -19,11 +19,11 @@ export class AssignmentsComponent implements OnInit {
 
 	dateRendu!: Date; // Pour récupérer la valeur du champs dateDeRendu
 
-	//
+	// Devoir sélectionné par l'utilisateur.
 	assignmentSelectionne!: Assignment;
 
-	//
-	formVisible=false;
+	// Affichage ou non du formulaire d'ajout d'un devoir.
+	formVisible = false;
 
 	// Pour la pagination
 	page: number=1;
@@ -35,7 +35,7 @@ export class AssignmentsComponent implements OnInit {
 	hasNextPage!: boolean;
 	nextPage!: number;
 
-	assignments!:Assignment[];
+	assignments!: Assignment[];
 
 	// Récupère l'état de la connexion.
 	isLogged = this.authService.loggedIn;
@@ -61,7 +61,7 @@ export class AssignmentsComponent implements OnInit {
 			});
 	}
 
-	getAssignment(){// Renvoie un Observable
+	getAssignment(){ // Renvoie un Observable
 		this.assignmentService.getAssignments()
 			.subscribe(assignments => this.assignments = assignments);
 	}
@@ -70,15 +70,11 @@ export class AssignmentsComponent implements OnInit {
 		this.assignmentSelectionne = assignment;
 	}
 
-	onAddAssignmentBtnClick(){
-		// this.formVisible = true;
+	onAddAssignmentBtnClick() {
+		this.formVisible = true;
 	}
 
-	// onNouvelAssignment(event:Assignment){
-	//   //this.assignments.push(event);
-	//   this.assignmentService.addAssignment(event)
-	//   .subscribe(message => console.log(message)
-	//   );
-	//   this.formVisible = false;
-	// }
+	onNouvelAssignment() {
+		this.formVisible = false;
+	}
 }

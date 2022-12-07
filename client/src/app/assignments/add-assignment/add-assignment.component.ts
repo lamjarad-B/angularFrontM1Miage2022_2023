@@ -1,4 +1,4 @@
-import { Component, OnInit /*, Output, EventEmitter */} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Assignment } from '../assignment.model';
 
@@ -9,13 +9,8 @@ import { Assignment } from '../assignment.model';
 })
 
 export class AddAssignmentComponent implements OnInit {
-	// Proprietes du formulaire
-	nomDevoir!:string; // Pour récupérer la valeur du champs nom
-
+	nomDevoir!: string; // Pour récupérer la valeur du champs nom
 	dateRendu!: Date; // Pour récupérer la valeur du champs dateDeRendu
-	//////
-
-	//@Output() nouvelAssignment = new EventEmitter<Assignment>();
 
 	constructor(private assignmentsService: AssignmentsService) { }
 
