@@ -61,8 +61,10 @@ function checkCredentials( request, result )
 	const password = request.body.password;
 
 	if ( !email || !password )
+	{
 		// Données manquantes/invalides.
 		return result.status( 400 ).send( { auth: false, message: "Données manquantes ou invalides." } );
+	}
 
 	// Recherche de l'utilisateur dans la base de données.
 	UserSchema.findOne( { email: email }, ( dbError, dbData ) =>

@@ -1,7 +1,8 @@
-export class Assignment {
+export class Assignment
+{
 	_id?: string;
 	id!: number;
-	nom!:string;
+	nom!: string;
 	dateDeRendu!: Date;
-	rendu!:boolean;
+	rendu!: boolean;
 }

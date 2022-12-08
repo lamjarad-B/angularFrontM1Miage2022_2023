@@ -4,63 +4,69 @@ import { AssignmentsService } from "src/app/shared/assignments.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "src/app/shared/auth.service";
 
-@Component({
+@Component( {
 	selector: "app-assignment-detail",
 	templateUrl: "./assignment-detail.component.html",
-	styleUrls: ["./assignment-detail.component.css"]
-})
+	styleUrls: [ "./assignment-detail.component.css" ]
+} )
 
-export class AssignmentDetailComponent implements OnInit {
+export class AssignmentDetailComponent implements OnInit
+{
 	@Input() assignmentTransmis?: Assignment;
 
-	constructor(private assignmentsService: AssignmentsService,
-		private route: ActivatedRoute,
-		private authService: AuthService,
-		private router: Router) { }// Pour utiliser le service
+	constructor( private assignmentsService: AssignmentsService, private authService: AuthService, private router: Router ) { }
 
-	ngOnInit(): void {}
+	ngOnInit(): void { }
 
 	onAssignmentRendu()
 	{
-		if (!this.assignmentTransmis || !this.isLogged()) return;
+		if ( !this.assignmentTransmis || !this.isLogged() ) return;
 
 		this.assignmentTransmis.rendu = true;
 
-		this.assignmentsService.updateAssignment(this.assignmentTransmis)
-			.subscribe(message => {console.log(message);
-				this.router.navigate(["/home"])
-			});
+		this.assignmentsService.updateAssignment( this.assignmentTransmis )
+			.subscribe( message =>
+			{
+				console.log( message );
+				this.router.navigate( [ "/home" ] );
+			} );
 	}
 
 	onDelete()
 	{
-		if (!this.assignmentTransmis || !this.isAdmin()) return;
+		if ( !this.assignmentTransmis || !this.isAdmin() ) return;
 
-		this.assignmentsService.deleteAssignment(this.assignmentTransmis)
-			.subscribe((message)=> {console.log(message);
-				this.router.navigateByUrl("/", {skipLocationChange: true}).then(()=>
-					this.router.navigate(["/home"])
+		this.assignmentsService.deleteAssignment( this.assignmentTransmis )
+			.subscribe( ( message ) =>
+			{
+				console.log( message );
+				this.router.navigateByUrl( "/", { skipLocationChange: true } ).then( () =>
+					this.router.navigate( [ "/home" ] )
 				);
-			});
+			} );
 
-		this.assignmentTransmis = undefined; // Il faut mettre l’assignmentTransmis à null pour que la carte n’affiche plus le détail !
+		// Il faut mettre l’assignmentTransmis à null pour que la carte n’affiche plus le détail !
+		this.assignmentTransmis = undefined;
 	}
 
-	isLogged(): boolean {
+	isLogged(): boolean
+	{
 		return this.authService.loggedIn;
 	}
 
-	isAdmin(): boolean {
+	isAdmin(): boolean
+	{
 		return this.isLogged() && this.authService.admin;
 	}
 
-	onClickEdit(){
-		if (!this.assignmentTransmis || !this.isAdmin()) return;
+	onClickEdit()
+	{
+		if ( !this.assignmentTransmis || !this.isAdmin() ) return;
 
-		this.router.navigate(["/assignment", this.assignmentTransmis.id, "edit"], {
+		this.router.navigate( [ "/assignment", this.assignmentTransmis.id, "edit" ], {
 			queryParams: {
 				nom: this.assignmentTransmis.nom
 			}, fragment: "edition"
-		});
+		} );
 	}
 }

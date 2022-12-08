@@ -1,56 +1,56 @@
-.rendu{
+.rendu {
 	color: green;
 	border: 1px solid black;
 }
 
-.nonRendu{
+.nonRendu {
 	color: red;
 	border: 1px solid black;
 }
 
-header{
+header {
 	background-color: aqua;
 }
 
-#toolbar{
+#toolbar {
 	display: flex;
 	justify-content: space-between;
 }
 
-.mat-icon{
+.mat-icon {
 	height: 50px;
 	width: 50px;
 }
 
-.material-icons{
+.material-icons {
 	font-size: 3rem;
 }
 
-#sidenav{
+#sidenav {
 	width: auto;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: end;
 }
 
-.menuNav{
+.menuNav {
 	display: inline-block;
 	margin-right: 2rem;
 }
 
-.nonSoumis{
+.nonSoumis {
 	background-color: red;
 	border: 1px solid black;
 
 }
-.container{
+.container {
 	display: flex;
 	flex-direction: column;
 }
-.ajouterBtn{
+.ajouterBtn {
 	align-self: flex-end;
 }
 
-.containerButtonPreviousNext{
+.containerButtonPreviousNext {
 	text-align: center;
 }

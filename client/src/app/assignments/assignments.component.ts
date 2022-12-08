@@ -3,15 +3,15 @@ import { AuthService } from "../shared/auth.service";
 import { AssignmentsService } from "../shared/assignments.service";
 import { Assignment } from "./assignment.model";
 
-@Component({
+@Component( {
 	selector: "app-assignments",
 	templateUrl: "./assignments.component.html",
-	styleUrls: ["./assignments.component.css"]
-})
+	styleUrls: [ "./assignments.component.css" ]
+} )
 
-export class AssignmentsComponent implements OnInit {
-
-	titre = "Mon application sur les Assignments !"
+export class AssignmentsComponent implements OnInit
+{
+	titre = "Mon application sur les Assignments !";
 	ajoutActive = false; // pour le button dans le fichier html
 
 	//Proprietes du formulaire
@@ -26,8 +26,8 @@ export class AssignmentsComponent implements OnInit {
 	formVisible = false;
 
 	// Pour la pagination
-	page: number=1;
-	limit: number=10;
+	page: number = 1;
+	limit: number = 10;
 	totalDocs!: number;
 	totalPages!: number;
 	hasPrevPage!: boolean;
@@ -40,13 +40,15 @@ export class AssignmentsComponent implements OnInit {
 	// Récupère l'état de la connexion.
 	isLogged = this.authService.loggedIn;
 
-	constructor(private authService: AuthService, private assignmentService: AssignmentsService) { } //Ingection des services
+	constructor( private authService: AuthService, private assignmentService: AssignmentsService ) { } //Ingection des services
 
-	ngOnInit(): void {
+	ngOnInit(): void
+	{
 		//this.assignments = this.assignmentsServices.getAssignments();// utilisation des services
 		//this.getAssignment();
-		this.assignmentService.getAssignmentsPagine(this.page, this.limit)
-			.subscribe(data => {
+		this.assignmentService.getAssignmentsPagine( this.page, this.limit )
+			.subscribe( data =>
+			{
 				this.assignments = data.docs;
 				this.page = data.page;
 				this.limit = data.limit;
@@ -57,30 +59,38 @@ export class AssignmentsComponent implements OnInit {
 				this.hasNextPage = data.hasNextPage;
 				this.nextPage = data.nextPage;
 
-				console.log("données reçues");
-			});
+				console.log( "données reçues" );
+			} );
 	}
 
-	getAssignment(){ // Renvoie un Observable
+	getAssignment()
+	{
+		// Renvoie un Observable
 		this.assignmentService.getAssignments()
-			.subscribe(assignments => this.assignments = assignments);
+			.subscribe( assignments => this.assignments = assignments );
 	}
 
-	assignmentClique(assignment: Assignment) {
-		if (this.assignmentSelectionne === assignment) {
+	assignmentClique( assignment: Assignment )
+	{
+		if ( this.assignmentSelectionne === assignment )
+		{
 			// Si le devoir est déjà sélectionné, on cache alors ses détails.
 			this.assignmentSelectionne = undefined;
-		} else {
+		}
+		else
+		{
 			// Dans le cas contraire, on met à jour les détails du devoir.
 			this.assignmentSelectionne = assignment;
 		}
 	}
 
-	onAddAssignmentBtnClick() {
+	onAddAssignmentBtnClick()
+	{
 		this.formVisible = true;
 	}
 
-	onNouvelAssignment() {
+	onNouvelAssignment()
+	{
 		this.formVisible = false;
 	}
 }
