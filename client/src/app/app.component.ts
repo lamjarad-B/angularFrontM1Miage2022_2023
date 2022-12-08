@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
+import { FormControl, Validators } from "@angular/forms";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { AuthService } from "./shared/auth.service";
 import { AssignmentsService } from "./shared/assignments.service";
-import { FormControl, Validators } from "@angular/forms";
 
 @Component( {
 	//Des propriétés
@@ -13,6 +14,12 @@ import { FormControl, Validators } from "@angular/forms";
 
 export class AppComponent
 {
+	private HttpOptions = {
+		headers: new HttpHeaders( {
+			"Content-Type": "application/json"
+		} )
+	};
+
 	// Titre du composant
 	title = "Application de gestion des devoirs à rendre (Assignments)";
 
@@ -33,7 +40,29 @@ export class AppComponent
 	// Afficher ou cacher le formulaire
 	loginVisible = false;
 
-	constructor( private authService: AuthService, private router: Router, private assignmentService: AssignmentsService ) { }
+	constructor( private http: HttpClient, private authService: AuthService, private router: Router, private assignmentService: AssignmentsService ) { }
+
+	ngOnInit(): void
+	{
+		// On active une nouvelle promesse afin de réaliser une requête HTTP à la base de données.
+		this.http.post<any>( "http://localhost:8010/api/auth/token", null, this.HttpOptions )
+			.subscribe( data =>
+			{
+				console.log( data );
+
+				// Lors de la réponse du serveur, on vérifie si la connexion a réussi.
+				if ( data.auth === true )
+				{
+					// Dans ce cas, on définit les attributs de l'utilisateur (connecté, admin ?).
+					//this.loggedIn = true;
+					//this.admin = data.admin;
+				}
+			},
+				err =>
+				{
+					console.log( err );
+				} );
+	}
 
 	async login()
 	{

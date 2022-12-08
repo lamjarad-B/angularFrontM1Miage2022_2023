@@ -5,19 +5,9 @@ const UserSchema = require( "../model/users" );
 
 function checkJWT( request, result )
 {
-	// Récupération des données de l'utilisateur.
-	const email = request.body.email;
-	const password = request.body.password;
-
-	if ( !email || !password )
-	{
-		// Données manquantes/invalides.
-		return result.status( 400 ).send( { auth: false, message: "Données manquantes ou invalides." } );
-	}
-
-	// Récupération du jeton d'authentifciation dans l'en-tête de la requête.
+	// Récupération du jeton d'authentification dans les cookies du navigateur.
 	// Source : https://www.freecodecamp.org/news/securing-node-js-restful-apis-with-json-web-tokens-9f811a92bb52/
-	const token = request.headers[ "x-access-token" ];
+	const token = request.cookies[ "access-token" ];
 
 	if ( !token )
 	{
@@ -93,7 +83,7 @@ function checkCredentials( request, result )
 				else
 				{
 					// Utilisateur trouvé.
-					let token = request.headers[ "x-access-token" ];
+					let token = request.cookies[ "access-token" ];
 
 					if ( !token )
 					{
@@ -101,9 +91,26 @@ function checkCredentials( request, result )
 						token = jwt.sign( { id: dbData._id }, config.secret, {
 							expiresIn: 86400 // Expiration au bout de 24 heures.
 						} );
-					}
 
-					return result.status( 200 ).send( { auth: true, token: token, admin: dbData.admin } );
+						// Définition du jeton sous forme de cookie.
+						result.cookie( "access-token", token, { maxAge: 86400 * 1000, httpOnly: true, secure: true } );
+
+						// Mise à jour du jeton dans la base de données.
+						UserSchema.findByIdAndUpdate( dbData._id, { token: token }, ( dbError, _dbData ) =>
+						{
+							if ( dbError )
+							{
+								console.log( err );
+								return result.status( 500 ).send( { auth: false, message: "Erreur de la base de données." } );
+							}
+
+							return result.status( 200 ).send( { auth: true, admin: dbData.admin } );
+						} );
+					}
+					else
+					{
+						return result.status( 200 ).send( { auth: true, admin: dbData.admin } );
+					}
 				}
 			} );
 		}

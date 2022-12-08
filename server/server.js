@@ -1,6 +1,8 @@
 const express = require( "express" );
 const app = express();
+const cors = require( "cors" );
 const bodyParser = require( "body-parser" );
+const cookieParser = require( "cookie-parser" );
 
 const users = require( "./routes/users" );
 const assignments = require( "./routes/assignments" );
@@ -30,18 +32,14 @@ mongoose.connect( uri, options )
 		} );
 
 // Pour accepter les connexions cross-domain (CORS)
-app.use( function ( _request, result, next )
-{
-	result.header( "Access-Control-Allow-Origin", "*" );
-	result.header( "Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept" );
-	result.header( "Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS" );
-
-	next();
-} );
+app.use( cors( {
+	credentials: true
+} ) );
 
 // Pour les formulaires
 app.use( bodyParser.urlencoded( { extended: true } ) );
 app.use( bodyParser.json() );
+app.use( cookieParser() );
 
 const port = process.env.PORT || 8010;
 

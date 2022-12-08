@@ -22,7 +22,7 @@ export class AuthService
 	// Constructeur de la classe.
 	constructor( private http: HttpClient ) { }
 
-	// Fonction d'autentification.
+	// Fonction d'authentification.
 	logIn( email: any, password: string )
 	{
 		// On active une nouvelle promesse afin de réaliser une requête HTTP à la base de données.

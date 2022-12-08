@@ -5,7 +5,10 @@ const Schema = mongoose.Schema;
 const UserSchema = Schema( {
 	email: String,
 	password: String,
-	admin: Boolean
+	admin: Boolean,
+	token: String
+}, {
+	timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" }
 } );
 
 UserSchema.plugin( aggregatePaginate );
