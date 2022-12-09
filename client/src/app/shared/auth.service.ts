@@ -32,29 +32,31 @@ export class AuthService
 		return new Promise( ( resolve, _reject ) =>
 		{
 			this.http.post<any>( "http://localhost:8010/api/auth/login", { email: email, password: password }, this.HttpOptions )
-				.subscribe( data =>
-				{
-					console.log( data );
-
-					// Lors de la réponse du serveur, on vérifie si la connexion a réussi.
-					if ( data.auth === true )
+				.subscribe( {
+					next: ( httpData ) =>
 					{
-						// Si la connexion a réussie, on stocke le jeton d'authentification et sa date d'expiration.
-						localStorage.setItem( "id_token", data.token );
-						localStorage.setItem( "expires_at", ( new Date().getTime() + this.jwtDuration ).toString() );
+						console.log( httpData );
 
-						// Aussi, on définit les attributs de l'utilisateur (connecté, admin ?).
-						this.loggedIn = true;
-						this.admin = data.admin;
+						// Lors de la réponse du serveur, on vérifie si la connexion a réussi.
+						if ( httpData.auth === true )
+						{
+							// Si la connexion a réussie, on stocke le jeton d'authentification et sa date d'expiration.
+							localStorage.setItem( "id_token", httpData.token );
+							localStorage.setItem( "expires_at", ( new Date().getTime() + this.jwtDuration ).toString() );
+
+							// Aussi, on définit les attributs de l'utilisateur (connecté, admin ?).
+							this.loggedIn = true;
+							this.admin = httpData.admin;
+						}
+
+						// Résolution de la promesse.
+						resolve( httpData );
+					},
+					error: ( httpError ) =>
+					{
+						resolve( httpError );
 					}
-
-					// Résolution de la promesse.
-					resolve( data );
-				},
-					err =>
-					{
-						resolve( err );
-					} );
+				} );
 		} );
 	}
 

@@ -52,27 +52,30 @@ export class AppComponent
 					"Content-Type": "application/json"
 				} )
 			} )
-				.subscribe( data =>
-				{
-					console.log( data );
-
-					// Lors de la réponse du serveur, on vérifie si la connexion a réussie.
-					if ( data.auth === true )
+				.subscribe( {
+					next: ( httpData ) =>
 					{
-						// Dans ce cas, on définit également certains attributs de l'utilisateur (connecté, admin ?).
-						this.isLogged = true;
-						this.isAdmin = data.admin;
-					}
-				},
-					err =>
+						console.log( httpData );
+
+						// Lors de la réponse du serveur, on vérifie si la connexion a réussie.
+						if ( httpData.auth === true )
+						{
+							// Dans ce cas, on définit également certains attributs de l'utilisateur (connecté, admin ?).
+							this.isLogged = true;
+							this.isAdmin = httpData.admin;
+						}
+					},
+					error: ( httpError ) =>
 					{
 						// Si la connexion a échouée, on supprime les données de connexion.
 						// Note : cela signifie les données sont invalides ou périmées.
 						localStorage.removeItem( "id_token" );
 						localStorage.removeItem( "expires_at" );
 
-						console.log( err );
-					} );
+						console.log( httpError );
+					}
+				} );
+
 		}
 	}
 
