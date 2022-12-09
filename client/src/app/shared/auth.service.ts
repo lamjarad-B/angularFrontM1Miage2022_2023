@@ -19,6 +19,9 @@ export class AuthService
 	// L'utilisateur est-il un administrateur ?
 	admin = false;
 
+	// Durée de validité d'un jeton d'authentification (1 jour).
+	jwtDuration = 86400 * 1000;
+
 	// Constructeur de la classe.
 	constructor( private http: HttpClient ) { }
 
@@ -36,7 +39,11 @@ export class AuthService
 					// Lors de la réponse du serveur, on vérifie si la connexion a réussi.
 					if ( data.auth === true )
 					{
-						// Dans ce cas, on définit les attributs de l'utilisateur (connecté, admin ?).
+						// Si la connexion a réussie, on stocke le jeton d'authentification et sa date d'expiration.
+						localStorage.setItem( "id_token", data.token );
+						localStorage.setItem( "expires_at", ( new Date().getTime() + this.jwtDuration ).toString() );
+
+						// Aussi, on définit les attributs de l'utilisateur (connecté, admin ?).
 						this.loggedIn = true;
 						this.admin = data.admin;
 					}

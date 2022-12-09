@@ -5,14 +5,22 @@ const UserSchema = require( "../model/users" );
 
 function checkJWT( request, result )
 {
-	// Récupération du jeton d'authentification dans les cookies du navigateur.
+	// Récupération du jeton d'authentification dans l'en-tête HTTP de la requête.
 	// Source : https://www.freecodecamp.org/news/securing-node-js-restful-apis-with-json-web-tokens-9f811a92bb52/
-	const token = request.cookies[ "access-token" ];
+	let token = request.headers[ "authorization" ];
 
 	if ( !token )
 	{
 		// Jeton introuvable.
 		return result.status( 401 ).send( { auth: false, message: "Jeton d'authentification introuvable." } );
+	}
+	else
+	{
+		// Extraction du jeton.
+		if ( token.startsWith( "Bearer " ) )
+		{
+			token = token.substring( 7, token.length );
+		}
 	}
 
 	// Vérification du jeton.
@@ -24,12 +32,12 @@ function checkJWT( request, result )
 			return result.status( 500 ).send( { auth: false, message: "Impossible d'authentifier par le jeton." } );
 		}
 
-		UserSchema.findOne( { token: tokenDecoded }, function ( dbError, dbData )
+		UserSchema.findOne( { _id: tokenDecoded.id }, function ( dbError, dbData )
 		{
 			if ( dbError )
 			{
 				// Erreur interne de la base de données.
-				console.log( err );
+				console.log( dbError );
 				return result.status( 500 ).send( { auth: false, message: "Erreur de la base de données." } );
 			}
 			else if ( dbData )
@@ -62,7 +70,7 @@ function checkCredentials( request, result )
 		if ( dbError )
 		{
 			// Erreur interne de la base de données.
-			console.log( err );
+			console.log( dbError );
 			return result.status( 500 ).send( { auth: false, message: "Erreur de la base de données." } );
 		}
 		else if ( dbData )
@@ -83,28 +91,25 @@ function checkCredentials( request, result )
 				else
 				{
 					// Utilisateur trouvé.
-					let token = request.cookies[ "access-token" ];
+					let token = request.headers[ "authorization" ];
 
 					if ( !token )
 					{
 						// Génération d'un jeton d'authentification pour se connecter automatiquement la prochaine fois.
 						token = jwt.sign( { id: dbData._id }, config.secret, {
-							expiresIn: 86400 // Expiration au bout de 24 heures.
+							expiresIn: "1d" // Expiration au bout de 24 heures.
 						} );
-
-						// Définition du jeton sous forme de cookie.
-						result.cookie( "access-token", token, { maxAge: 86400 * 1000, httpOnly: true, secure: true } );
 
 						// Mise à jour du jeton dans la base de données.
 						UserSchema.findByIdAndUpdate( dbData._id, { token: token }, ( dbError, _dbData ) =>
 						{
 							if ( dbError )
 							{
-								console.log( err );
+								console.log( dbError );
 								return result.status( 500 ).send( { auth: false, message: "Erreur de la base de données." } );
 							}
 
-							return result.status( 200 ).send( { auth: true, admin: dbData.admin } );
+							return result.status( 200 ).send( { auth: true, token: token, admin: dbData.admin } );
 						} );
 					}
 					else

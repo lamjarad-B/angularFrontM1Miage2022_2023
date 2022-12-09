@@ -14,12 +14,6 @@ import { AssignmentsService } from "./shared/assignments.service";
 
 export class AppComponent
 {
-	private HttpOptions = {
-		headers: new HttpHeaders( {
-			"Content-Type": "application/json"
-		} )
-	};
-
 	// Titre du composant
 	title = "Application de gestion des devoirs à rendre (Assignments)";
 
@@ -44,24 +38,42 @@ export class AppComponent
 
 	ngOnInit(): void
 	{
-		// On active une nouvelle promesse afin de réaliser une requête HTTP à la base de données.
-		this.http.post<any>( "http://localhost:8010/api/auth/token", null, this.HttpOptions )
-			.subscribe( data =>
-			{
-				console.log( data );
+		// Vérification de la présence et de la validité d'un jeton d'authentification.
+		const token = localStorage.getItem( "id_token" );
+		const expiration = localStorage.getItem( "expires_at" );
 
-				// Lors de la réponse du serveur, on vérifie si la connexion a réussi.
-				if ( data.auth === true )
+		if ( token && expiration && Date.now() + this.authService.jwtDuration > +expiration )
+		{
+			// Si c'est un jeton valide alors on génère une nouvelle promesse afin de réaliser une requête HTTP à la base de données.
+			this.http.post<any>( "http://localhost:8010/api/auth/token", null, {
+				withCredentials: true,
+				headers: new HttpHeaders( {
+					"Authorization": "Bearer " + token,
+					"Content-Type": "application/json"
+				} )
+			} )
+				.subscribe( data =>
 				{
-					// Dans ce cas, on définit les attributs de l'utilisateur (connecté, admin ?).
-					//this.loggedIn = true;
-					//this.admin = data.admin;
-				}
-			},
-				err =>
-				{
-					console.log( err );
-				} );
+					console.log( data );
+
+					// Lors de la réponse du serveur, on vérifie si la connexion a réussie.
+					if ( data.auth === true )
+					{
+						// Dans ce cas, on définit également certains attributs de l'utilisateur (connecté, admin ?).
+						this.isLogged = true;
+						this.isAdmin = data.admin;
+					}
+				},
+					err =>
+					{
+						// Si la connexion a échouée, on supprime les données de connexion.
+						// Note : cela signifie les données sont invalides ou périmées.
+						localStorage.removeItem( "id_token" );
+						localStorage.removeItem( "expires_at" );
+
+						console.log( err );
+					} );
+		}
 	}
 
 	async login()
@@ -107,6 +119,10 @@ export class AppComponent
 
 		// Déconnexion du service d'authentification.
 		this.authService.logOut();
+
+		// Suppression des données de connexion.
+		localStorage.removeItem( "id_token" );
+		localStorage.removeItem( "expires_at" );
 
 		// Redirection vers la page d'accueil.
 		this.router.navigateByUrl( "/", { skipLocationChange: true } ).then( () =>
