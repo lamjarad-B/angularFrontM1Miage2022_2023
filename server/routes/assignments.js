@@ -1,6 +1,6 @@
 const Assignment = require( "../model/assignments" );
 
-// Récupérer tous les assignments (GET).
+// Récupération de tous les devoirs (requête de type GET).
 function getAssignments( request, result )
 {
 	const query = Assignment.aggregate();
@@ -20,7 +20,7 @@ function getAssignments( request, result )
 	} );
 }
 
-// Récupérer un assignment par son id (GET)
+// Récupérer d'un devoir à partir de son identifiant unique (requête de type GET).
 function getAssignment( request, result )
 {
 	Assignment.findOne( { id: request.params.id }, ( dbError, dbData ) =>
@@ -35,8 +35,8 @@ function getAssignment( request, result )
 	} );
 }
 
-// Ajout d'un assignment (POST)
-function postAssignment( request, result )
+// Ajout d'un nouveau devoir (requête de type POST).
+function addAssignment( request, result )
 {
 	const assignment = new Assignment();
 	assignment.id = request.body.id;
@@ -59,7 +59,7 @@ function postAssignment( request, result )
 	} );
 }
 
-// Update d'un assignment (PUT)
+// Mise à jour d'un devoir existant (requête de type PUT).
 function updateAssignment( request, result )
 {
 	console.log( "UPDATE recu assignment : " );
@@ -77,7 +77,7 @@ function updateAssignment( request, result )
 	} );
 }
 
-// suppresultsion d'un assignment (DELETE)
+// Suppression d'un devoir existant (requête de type DELETE).
 function deleteAssignment( request, result )
 {
 	console.log( "UPDATE recu assignment : " );
@@ -95,4 +95,4 @@ function deleteAssignment( request, result )
 	} );
 }
 
-module.exports = { getAssignments, postAssignment, getAssignment, updateAssignment, deleteAssignment };
+module.exports = { getAssignments, addAssignment, getAssignment, updateAssignment, deleteAssignment };

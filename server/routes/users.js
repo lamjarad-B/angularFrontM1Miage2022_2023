@@ -3,6 +3,7 @@ const bcrypt = require( "bcryptjs" );
 const config = require( "../config" );
 const UserSchema = require( "../model/users" );
 
+// Vérification du jeton d'authentification (requête de type POST).
 function checkJWT( request, result )
 {
 	// Récupération du jeton d'authentification dans l'en-tête HTTP de la requête.
@@ -52,6 +53,7 @@ function checkJWT( request, result )
 	} );
 }
 
+// Vérification des identifiants de connexion (requête de type POST).
 function checkCredentials( request, result )
 {
 	// Récupération des données de l'utilisateur.

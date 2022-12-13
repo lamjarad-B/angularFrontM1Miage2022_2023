@@ -1,3 +1,4 @@
+// Modèle MongoDB pour les devoirs.
 const mongoose = require( "mongoose" );
 const aggregatePaginate = require( "mongoose-aggregate-paginate-v2" );
 
@@ -6,6 +7,10 @@ const AssignmentSchema = Schema( {
 	id: Number,
 	dateDeRendu: Date,
 	nom: String,
+	auteur: String,
+	course: [ { type: Schema.Types.ObjectId, ref: "courses" } ],
+	remarque: String,
+	note: Number,
 	rendu: Boolean
 } );
 

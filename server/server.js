@@ -1,16 +1,14 @@
+// Dépendances et configuration du serveur.
 const express = require( "express" );
 const app = express();
 const cors = require( "cors" );
 const bodyParser = require( "body-parser" );
 
-const users = require( "./routes/users" );
-const assignments = require( "./routes/assignments" );
-
+// Liaison à la base de données MongoDB.
 const mongoose = require( "mongoose" );
 mongoose.Promise = global.Promise;
 // mongoose.set( "debug", true );
 
-// remplacer toute cette chaîne par l'URI de connexion à votre propre base dans le cloud.
 const uri = "mongodb+srv://Brahim1990:brahim1990@cluster0.uz0zutp.mongodb.net/assignments?retryWrites=true&w=majority";
 const options = {
 	useNewUrlParser: true,
@@ -30,20 +28,20 @@ mongoose.connect( uri, options )
 			console.log( "Erreur de connexion: ", dbError );
 		} );
 
-// Pour accepter les connexions cross-domain (CORS)
+// Autorisation des requêtes HTTP ayant des requêtes CORS.
 app.use( cors( {
-	origin: "http://localhost:4200",
-	credentials: true,
-	allowedHeaders: [ "Content-Type", "Authorization" ]
+	origin: "http://localhost:4200", // Le serveur accepte uniquement les requêtes du domaine front.
+	credentials: true, // La transmission d'informations de connexion est autorisée.
+	allowedHeaders: [ "Content-Type", "Authorization" ] // La transmission de certains types d'en-têtes est autorisée.
 } ) );
 
-// Pour les formulaires
+// Modification du traitement des données reçues par le serveur.
 app.use( bodyParser.urlencoded( { extended: true } ) );
 app.use( bodyParser.json() );
 
-const port = process.env.PORT || 8010;
-
-// les routes
+// Ouverture des routes de réponse.
+const users = require( "./routes/users" );
+const assignments = require( "./routes/assignments" );
 const prefix = "/api";
 
 app.route( prefix + "/assignments" )
