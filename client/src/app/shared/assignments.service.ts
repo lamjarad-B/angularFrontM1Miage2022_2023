@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Assignment } from "../assignments/assignment.model";
 import { forkJoin, Observable, of } from "rxjs";
-import { LoggingService } from "./logging.service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { catchError, map, tap } from "rxjs/operators";
 import { bdInitialAssignments } from "./data";
@@ -21,8 +20,7 @@ export class AssignmentsService
 
 	assignments: Assignment[] = [];
 
-	constructor( private loggingService: LoggingService,
-		private http: HttpClient ) { }
+	constructor( private http: HttpClient ) { }
 
 	url = "http://localhost:8010/api/assignments";
 	//url = "https://api-cours-angular-2023.herokuapp.com/api/assignments";
@@ -121,10 +119,13 @@ export class AssignmentsService
 		bdInitialAssignments.forEach( ( a ) =>
 		{
 			const nouvelAssignment: any = new Assignment();
-
 			nouvelAssignment.id = a.id;
 			nouvelAssignment.nom = a.nom;
+			nouvelAssignment.auteur = a.auteur;
+			nouvelAssignment.courseId = a.courseId;
 			nouvelAssignment.dateDeRendu = new Date( a.dateDeRendu );
+			nouvelAssignment.remarque = a.remarque;
+			nouvelAssignment.note = a.note;
 			nouvelAssignment.rendu = a.rendu;
 
 			appelsVersAddAssignment.push( this.addAssignment( nouvelAssignment ) );

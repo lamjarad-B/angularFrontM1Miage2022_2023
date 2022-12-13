@@ -41,7 +41,11 @@ function addAssignment( request, result )
 	const assignment = new Assignment();
 	assignment.id = request.body.id;
 	assignment.nom = request.body.nom;
+	assignment.auteur = request.body.auteur;
+	assignment.courseId = request.body.courseId;
 	assignment.dateDeRendu = request.body.dateDeRendu;
+	assignment.remarque = request.body.remarque;
+	assignment.note = request.body.note;
 	assignment.rendu = request.body.rendu;
 
 	console.log( "POST assignment reçu :" );
