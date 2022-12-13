@@ -37,8 +37,11 @@ export class AssignmentsComponent implements OnInit
 
 	assignments!: Assignment[];
 
-	// Récupère l'état de la connexion.
-	isLogged = this.authService.loggedIn;
+	// État de connexion
+	isLogged = this.authService.isLogged;
+
+	// L'utilisateur est-il un administrateur ?
+	isAdmin = this.authService.isAdmin;
 
 	constructor( private authService: AuthService, private assignmentService: AssignmentsService ) { } //Ingection des services
 

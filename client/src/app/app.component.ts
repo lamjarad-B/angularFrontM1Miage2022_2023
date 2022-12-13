@@ -26,10 +26,10 @@ export class AppComponent
 	hide = true;
 
 	// État de connexion
-	isLogged = false;
+	isLogged = this.authService.isLogged;
 
 	// L'utilisateur est-il un administrateur ?
-	isAdmin = false;
+	isAdmin = this.authService.isAdmin;
 
 	// Afficher ou cacher le formulaire
 	loginVisible = false;
@@ -63,6 +63,13 @@ export class AppComponent
 							// Dans ce cas, on définit également certains attributs de l'utilisateur (connecté, admin ?).
 							this.isLogged = true;
 							this.isAdmin = httpData.admin;
+							this.authService.isLogged = true;
+							this.authService.isAdmin = httpData.admin;
+
+							// Redirection vers la page d'accueil.
+							this.router.navigateByUrl( "/", { skipLocationChange: true } ).then( () =>
+								this.router.navigate( [ "/home" ] )
+							);
 						}
 					},
 					error: ( httpError ) =>
@@ -88,16 +95,16 @@ export class AppComponent
 		await this.authService.logIn( this.email, this.password );
 
 		// Vérifie si l'utilisateur a été authentifié.
-		if ( this.authService.loggedIn )
+		if ( this.authService.isLogged )
 		{
 			// Le formulaire de connexion est caché.
 			this.loginVisible = false;
 
 			// L'utilisateur est connecté.
-			this.isLogged = true;
+			this.isLogged = this.authService.isLogged;
 
 			// Détermine si c'est un administrateur grâce au service d'authentification.
-			this.isAdmin = this.authService.admin;
+			this.isAdmin = this.authService.isAdmin;
 
 			// Redirection vers la page d'accueil.
 			this.router.navigateByUrl( "/", { skipLocationChange: true } ).then( () =>

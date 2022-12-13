@@ -14,10 +14,10 @@ export class AuthService
 	};
 
 	// État de connexion de l'utilisateur.
-	loggedIn = false;
+	isLogged = false;
 
 	// L'utilisateur est-il un administrateur ?
-	admin = false;
+	isAdmin = false;
 
 	// Durée de validité d'un jeton d'authentification (1 jour).
 	jwtDuration = 86400 * 1000;
@@ -45,8 +45,8 @@ export class AuthService
 							localStorage.setItem( "expires_at", ( new Date().getTime() + this.jwtDuration ).toString() );
 
 							// Aussi, on définit les attributs de l'utilisateur (connecté, admin ?).
-							this.loggedIn = true;
-							this.admin = httpData.admin;
+							this.isLogged = true;
+							this.isAdmin = httpData.admin;
 						}
 
 						// Résolution de la promesse.
@@ -63,18 +63,7 @@ export class AuthService
 	// Fonction de déconnexion.
 	logOut()
 	{
-		this.loggedIn = false;
-		this.admin = false;
-	}
-
-	// Détermine grâce à une promesse si l'utilisateur est connecté.
-	isAdmin()
-	{
-		const isUserAdmin = new Promise( ( resolve, _reject ) =>
-		{
-			resolve( this.loggedIn && this.admin );
-		} );
-
-		return isUserAdmin;
+		this.isLogged = false;
+		this.isAdmin = false;
 	}
 }
