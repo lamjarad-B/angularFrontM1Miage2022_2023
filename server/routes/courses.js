@@ -45,9 +45,9 @@ function addCourse( request, result )
 	course.teacherAvatar = request.body.teacherAvatar;
 
 	console.log( "POST matière reçu :" );
-	console.log( assignment );
+	console.log( course );
 
-	assignment.save( ( dbError ) =>
+	course.save( ( dbError ) =>
 	{
 		if ( dbError )
 		{
@@ -55,7 +55,7 @@ function addCourse( request, result )
 			return result.send( dbError );
 		}
 
-		return result.json( { message: `${ assignment.nom } saved!` } );
+		return result.json( { message: `${ course.nom } saved!` } );
 	} );
 }
 

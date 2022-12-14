@@ -4,6 +4,7 @@ import { FormControl, Validators } from "@angular/forms";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { AuthService } from "./shared/auth.service";
 import { AssignmentsService } from "./shared/assignments.service";
+import { CoursesService } from "./shared/courses.service";
 
 @Component( {
 	//Des propriétés
@@ -34,7 +35,7 @@ export class AppComponent
 	// Afficher ou cacher le formulaire
 	loginVisible = false;
 
-	constructor( private http: HttpClient, private authService: AuthService, private router: Router, private assignmentService: AssignmentsService ) { }
+	constructor( private http: HttpClient, private authService: AuthService, private router: Router, private assignmentService: AssignmentsService, private courseService: CoursesService ) { }
 
 	ngOnInit(): void
 	{
@@ -158,18 +159,10 @@ export class AppComponent
 
 	initialiserLaBaseAvecDonneesDeTest()
 	{
-		this.assignmentService.peuplerBDAvecForkJoin()
-			.subscribe( () =>
-			{
-				console.log( "LA BD A ETE PEUPLEE, TOUS LES ASSIGNMENTS AJOUTES, ON RE-AFFICHE LA LISTE" );
-				// replaceUrl = true = force le refresh, même si
-				// on est déjà sur la page d’accueil
-				// Marche plus avec la dernière version d’angular
-				//  this.router.navigate(["/home"], {replaceUrl:true});
-
-				this.router.navigateByUrl( "/", { skipLocationChange: true } ).then( () =>
-					this.router.navigate( [ "/home" ] )
-				);
-			} );
+		this.courseService.peuplerBDAvecForkJoin().subscribe( () =>
+		{
+			this.assignmentService.peuplerBDAvecForkJoin();
+			console.log( "La base de données est prête." );
+		} );
 	}
 }

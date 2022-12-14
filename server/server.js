@@ -48,17 +48,18 @@ const prefix = "/api";
 app.route( prefix + "/assignments" ) // Route pour obtenir et modifier les informations de l'ensemble des devoirs.
 	.get( assignments.getAssignments )
 	.post( assignments.addAssignment )
-	.put( assignments.updateAssignment );
+	.put( assignments.updateAssignment )
+	.delete( assignments.deleteAssignment );
 
 app.route( prefix + "/assignments/:id" ) // Route pour obtenir et modifier les informations d'un devoir.
 	.get( assignments.getAssignment )
 	.delete( assignments.deleteAssignment );
 
-app.route( prefix + "/courses" ) // Route pour obtenir et modifier les informations de l'ensemble des devoirs.
+app.route( prefix + "/courses" ) // Route pour obtenir et modifier les informations de l'ensemble des matières.
 	.get( courses.getCourses )
 	.post( courses.addCourse );
 
-app.route( prefix + "/courses/:id" ).get( courses.getCourse ); // Route pour obtenir les informations d'un devoir.
+app.route( prefix + "/courses/:id" ).get( courses.getCourse ); // Route pour obtenir les informations d'une matière.
 
 app.route( prefix + "/auth/token" ) // Route pour la connexion automatique via le JWT.
 	.post( users.checkJWT );
