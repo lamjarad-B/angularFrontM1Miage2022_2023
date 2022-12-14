@@ -16,7 +16,10 @@ export class AssignmentsComponent implements OnInit
 
 	//Proprietes du formulaire
 	nomDevoir = ""; // Pour récupérer la valeur du champs nom
-
+	remarque = ""; // Pour récupérer la valeur du champs remarque
+	note = 0; // Pour récupérer la valeur du champs note
+	rendu = false; // Pour récupérer la valeur du champs rendu
+	course = 0; // Pour récupérer la valeur du champs course
 	dateRendu!: Date; // Pour récupérer la valeur du champs dateDeRendu
 
 	// Devoir sélectionné par l'utilisateur.

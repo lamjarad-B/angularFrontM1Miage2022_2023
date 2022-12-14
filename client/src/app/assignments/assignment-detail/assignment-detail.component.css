@@ -2,9 +2,9 @@
 	margin-bottom: 1rem;
 }
 
-#bottom {
+mat-card-actions {
 	display: flex;
 	justify-content: flex-start;
-	align-items: flex-end;
+	align-items: center;
 	gap: 1rem;
 }

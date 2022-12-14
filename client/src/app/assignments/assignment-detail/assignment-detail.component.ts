@@ -23,7 +23,7 @@ export class AssignmentDetailComponent implements OnInit
 
 	onAssignmentRendu()
 	{
-		if ( !this.assignmentTransmis || !this.authService.isLogged ) return;
+		if ( !this.assignmentTransmis || !this.assignmentTransmis.note || !this.authService.isLogged ) return;
 
 		this.assignmentTransmis.rendu = true;
 
