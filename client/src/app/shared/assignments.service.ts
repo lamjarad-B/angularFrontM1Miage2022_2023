@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Assignment } from "../assignments/assignment.model";
+import { Assignment } from "../models/assignment.model";
 import { forkJoin, Observable, of } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { catchError, map, tap } from "rxjs/operators";

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Assignment } from "../assignment.model";
+import { Assignment } from "../../models/assignment.model";
 import { AssignmentsService } from "src/app/shared/assignments.service";
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/shared/auth.service";
