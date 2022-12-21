@@ -3,16 +3,20 @@
 
 	<form ngForm class="form" #formupdate (submit)="onSaveAssignment(); formupdate.reset(); ">
 		<mat-form-field>
-			<input matInput placeholder="Edition du nom" [(ngModel)]="nomAssignment" name="assignment-name">
+			<input matInput placeholder="Édition du nom" [(ngModel)]="nomAssignment" name="assignment-name">
 		</mat-form-field>
 
 		<mat-form-field>
-			<input matInput [matDatepicker]="picker" placeholder="Edition de la date" [(ngModel)]="dateDeRendu" name="date">
+			<input matInput [matDatepicker]="picker" placeholder="Édition de la date" [(ngModel)]="dateDeRendu" name="date">
 
 			<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 			<mat-datepicker #picker></mat-datepicker>
 		</mat-form-field>
 
-		<button mat-raised-button color="primary" [disabled]="((!nomAssignment)||(!dateDeRendu))">Sauver</button>
+		<mat-form-field>
+			<input matInput placeholder="Édition de la note" [(ngModel)]="noteAssignment" name="assignment-note">
+		</mat-form-field>
+
+		<button mat-raised-button color="primary" [disabled]="((!nomAssignment)||(!dateDeRendu)||(!noteAssignment))">Sauver</button>
 	</form>
 </div>

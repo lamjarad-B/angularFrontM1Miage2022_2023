@@ -15,6 +15,7 @@ export class EditAssignmentComponent implements OnInit
 	assignment!: Assignment | undefined;
 	nomAssignment!: string;
 	dateDeRendu!: Date;
+	noteAssignment!: number;
 
 	// Constructeur.
 	constructor(
@@ -43,6 +44,7 @@ export class EditAssignmentComponent implements OnInit
 			// On stocke le devoir dans la propriété du composant.
 			this.assignment = assignment;
 			this.nomAssignment = assignment.nom;
+			this.noteAssignment = assignment.note;
 			this.dateDeRendu = assignment.dateDeRendu;
 		} );
 	}
@@ -54,13 +56,12 @@ export class EditAssignmentComponent implements OnInit
 
 		// on récupère les valeurs dans le formulaire.
 		this.assignment.nom = this.nomAssignment;
+		this.assignment.note = Math.min( Math.max( this.noteAssignment, 0 ), 20 );
 		this.assignment.dateDeRendu = this.dateDeRendu;
 		this.assignmentsService
 			.updateAssignment( this.assignment )
 			.subscribe( ( message ) =>
 			{
-				console.log( message );
-
 				this.router.navigate( [ "/home" ] );
 			} );
 	}

@@ -19,13 +19,12 @@ const options = {
 mongoose.connect( uri, options )
 	.then( () =>
 	{
-		console.log( "Connecté à la base MongoDB assignments dans le cloud !" );
-		console.log( "at URI = " + uri );
-		console.log( "vérifiez with http://localhost:8010/api/assignments que cela fonctionne" );
+		console.log( "Connecté à la base de données MongoDB à l'adresse : " + uri );
+		console.log( "Vérifiez que http://localhost:8010/api/assignments fonctionne correctement." );
 	},
 		dbError =>
 		{
-			console.log( "Erreur de connexion: ", dbError );
+			console.log( "Erreur de connexion : ", dbError );
 		} );
 
 // Autorisation des requêtes HTTP ayant des requêtes CORS.

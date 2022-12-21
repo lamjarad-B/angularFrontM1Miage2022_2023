@@ -26,11 +26,23 @@ header {
 	font-size: 3rem;
 }
 
+.name_filter {
+	width: 200px;
+}
+
 #sidenav {
 	width: auto;
 	margin-left: auto;
 	margin-right: auto;
-	text-align: end;
+	text-align: center;
+}
+
+#sidenav mat-list {
+	padding: 1rem;
+}
+
+#sidenav mat-nav-list {
+	padding: 0;
 }
 
 .menuNav {

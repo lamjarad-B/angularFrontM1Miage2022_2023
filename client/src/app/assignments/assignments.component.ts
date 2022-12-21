@@ -12,10 +12,6 @@ import { Assignment } from "../models/assignment.model";
 export class AssignmentsComponent implements OnInit
 {
 	// Propriétés du composant.
-	titre = "Mon application sur les Assignments !";
-	ajoutActive = false;
-
-	// Propriétés du formulaire
 	nomDevoir = "";
 	remarque = "";
 	note = 0;
@@ -38,6 +34,8 @@ export class AssignmentsComponent implements OnInit
 	prevPage!: number;
 	hasNextPage!: boolean;
 	nextPage!: number;
+	nameFilter!: string;
+	renduFilter!: boolean;
 	assignments!: Assignment[];
 
 	// État de connexion
@@ -56,7 +54,7 @@ export class AssignmentsComponent implements OnInit
 	ngOnInit(): void
 	{
 		// On récupère les devoirs (avec pagination).
-		this.assignmentsService.getAssignmentsPagine( this.page, this.limit )
+		this.assignmentsService.getAssignmentsPagine( this.page, this.limit, this.nameFilter, this.renduFilter )
 			.subscribe( data =>
 			{
 				this.assignments = data.docs;
@@ -68,13 +66,11 @@ export class AssignmentsComponent implements OnInit
 				this.prevPage = data.prevPage;
 				this.hasNextPage = data.hasNextPage;
 				this.nextPage = data.nextPage;
-
-				console.log( "données reçues" );
 			} );
 	}
 
 	// Méthode pour récupérer les devoirs.
-	getAssignment()
+	getAssignments()
 	{
 		this.assignmentsService.getAssignments()
 			.subscribe( assignments => this.assignments = assignments );
@@ -105,5 +101,20 @@ export class AssignmentsComponent implements OnInit
 	onNouvelAssignment()
 	{
 		this.formVisible = false;
+	}
+
+	// Méthode pour filtrer les résultats de la recherche (nom du devoir).
+	onUpdateNameFilter( event: any )
+	{
+		// Note : Angular semble avoir du mal à me donner une valeur à la première saisie...
+		// Source : https://www.angularjswiki.com/angular/ngmodelchange-change-angular/
+		this.nameFilter = event;
+		this.ngOnInit();
+	}
+
+	// Méthode pour filtrer les résultats des recherches (devoir rendu ou non).
+	onUpdateRenduFilter()
+	{
+		this.ngOnInit();
 	}
 }

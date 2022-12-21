@@ -60,9 +60,8 @@ export class AssignmentDetailComponent implements OnInit
 
 		// On met à jour le devoir dans la base de données.
 		this.assignmentsService.updateAssignment( this.assignmentTransmis )
-			.subscribe( message =>
+			.subscribe( () =>
 			{
-				console.log( message );
 				this.router.navigate( [ "/home" ] );
 			} );
 	}
@@ -75,9 +74,8 @@ export class AssignmentDetailComponent implements OnInit
 
 		// On supprime le devoir dans la base de données.
 		this.assignmentsService.deleteAssignment( this.assignmentTransmis )
-			.subscribe( ( message ) =>
+			.subscribe( () =>
 			{
-				console.log( message );
 				this.router.navigateByUrl( "/", { skipLocationChange: true } ).then( () =>
 					this.router.navigate( [ "/home" ] )
 				);

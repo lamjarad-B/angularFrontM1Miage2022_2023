@@ -3,6 +3,7 @@
 	<a routerLink="/home"><mat-icon aria-hidden="false" fontIcon="home"></mat-icon></a>
 </div>
 
+<!-- Ne devrait plus exister ?
 <mat-sidenav-container id="sidenav" mode="side" *ngIf="isLogged">
 	<mat-list>
 		<mat-nav-list class="menuNav"><a routerLink="/">Liste des devoirs</a></mat-nav-list>
@@ -11,11 +12,10 @@
 		<mat-nav-list class="menuNav"><a routerLink="/">Suppression d'un devoir</a></mat-nav-list>
 		<mat-nav-list class="menuNav"><a routerLink="/">Génération de données de test</a></mat-nav-list>
 	</mat-list>
-</mat-sidenav-container>
+</mat-sidenav-container> -->
 
-<p>{{titre}}</p> <!--titre vient du fichier .ts-->
-<p>Nb total de pages: {{totalPages}}</p>
-<p>Nb total d'assignments: {{totalDocs}}</p>
+<p>Nombre total de pages : <strong>{{totalPages}}</strong></p>
+<p>Nombre total de devoirs : <strong>{{totalDocs}}</strong></p>
 
 <div class="containerButtonPreviousNext">
 	<button mat-raised-button color="primary"></button>&nbsp;
@@ -25,39 +25,46 @@
 </div>
 
 <main class="container">
-	<!--Boutton pour afficher le formulaire-->
-	<div class="ajouterBtn" *ngIf="!formVisible">
-		<button class="ajouterBtn" mat-flat-button color="accent" (click)="onAddAssignmentBtnClick()" *ngIf="isLogged">
-			Ajouter Assignment
+	<!-- Filtre par nom -->
+	<mat-form-field class="name_filter">
+		<mat-label>Filtrer par nom</mat-label>
+		<input matInput type="text" (ngModelChange)="onUpdateNameFilter($event)" [(ngModel)]="nameFilter">
+
+		<button *ngIf="nameFilter" matSuffix mat-icon-button aria-label="Clear" (click)="nameFilter=''; onUpdateNameFilter($event);">
+			<mat-icon>close</mat-icon>
 		</button>
+	</mat-form-field>
+
+	<!-- Filtre par rendu/non-rendu -->
+	<mat-checkbox class="rendu_filter" (change)="onUpdateRenduFilter()" [(ngModel)]="renduFilter">Afficher seulement les devoirs rendus ?</mat-checkbox>
+
+	<!-- Bouton pour afficher le formulaire -->
+	<div class="ajouterBtn" *ngIf="!formVisible">
+		<button class="ajouterBtn" mat-flat-button color="accent" (click)="onAddAssignmentBtnClick()" *ngIf="isLogged">Ajouter Assignment</button>
 	</div>
 
 	<!-- Formulaire d'ajout d'un nouveau devoir -->
 	<app-add-assignment *ngIf="formVisible"></app-add-assignment>
 
-	<!-- <mat-list *ngFor="let assignment of assignments"></mat-list> -->
-	<p *ngIf="dateRendu">{{nomDevoir}} date de rendu =  {{dateRendu | date:'dd/MM/yyyy'}}</p><!--le binding bi-directionnel-->
+	<!-- Affichage de la date de rendu du devoir -->
+	<p *ngIf="dateRendu">{{nomDevoir}} date de rendu =  {{dateRendu | date:'dd/MM/yyyy'}}</p>
 
-	<!--[ngStyle]="{'color": assignment.rendu ? 'green' : "red'}"  (sans utiliser les classes en css) on met ça à l'intérieur du <div....>-->
-	<!-- [ngClass]="{'rendu":assignment.rendu, 'nonRendu": !assignment.rendu}" (en utilisant des clases) on met ça à l'intérieur du <div....-->
-	<mat-list *ngFor="let assignment of assignments"><!--assignments est le nom du tableau dans .ts -->
+	<!-- Listage des devoirs -->
+	<mat-list *ngFor="let assignment of assignments">
 		<nav>
 			<h3 mat-subheader>{{assignment.dateDeRendu | date:'dd/MM/yyyy'}}</h3>
 
-			<mat-list-item (click)="assignmentClique(assignment)"><!--quand je clique, j'appelle la méthode assignmentClique()-->
-				<li appRendu *ngIf="assignment.rendu; else nonSoumis">
-					Devoir intitulé {{assignment.nom}}, à rendre le {{assignment.dateDeRendu | date:'dd/MM/yyyy'}}, soumis par l'élève.
-				</li>
+			<mat-list-item (click)="assignmentClique(assignment)">
+				<li appRendu *ngIf="assignment.rendu; else nonSoumis">{{assignment.nom}}</li>
 
-				<ng-template #nonSoumis> <!--on créer un template avec l'identifiant nonsoumis-->
-					<li class="nonSoumis">Le devoir {{assignment.nom}} n'a pas été rendu.</li>
+				<ng-template #nonSoumis>
+					<li class="nonSoumis">{{assignment.nom}} <strong>NON RENDU</strong></li>
 				</ng-template>
 			</mat-list-item>
 
-			<!--Le *ngIf est là car sans lui lors du chargement initial de la page, assignementTransmis est undefined et une erreur s’affichait dans la console. -->
 			<app-assignment-detail [assignmentTransmis]="assignmentSelectionne" *ngIf="assignmentSelectionne === assignment"></app-assignment-detail>
 
-			<mat-divider></mat-divider> <!--pour faire un trait horizontal-->
+			<mat-divider></mat-divider>
 		</nav>
 	</mat-list>
 </main>

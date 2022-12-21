@@ -10,14 +10,14 @@
 
 	<!-- Formulaire de connexion -->
 	<div class="login" *ngIf="loginVisible">
-		<!-- Email -->
+		<!-- Adresse électronique -->
 		<mat-form-field appearance="fill">
-			<mat-label>Entrer votre email</mat-label>
+			<mat-label>Entrer votre adresse électronique</mat-label>
 			<input matInput [(ngModel)]="email" required>
 			<mat-error *ngIf="validator.invalid">{{getErrorMessage()}}</mat-error>
 		</mat-form-field>
 
-		<!-- Password -->
+		<!-- Mot de passe -->
 		<mat-form-field appearance="fill">
 			<mat-label>Entrer votre mot de passe</mat-label>
 			<input matInput [(ngModel)]="password" [type]="hide ? 'password' : 'text'">
@@ -26,7 +26,7 @@
 			</button>
 		</mat-form-field>
 
-		<!-- Bouton "se connecter" -->
+		<!-- Bouton de connexion -->
 		<button class="ajouterBtn" mat-flat-button color="accent" (click)="login()">Se connecter</button>
 	</div>
 </div>

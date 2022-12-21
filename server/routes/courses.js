@@ -44,9 +44,6 @@ function addCourse( request, result )
 	course.teacherName = request.body.teacherName;
 	course.teacherAvatar = request.body.teacherAvatar;
 
-	console.log( "POST matière reçu :" );
-	console.log( course );
-
 	course.save( ( dbError ) =>
 	{
 		if ( dbError )

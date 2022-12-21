@@ -35,8 +35,6 @@ export class AuthService
 				.subscribe( {
 					next: ( httpData ) =>
 					{
-						console.log( httpData );
-
 						// Lors de la réponse du serveur, on vérifie si la connexion a réussi.
 						if ( httpData.auth === true )
 						{

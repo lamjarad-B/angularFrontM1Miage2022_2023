@@ -31,9 +31,9 @@ export class AssignmentsService
 		return this.http.get<Assignment[]>( this.url );
 	}
 
-	getAssignmentsPagine( page: number, limit: number ): Observable<any>
+	getAssignmentsPagine( page: number, limit: number, name: string, rendu: boolean ): Observable<any>
 	{
-		return this.http.get<any>( this.url + "?page=" + page + "&limit=" + limit );
+		return this.http.get<any>( this.url + "?page=" + page + "&limit=" + limit + "&name=" + name + "&rendu=" + rendu );
 	}
 
 	getAssignment( id: number ): Observable<Assignment | undefined>
@@ -44,7 +44,6 @@ export class AssignmentsService
 	// Ajout
 	addAssignment( assignment: Assignment ): Observable<any>
 	{
-		console.log( 1, assignment );
 		return this.http.post<Assignment>( this.url, assignment, this.HttpOptions );
 	}
 

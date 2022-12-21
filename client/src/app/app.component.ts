@@ -63,8 +63,6 @@ export class AppComponent
 				.subscribe( {
 					next: ( httpData ) =>
 					{
-						console.log( httpData );
-
 						// Lors de la réponse du serveur, on vérifie si la connexion a réussie.
 						if ( httpData.auth === true )
 						{
@@ -86,8 +84,6 @@ export class AppComponent
 						// Note : cela signifie les données sont invalides ou périmées.
 						localStorage.removeItem( "id_token" );
 						localStorage.removeItem( "expires_at" );
-
-						console.log( httpError );
 					}
 				} );
 
@@ -174,7 +170,6 @@ export class AppComponent
 		this.courseService.peuplerBDAvecForkJoin().subscribe( () =>
 		{
 			this.assignmentsService.peuplerBDAvecForkJoin();
-			console.log( "La base de données est prête." );
 		} );
 	}
 }
