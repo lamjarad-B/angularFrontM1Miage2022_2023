@@ -11,33 +11,37 @@ import { Assignment } from "../../models/assignment.model";
 
 export class EditAssignmentComponent implements OnInit
 {
+	// Propriétés du composant.
 	assignment!: Assignment | undefined;
 	nomAssignment!: string;
 	dateDeRendu!: Date;
 
+	// Constructeur.
 	constructor(
 		private assignmentsService: AssignmentsService,
 		private route: ActivatedRoute,
 		private router: Router
 	) { }
 
+	// Méthode d'initialisation.
 	ngOnInit(): void
 	{
 		this.getAssignment();
 	}
 
+	// Méthode pour récupérer un devoir.
 	getAssignment()
 	{
-		// on récupère l'id dans le snapshot passé par le routeur
-		// le "+" force l'id de type string en "number"
+		// Récupération de l'identifiant dans l'URL.
 		const id = +this.route.snapshot.params[ "id" ];
 
 		this.assignmentsService.getAssignment( id ).subscribe( ( assignment ) =>
 		{
+			// Si l'identifiant n'existe pas, on retourne rien.
 			if ( !assignment ) return;
 
+			// On stocke le devoir dans la propriété du composant.
 			this.assignment = assignment;
-			// Pour pré-remplir le formulaire
 			this.nomAssignment = assignment.nom;
 			this.dateDeRendu = assignment.dateDeRendu;
 		} );
@@ -45,9 +49,10 @@ export class EditAssignmentComponent implements OnInit
 
 	onSaveAssignment()
 	{
+		// si le devoir n'existe pas, on retourne rien.
 		if ( !this.assignment ) return;
 
-		// on récupère les valeurs dans le formulaire
+		// on récupère les valeurs dans le formulaire.
 		this.assignment.nom = this.nomAssignment;
 		this.assignment.dateDeRendu = this.dateDeRendu;
 		this.assignmentsService
@@ -56,7 +61,6 @@ export class EditAssignmentComponent implements OnInit
 			{
 				console.log( message );
 
-				// navigation vers la home page
 				this.router.navigate( [ "/home" ] );
 			} );
 	}

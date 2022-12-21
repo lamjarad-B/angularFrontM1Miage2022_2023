@@ -11,16 +11,17 @@ import { Assignment } from "../models/assignment.model";
 
 export class AssignmentsComponent implements OnInit
 {
+	// Propriétés du composant.
 	titre = "Mon application sur les Assignments !";
-	ajoutActive = false; // pour le button dans le fichier html
+	ajoutActive = false;
 
-	//Proprietes du formulaire
-	nomDevoir = ""; // Pour récupérer la valeur du champs nom
-	remarque = ""; // Pour récupérer la valeur du champs remarque
-	note = 0; // Pour récupérer la valeur du champs note
-	rendu = false; // Pour récupérer la valeur du champs rendu
-	course = 0; // Pour récupérer la valeur du champs course
-	dateRendu!: Date; // Pour récupérer la valeur du champs dateDeRendu
+	// Propriétés du formulaire
+	nomDevoir = "";
+	remarque = "";
+	note = 0;
+	rendu = false;
+	course = 0;
+	dateRendu!: Date;
 
 	// Devoir sélectionné par l'utilisateur.
 	assignmentSelectionne!: Assignment | undefined;
@@ -28,7 +29,7 @@ export class AssignmentsComponent implements OnInit
 	// Affichage ou non du formulaire d'ajout d'un devoir.
 	formVisible = false;
 
-	// Pour la pagination
+	// Pour la pagination des résultats.
 	page: number = 1;
 	limit: number = 10;
 	totalDocs!: number;
@@ -37,7 +38,6 @@ export class AssignmentsComponent implements OnInit
 	prevPage!: number;
 	hasNextPage!: boolean;
 	nextPage!: number;
-
 	assignments!: Assignment[];
 
 	// État de connexion
@@ -46,13 +46,17 @@ export class AssignmentsComponent implements OnInit
 	// L'utilisateur est-il un administrateur ?
 	isAdmin = this.authService.isAdmin;
 
-	constructor( private authService: AuthService, private assignmentService: AssignmentsService ) { } //Ingection des services
+	// Constructeur.
+	constructor(
+		private authService: AuthService,
+		private assignmentsService: AssignmentsService
+	) { }
 
+	// Méthode d'initialisation.
 	ngOnInit(): void
 	{
-		//this.assignments = this.assignmentsServices.getAssignments();// utilisation des services
-		//this.getAssignment();
-		this.assignmentService.getAssignmentsPagine( this.page, this.limit )
+		// On récupère les devoirs (avec pagination).
+		this.assignmentsService.getAssignmentsPagine( this.page, this.limit )
 			.subscribe( data =>
 			{
 				this.assignments = data.docs;
@@ -69,13 +73,14 @@ export class AssignmentsComponent implements OnInit
 			} );
 	}
 
+	// Méthode pour récupérer les devoirs.
 	getAssignment()
 	{
-		// Renvoie un Observable
-		this.assignmentService.getAssignments()
+		this.assignmentsService.getAssignments()
 			.subscribe( assignments => this.assignments = assignments );
 	}
 
+	// Méthode pour sélectionner un devoir.
 	assignmentClique( assignment: Assignment )
 	{
 		if ( this.assignmentSelectionne === assignment )
@@ -90,11 +95,13 @@ export class AssignmentsComponent implements OnInit
 		}
 	}
 
+	// Méthode pour voir les détails d'un devoir.
 	onAddAssignmentBtnClick()
 	{
 		this.formVisible = true;
 	}
 
+	// Méthode pour cacher les détails d'un devoir.
 	onNouvelAssignment()
 	{
 		this.formVisible = false;

@@ -1,14 +1,13 @@
 <div class="container">
 	<mat-card class="assignmentDetail" *ngIf="assignmentTransmis">
 		<mat-card-header>
-			<img mat-card-sm-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" >
+			<img mat-card-sm-image src="{{teacherAvatar}}" >
 
 			<mat-card-title>{{assignmentTransmis.nom}}</mat-card-title>
-			<mat-card-subtitle>Par {{assignmentTransmis.auteur}}</mat-card-subtitle>
-			<mat-card-subtitle>{{assignmentTransmis.dateDeRendu | date:'dd/MM/yyyy'}}</mat-card-subtitle>
+			<mat-card-subtitle>Auteur : {{teacherName}} ({{courseName}})</mat-card-subtitle>
+			<mat-card-subtitle>Élève : {{assignmentTransmis.auteur}}</mat-card-subtitle>
+			<mat-card-subtitle>Date de rendu : {{assignmentTransmis.dateDeRendu | date:'dd/MM/yyyy'}}</mat-card-subtitle>
 		</mat-card-header>
-
-		<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
 
 		<mat-card-content>
 			<p>{{assignmentTransmis.remarque}}</p>

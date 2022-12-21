@@ -7,36 +7,43 @@ import { AssignmentsService } from "./shared/assignments.service";
 import { CoursesService } from "./shared/courses.service";
 
 @Component( {
-	//Des propriétés
-	selector: "app-root", //Le nom du component(il se trouve dans l'index)
-	templateUrl: "./app.component.html",// template qui correspond à l'affichage de ce composant
-	styleUrls: [ "./app.component.css" ]// Le style de ce composant
+	selector: "app-root",
+	templateUrl: "./app.component.html",
+	styleUrls: [ "./app.component.css" ]
 } )
 
 export class AppComponent
 {
-	// Titre du composant
+	// Titre du composant.
 	title = "Application de gestion des devoirs à rendre (Assignments)";
 
-	// Propriétés de l'email/password
+	// Propriétés de l'email et du mot de passe.
 	email = "";
 	password = "";
 	validator = new FormControl( "", [ Validators.required, Validators.email ] );
 
-	// Bouton pour montrer/cache le mot de passe
+	// Bouton pour montrer/cache le mot de passe.
 	hide = true;
 
-	// État de connexion
+	// État de connexion.
 	isLogged = this.authService.isLogged;
 
 	// L'utilisateur est-il un administrateur ?
 	isAdmin = this.authService.isAdmin;
 
-	// Afficher ou cacher le formulaire
+	// Afficher ou cacher le formulaire.
 	loginVisible = false;
 
-	constructor( private http: HttpClient, private authService: AuthService, private router: Router, private assignmentService: AssignmentsService, private courseService: CoursesService ) { }
+	// Constructeur.
+	constructor(
+		private http: HttpClient,
+		private authService: AuthService,
+		private router: Router,
+		private assignmentsService: AssignmentsService,
+		private courseService: CoursesService
+	) { }
 
+	// Méthode d'initialisation.
 	ngOnInit(): void
 	{
 		// Vérification de la présence et de la validité d'un jeton d'authentification.
@@ -87,6 +94,7 @@ export class AppComponent
 		}
 	}
 
+	// Méthode pour se connecter.
 	async login()
 	{
 		// Vérification de la présence d'un email/password
@@ -122,6 +130,7 @@ export class AppComponent
 		this.password = "";
 	}
 
+	// Méthode pour se déconnecter.
 	logout()
 	{
 		// Utilisateur/administrateur déconnecté.
@@ -141,12 +150,14 @@ export class AppComponent
 		);
 	}
 
+	// Méthode pour afficher le formulaire de connexion.
 	showLogin()
 	{
 		// Formulaire de connexion visible.
 		this.loginVisible = true;
 	}
 
+	// Méthode pour afficher les messages d'erreur.
 	getErrorMessage()
 	{
 		if ( this.validator?.hasError( "required" ) )
@@ -157,11 +168,12 @@ export class AppComponent
 		return this.validator?.hasError( "email" ) ? "Ce n'est pas une adresse email valide" : "";
 	}
 
+	// Méthode pour insérer des données de test dans la base de données.
 	initialiserLaBaseAvecDonneesDeTest()
 	{
 		this.courseService.peuplerBDAvecForkJoin().subscribe( () =>
 		{
-			this.assignmentService.peuplerBDAvecForkJoin();
+			this.assignmentsService.peuplerBDAvecForkJoin();
 			console.log( "La base de données est prête." );
 		} );
 	}

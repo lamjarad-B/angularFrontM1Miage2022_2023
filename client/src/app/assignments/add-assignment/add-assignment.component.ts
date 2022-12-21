@@ -10,17 +10,19 @@ import { Assignment } from "../../models/assignment.model";
 
 export class AddAssignmentComponent implements OnInit
 {
-	nomDevoir!: string; // Pour récupérer la valeur du champs nom
-	dateRendu!: Date; // Pour récupérer la valeur du champs dateDeRendu
+	// Propriétés du composant.
+	nomDevoir!: string;
+	dateRendu!: Date;
 
+	// Constructeur.
 	constructor( private assignmentsService: AssignmentsService ) { }
 
+	// Méthode d'initialisation.
 	ngOnInit(): void { }
 
+	// Méthode pour ajouter un devoir.
 	onSubmit()
 	{
-		console.log( this.nomDevoir + "date de rendu = " + this.dateRendu );
-
 		const newAssignment = new Assignment();
 		newAssignment.id = Math.floor( Math.random() * 10000 );
 		newAssignment.nom = this.nomDevoir;
