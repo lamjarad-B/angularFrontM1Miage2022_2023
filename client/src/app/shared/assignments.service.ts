@@ -71,7 +71,7 @@ export class AssignmentsService
 				newAssignment.id = a.id;
 				newAssignment.nom = a.nom;
 				newAssignment.auteur = a.auteur;
-				newAssignment.course = course;
+				newAssignment.course = course.id;
 				newAssignment.dateDeRendu = new Date( a.dateDeRendu );
 				newAssignment.remarque = a.remarque;
 				newAssignment.note = a.note;

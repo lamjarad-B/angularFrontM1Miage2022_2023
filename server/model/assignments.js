@@ -8,7 +8,7 @@ const AssignmentSchema = Schema( {
 	dateDeRendu: Date,
 	nom: String,
 	auteur: String,
-	course: [ { type: Schema.Types.ObjectId, ref: "courses" } ],
+	course: Number,
 	remarque: String,
 	note: Number,
 	rendu: Boolean
