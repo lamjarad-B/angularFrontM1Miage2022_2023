@@ -1,9 +1,9 @@
 const initialCourses = [
-	{ id: 1, nom: "Base de données", teacherName: "G. Mopol", teacherAvatar: "https://www.fratmat.info/media/k2/items/cache/7a763ea01045fd6bbe9be20fa045d43a_XL.jpg" },
-	{ id: 2, nom: "Technologies Web", teacherName: "M. Buffa", teacherAvatar: "https://pbs.twimg.com/profile_images/110455194/n666194627_2302_400x400.jpg" },
-	{ id: 3, nom: "Veille technologique", teacherName: "S. Tounsi", teacherAvatar: "https://smartdeal06.departement06.fr/documents/_processed_/2/0/csm_smartdeal_experts_tounsi_cd27b91a2a.jpg" },
-	{ id: 4, nom: "Réseau", teacherName: "G. Menez", teacherAvatar: "https://cdn.discordapp.com/attachments/930362901401862164/932948708599926814/votrephoto.png" },
-	{ id: 5, nom: "Communiquer pour Convaincre", teacherName: "F. Arnaut", teacherAvatar: "https://pbs.twimg.com/profile_images/2347225535/FA_EURO_2004_400x400.jpg" }
+	{ id: 1, nom: "Base de données", image: "https://cdn-ajfbi.nitrocdn.com/GuYcnotRkcKfJXshTEEKnCZTOtUwxDnm/assets/static/optimized/rev-e32aa23/blackfish-uploads/blog/post/seo/og_image_file/og_image/15493/0712-Bad_Practices_in_Database_Design_-_Are_You_Making_These_Mistakes_Dan_Social-754bc73011e057dc76e55a44a954e0c3.png", teacherName: "G. Mopol", teacherAvatar: "https://www.fratmat.info/media/k2/items/cache/7a763ea01045fd6bbe9be20fa045d43a_XL.jpg" },
+	{ id: 2, nom: "Technologies Web", image: "https://www.pulsar-agency.com/images/technologies/web_technologies.jpg", teacherName: "M. Buffa", teacherAvatar: "https://pbs.twimg.com/profile_images/110455194/n666194627_2302_400x400.jpg" },
+	{ id: 3, nom: "Veille technologique", image: "https://www.kbcrawl.com/wp-content/uploads/2019/01/la-veille-technologique.jpg", teacherName: "S. Tounsi", teacherAvatar: "https://smartdeal06.departement06.fr/documents/_processed_/2/0/csm_smartdeal_experts_tounsi_cd27b91a2a.jpg" },
+	{ id: 4, nom: "Réseau", image: "https://cdn.futura-sciences.com/sources/images/Reseau-informatique-connexion.jpeg", teacherName: "G. Menez", teacherAvatar: "https://cdn.discordapp.com/attachments/930362901401862164/932948708599926814/votrephoto.png" },
+	{ id: 5, nom: "Communiquer pour convaincre", image: "https://www.placedesreseaux.com/img/illustrations-dossiers/communication-orale/communication-orale-00.jpg", teacherName: "F. Arnaut", teacherAvatar: "https://pbs.twimg.com/profile_images/2347225535/FA_EURO_2004_400x400.jpg" }
 ];
 
 const initialAssignments = [
