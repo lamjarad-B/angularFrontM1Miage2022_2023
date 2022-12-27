@@ -7,16 +7,11 @@ const bodyParser = require( "body-parser" );
 // Liaison à la base de données MongoDB.
 const mongoose = require( "mongoose" );
 mongoose.Promise = global.Promise;
-// mongoose.set( "debug", true );
+mongoose.set( "debug", true );
+mongoose.set( "strictQuery", true );
 
 const uri = "mongodb+srv://Brahim1990:brahim1990@cluster0.uz0zutp.mongodb.net/assignments?retryWrites=true&w=majority";
-const options = {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-	useFindAndModify: false
-};
-
-mongoose.connect( uri, options )
+mongoose.connect( uri )
 	.then( () =>
 	{
 		console.log( "Connecté à la base de données MongoDB à l'adresse : " + uri );
