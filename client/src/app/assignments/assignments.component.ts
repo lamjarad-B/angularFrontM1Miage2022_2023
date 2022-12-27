@@ -53,8 +53,8 @@ export class AssignmentsComponent implements OnInit
 	// Méthode d'initialisation.
 	ngOnInit(): void
 	{
-		// On récupère les devoirs (avec pagination).
-		this.assignmentsService.getAssignmentsPagine( this.page, this.limit, this.nameFilter, this.renduFilter )
+		// Récupération de tous les devoirs (avec pagination).
+		this.assignmentsService.getAssignments( this.page, this.limit, this.nameFilter, this.renduFilter )
 			.subscribe( data =>
 			{
 				this.assignments = data.docs;
@@ -67,13 +67,6 @@ export class AssignmentsComponent implements OnInit
 				this.hasNextPage = data.hasNextPage;
 				this.nextPage = data.nextPage;
 			} );
-	}
-
-	// Méthode pour récupérer les devoirs.
-	getAssignments()
-	{
-		this.assignmentsService.getAssignments()
-			.subscribe( assignments => this.assignments = assignments );
 	}
 
 	// Méthode pour sélectionner un devoir.

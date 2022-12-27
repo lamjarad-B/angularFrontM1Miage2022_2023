@@ -24,35 +24,37 @@ export class CoursesService
 	url = "http://localhost:8010/api/courses";
 	//url = "https://api-cours-angular-2023.herokuapp.com/api/courses";
 
-	getCourses(): Observable<Course[]>
+	// Récupération de toutes les matières.
+	getCourses( page: number, limit: number ): Observable<any>
 	{
-		return this.http.get<Course[]>( this.url );
+		return this.http.get<any>( this.url + "?page=" + page + "&limit=" + limit );
 	}
 
+	// Récupération d'une seule matière.
 	getCourse( id: number ): Observable<Course>
 	{
 		return this.http.get<Course>( this.url + "/" + id );
 	}
 
-	// Ajout
+	// Récupération de toutes les matières.
 	addCourse( course: Course ): Observable<any>
 	{
 		return this.http.post<Course>( this.url, course, this.HttpOptions );
 	}
 
-	// Modification
+	// Modification d'une matière.
 	updateCourse( course: Course ): Observable<any>
 	{
 		return this.http.put<Course>( this.url, course );
 	}
 
-	// Supprimer
+	// Suppression d'une matière.
 	deleteCourse( course: Course ): Observable<any>
 	{
 		return this.http.delete( this.url + "/" + course._id );
 	}
 
-	// Peuplement
+	// Peuplement des matières.
 	peuplerBDAvecForkJoin(): Observable<any>
 	{
 		const appelsVersAddCourse: any = [];

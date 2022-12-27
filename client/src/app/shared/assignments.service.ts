@@ -26,40 +26,37 @@ export class AssignmentsService
 	url = "http://localhost:8010/api/assignments";
 	//url = "https://api-cours-angular-2023.herokuapp.com/api/assignments";
 
-	getAssignments(): Observable<Assignment[]>
-	{
-		return this.http.get<Assignment[]>( this.url );
-	}
-
-	getAssignmentsPagine( page: number, limit: number, name: string, rendu: boolean ): Observable<any>
+	// Récupération de tous les devoirs.
+	getAssignments( page: number, limit: number, name: string, rendu: boolean ): Observable<any>
 	{
 		return this.http.get<any>( this.url + "?page=" + page + "&limit=" + limit + "&name=" + name + "&rendu=" + rendu );
 	}
 
+	// Récupération d'un seul devoir.
 	getAssignment( id: number ): Observable<Assignment | undefined>
 	{
 		return this.http.get<Assignment>( this.url + "/" + id );
 	}
 
-	// Ajout
+	// Ajout d'un devoir.
 	addAssignment( assignment: Assignment ): Observable<any>
 	{
 		return this.http.post<Assignment>( this.url, assignment, this.HttpOptions );
 	}
 
-	// Modification
+	// Modification d'un devoir.
 	updateAssignment( assignment: Assignment ): Observable<any>
 	{
 		return this.http.put<Assignment>( this.url, assignment );
 	}
 
-	// Supprimer
+	// Suppression d'un devoir.
 	deleteAssignment( assignment: Assignment ): Observable<any>
 	{
 		return this.http.delete( this.url + "/" + assignment._id );
 	}
 
-	// Peuplement
+	// Peuplement des devoirs.
 	peuplerBDAvecForkJoin(): void
 	{
 		initialAssignments.forEach( ( a ) =>

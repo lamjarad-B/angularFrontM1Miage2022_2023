@@ -11,6 +11,7 @@ import { MatInputModule } from "@angular/material/input";// On récupère le mod
 import { MatFormFieldModule } from "@angular/material/form-field";// On récupère le module form-field
 import { MatDatepickerModule } from "@angular/material/datepicker";// On récupère le module datepicker
 import { MatNativeDateModule } from "@angular/material/core";
+import { MatSelectModule } from "@angular/material/select";
 import { AssignmentsComponent } from "./assignments/assignments.component";
 import { RenduDirective } from "./shared/rendu.directive"; // Correspond au module qu'on a créer
 import { FormsModule } from "@angular/forms";
@@ -63,6 +64,7 @@ const routes: Routes = [
 		FormsModule,
 		MatDatepickerModule,
 		MatNativeDateModule,
+		MatSelectModule,
 
 		MatToolbarModule,
 		MatSidenavModule,
