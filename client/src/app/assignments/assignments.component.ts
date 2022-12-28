@@ -101,7 +101,11 @@ export class AssignmentsComponent implements OnInit
 	{
 		// Note : Angular semble avoir du mal à me donner une valeur à la première saisie...
 		// Source : https://www.angularjswiki.com/angular/ngmodelchange-change-angular/
-		this.nameFilter = event;
+		if ( this.nameFilter !== "" )
+		{
+			this.nameFilter = event;
+		}
+
 		this.ngOnInit();
 	}
 

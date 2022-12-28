@@ -17,12 +17,9 @@ header {
 	justify-content: space-between;
 }
 
-.mat-icon {
+mat-icon[fonticon = home] {
 	height: 50px;
 	width: 50px;
-}
-
-.material-icons {
 	font-size: 3rem;
 }
 
