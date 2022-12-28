@@ -1,5 +1,6 @@
 <div class="container">
 	<mat-card class="assignmentDetail" *ngIf="assignmentTransmis">
+		<!-- Information générale du devoir -->
 		<mat-card-header>
 			<img mat-card-sm-image src="{{teacherAvatar}}" >
 
@@ -9,6 +10,7 @@
 			<mat-card-subtitle>Date de rendu : {{assignmentTransmis.dateDeRendu | date:'dd/MM/yyyy'}}</mat-card-subtitle>
 		</mat-card-header>
 
+		<!-- Note du devoir -->
 		<mat-card-content>
 			<p>{{assignmentTransmis.remarque}}</p>
 
@@ -16,6 +18,7 @@
 			<mat-card-subtitle *ngIf="assignmentTransmis.note == null">Pas encore noté (une note est <strong>nécessaire</strong> pour marquer ce devoir comme rendu)</mat-card-subtitle>
 		</mat-card-content>
 
+		<!-- Actions sur le devoir -->
 		<mat-card-actions>
 			<mat-checkbox *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()" [disabled]="!isLogged || assignmentTransmis.note == null">Devoir rendu ?</mat-checkbox>
 

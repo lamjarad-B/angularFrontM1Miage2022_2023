@@ -1,22 +1,46 @@
 <div class="container" *ngIf="assignment">
-	<h1>Edition de l'assignment {{assignment.nom}}</h1>
+	<h1>Édition du devoir : {{assignment.nom}}</h1>
 
-	<form ngForm class="form" #formupdate (submit)="onSaveAssignment(); formupdate.reset(); ">
-		<mat-form-field>
-			<input matInput placeholder="Édition du nom" [(ngModel)]="nomAssignment" name="assignment-name">
-		</mat-form-field>
+	<form ngForm #formupdate (submit)="onSaveAssignment(); formupdate.reset();">
+		<div>
+			<!-- Nom du devoir -->
+			<mat-form-field>
+				<input matInput placeholder="Édition du nom" [(ngModel)]="nomAssignment" name="assignment-name">
+			</mat-form-field>
 
-		<mat-form-field>
-			<input matInput [matDatepicker]="picker" placeholder="Édition de la date" [(ngModel)]="dateDeRendu" name="date">
+			<!-- Liste des matières disponibles -->
+			<mat-form-field appearance="fill">
+				<mat-label>Matière</mat-label>
 
-			<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-			<mat-datepicker #picker></mat-datepicker>
-		</mat-form-field>
+				<mat-select (selectionChange)="onChange($event.value)">
+					<mat-option *ngFor="let course of courses" [value]="course.id">
+						{{course.nom}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
 
-		<mat-form-field>
-			<input matInput placeholder="Édition de la note" [(ngModel)]="noteAssignment" name="assignment-note">
-		</mat-form-field>
+			<!-- Date de rendu du devoir -->
+			<mat-form-field>
+				<input matInput [matDatepicker]="picker" placeholder="Édition de la date" [(ngModel)]="dateDeRendu" name="date">
 
-		<button mat-raised-button color="primary" [disabled]="((!nomAssignment)||(!dateDeRendu)||(!noteAssignment))">Sauver</button>
+				<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+				<mat-datepicker #picker></mat-datepicker>
+			</mat-form-field>
+
+			<!-- Note du devoir -->
+			<mat-form-field>
+				<input matInput placeholder="Édition de la note" [(ngModel)]="noteAssignment" name="assignment-note">
+			</mat-form-field>
+
+			<!-- Bouton de sauvegarde -->
+			<button mat-raised-button color="primary" [disabled]="((!nomAssignment)||(!dateDeRendu)||(!noteAssignment))">Sauver</button>
+		</div>
+
+		<div>
+			<!-- Information sur le devoir -->
+			<p>Par : {{teacher}}</p>
+
+			<img src="{{image}}" alt="Photo de la matière">
+		</div>
 	</form>
 </div>

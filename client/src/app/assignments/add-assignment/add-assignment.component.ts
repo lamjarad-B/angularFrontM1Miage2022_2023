@@ -20,7 +20,10 @@ export class AddAssignmentComponent implements OnInit
 	courses: Course[] = [];
 
 	// Constructeur.
-	constructor( private assignmentsService: AssignmentsService, private coursesService: CoursesService ) { }
+	constructor(
+		private assignmentsService: AssignmentsService,
+		private coursesService: CoursesService
+	) { }
 
 	// Méthode d'initialisation.
 	ngOnInit()
