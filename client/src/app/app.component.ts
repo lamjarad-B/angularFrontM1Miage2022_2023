@@ -40,7 +40,7 @@ export class AppComponent
 		private authService: AuthService,
 		private router: Router,
 		private assignmentsService: AssignmentsService,
-		private courseService: CoursesService
+		private coursesService: CoursesService
 	) { }
 
 	// Méthode d'initialisation.
@@ -78,7 +78,7 @@ export class AppComponent
 							);
 						}
 					},
-					error: ( httpError ) =>
+					error: () =>
 					{
 						// Si la connexion a échouée, on supprime les données de connexion.
 						// Note : cela signifie les données sont invalides ou périmées.
@@ -167,7 +167,7 @@ export class AppComponent
 	// Méthode pour insérer des données de test dans la base de données.
 	initialiserLaBaseAvecDonneesDeTest()
 	{
-		this.courseService.peuplerBDAvecForkJoin().subscribe( () =>
+		this.coursesService.peuplerBDAvecForkJoin().subscribe( () =>
 		{
 			this.assignmentsService.peuplerBDAvecForkJoin();
 		} );

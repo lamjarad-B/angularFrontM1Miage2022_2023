@@ -1,18 +1,11 @@
-form {
-	display: flex;
+.mat-stepper-vertical {
+	margin-top: 8px;
 }
 
-form div {
-	width: 50%;
+.mat-mdc-form-field {
+	margin-top: 16px;
 }
 
-form > div {
-	display:flex;
-	flex-direction: column;
-	margin: 5px;
-}
-
-form div:last-of-type {
-	max-height: 280px;
-	overflow-y: auto;
+img {
+	width: 300px;
 }

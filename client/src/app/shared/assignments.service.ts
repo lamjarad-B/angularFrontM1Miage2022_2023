@@ -21,7 +21,7 @@ export class AssignmentsService
 
 	assignments: Assignment[] = [];
 
-	constructor( private http: HttpClient, private courseService: CoursesService ) { }
+	constructor( private http: HttpClient, private coursesService: CoursesService ) { }
 
 	url = "http://localhost:8010/api/assignments";
 	//url = "https://api-cours-angular-2023.herokuapp.com/api/assignments";
@@ -61,7 +61,7 @@ export class AssignmentsService
 	{
 		initialAssignments.forEach( ( a ) =>
 		{
-			this.courseService.getCourse( a.course ).subscribe( ( course: Course ) =>
+			this.coursesService.getCourse( a.course ).subscribe( ( course: Course ) =>
 			{
 				const newAssignment: any = new Assignment();
 				newAssignment.id = a.id;

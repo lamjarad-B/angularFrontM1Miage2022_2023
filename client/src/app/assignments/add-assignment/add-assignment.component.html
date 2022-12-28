@@ -1,38 +1,80 @@
-<form ngForm (submit)="onSubmit(); assignmentForm.reset" #assignmentForm>
-	<div>
-		<!-- Nom du devoir -->
-		<mat-form-field>
-			<input matInput #nomAssignment placeholder="Nom du devoir" [(ngModel)]="nomDevoir" name="nom" />
-		</mat-form-field>
+<mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+	<!-- Nom du devoir -->
+	<mat-step [stepControl]="firstFormGroup">
+		<form [formGroup]="firstFormGroup">
+			<ng-template matStepLabel>Entrez le nom du devoir</ng-template>
 
-		<!-- Liste des matières -->
-		<mat-form-field appearance="fill">
-			<mat-label>Matière</mat-label>
+			<mat-form-field appearance="fill">
+				<mat-label>Nom du devoir</mat-label>
+				<input matInput placeholder="Nom du devoir" formControlName="firstCtrl" required>
+			</mat-form-field>
 
-			<mat-select (selectionChange)="onChange($event.value)">
-				<mat-option *ngFor="let course of courses" [value]="course.id">
-					{{course.nom}}
-				</mat-option>
-			</mat-select>
-		</mat-form-field>
+			<div>
+				<button mat-button matStepperNext>Suivant</button>
+			</div>
+		</form>
+	</mat-step>
 
-		<!-- Date de rendu -->
-		<mat-form-field>
-			<input matInput [matDatepicker]="picker" [(ngModel)]="dateRendu" name="date" placeholder="Date de rendu" />
+	<!-- Liste des matières -->
+	<mat-step [stepControl]="secondFormGroup">
+		<form [formGroup]="secondFormGroup">
+			<ng-template matStepLabel>Sélectionnez la matière</ng-template>
 
-			<mat-hint>DD/MM/YYYY</mat-hint>
-			<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-			<mat-datepicker #picker></mat-datepicker>
-		</mat-form-field>
+			<mat-form-field appearance="fill">
+				<mat-label>Matière</mat-label>
 
-		<!-- Bouton d'ajout d'un devoir -->
-		<button mat-stroked-button color="primary">Ajouter un devoir</button>
-	</div>
+				<mat-select (selectionChange)="onChange($event.value)" formControlName="secondCtrl">
+					<mat-option *ngFor="let course of courses" [value]="course.id">
+						{{course.nom}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
 
-	<div>
+			<div>
+				<button mat-button matStepperPrevious>Précédent</button>
+				<button mat-button matStepperNext>Suivant</button>
+			</div>
+		</form>
+	</mat-step>
+
+	<!-- Date de rendu -->
+	<mat-step [stepControl]="thirdFormGroup">
+		<form [formGroup]="thirdFormGroup">
+			<ng-template matStepLabel>Indiquez la date de rendu</ng-template>
+
+			<mat-form-field appearance="fill">
+				<mat-label>Date de rendu</mat-label>
+
+				<input matInput [matDatepicker]="picker" name="date" formControlName="thirdCtrl" placeholder="Date de rendu" />
+
+				<mat-hint>DD/MM/YYYY</mat-hint>
+
+				<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+				<mat-datepicker #picker></mat-datepicker>
+			</mat-form-field>
+
+			<div>
+				<button mat-button matStepperPrevious>Précédent</button>
+				<button mat-button matStepperNext>Suivant</button>
+			</div>
+		</form>
+	</mat-step>
+
+	<mat-step>
+		<ng-template matStepLabel>Terminé</ng-template>
+
 		<!-- Information sur le devoir -->
-		<p>Par : {{teacher}}</p>
+		<p>Responsable de la matière : {{teacher}}</p>
 
 		<img src="{{image}}" alt="Photo de la matière">
-	</div>
-</form>
+
+		<div>
+			<!-- Divers boutons -->
+			<button mat-button matStepperPrevious>Précédent</button>
+			<button mat-button (click)="stepper.reset()">Réinitialiser les informations</button>
+
+			<!-- Bouton d'ajout d'un devoir -->
+			<button mat-stroked-button color="primary" (click)="onSubmit();">Ajouter un devoir</button>
+		</div>
+	</mat-step>
+</mat-stepper>
