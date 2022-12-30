@@ -1,16 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
-/* Le code ci-dessous pour le reset css de l'application*/
+/* Réinitialisation de certaines règles de style */
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-@import "@angular/material/prebuilt-themes/indigo-pink.css"; /* Le theme qu'on va utiliser */
 
-/*
-deeppurple-amber.css
-indigo-pink.css
-pink-bluegrey.css
-purple-green.css
-*/
+/* Importation du thème d'Angular Material */
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
 
+/* Définition des marges par défaut du corps de la page */
 body {
     margin: 20px;
 }
