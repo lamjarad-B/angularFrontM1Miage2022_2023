@@ -1,5 +1,4 @@
 /* Réinitialisation de certaines règles de style */
-html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 /* Importation du thème d'Angular Material */

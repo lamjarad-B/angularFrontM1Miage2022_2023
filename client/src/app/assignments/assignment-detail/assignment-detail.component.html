@@ -1,34 +1,32 @@
-<div class="container">
-	<mat-card class="assignmentDetail" *ngIf="assignmentTransmis">
-		<!-- Information générale du devoir -->
-		<mat-card-header>
-			<img mat-card-sm-image src="{{teacherAvatar}}" >
+<mat-card class="assignmentDetail" *ngIf="assignmentTransmis">
+	<!-- Information générale du devoir -->
+	<mat-card-header>
+		<img mat-card-sm-image src="{{teacherAvatar}}" >
 
-			<mat-card-title>{{assignmentTransmis.nom}}</mat-card-title>
-			<mat-card-subtitle>Auteur : {{teacherName}} ({{courseName}})</mat-card-subtitle>
-			<mat-card-subtitle>Élève : {{assignmentTransmis.auteur}}</mat-card-subtitle>
-			<mat-card-subtitle>Date de rendu : {{assignmentTransmis.dateDeRendu | date:'dd/MM/yyyy'}}</mat-card-subtitle>
-		</mat-card-header>
+		<mat-card-title>{{assignmentTransmis.nom}}</mat-card-title>
+		<mat-card-subtitle>Auteur : {{teacherName}} ({{courseName}})</mat-card-subtitle>
+		<mat-card-subtitle>Élève : {{assignmentTransmis.auteur}}</mat-card-subtitle>
+		<mat-card-subtitle>Date de rendu : {{assignmentTransmis.dateDeRendu | date:'dd/MM/yyyy'}}</mat-card-subtitle>
+	</mat-card-header>
 
-		<!-- Note du devoir -->
-		<mat-card-content>
-			<p>{{assignmentTransmis.remarque}}</p>
+	<!-- Note du devoir -->
+	<mat-card-content>
+		<p>{{assignmentTransmis.remarque}}</p>
 
-			<mat-card-subtitle *ngIf="assignmentTransmis.note != null">Note : {{assignmentTransmis.note}}/20</mat-card-subtitle>
-			<mat-card-subtitle *ngIf="assignmentTransmis.note == null">Pas encore noté (une note est <strong>nécessaire</strong> pour marquer ce devoir comme rendu)</mat-card-subtitle>
-		</mat-card-content>
+		<mat-card-subtitle *ngIf="assignmentTransmis.note">Note : {{assignmentTransmis.note}}/20</mat-card-subtitle>
+		<mat-card-subtitle *ngIf="!assignmentTransmis.note">Pas encore noté (une note est <strong>nécessaire</strong> pour marquer ce devoir comme rendu)</mat-card-subtitle>
+	</mat-card-content>
 
-		<!-- Actions sur le devoir -->
-		<mat-card-actions>
-			<mat-checkbox *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()" [disabled]="!isLogged || assignmentTransmis.note == null">Devoir rendu ?</mat-checkbox>
+	<!-- Actions sur le devoir -->
+	<mat-card-actions>
+		<mat-checkbox *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()" [disabled]="!isLogged || !assignmentTransmis.note">Devoir rendu ?</mat-checkbox>
 
-			<nav>
-				<a routerLink="/assignment/{{assignmentTransmis.id}}/edit">
-					<button mat-stroked-button color="primary" type="submit" [disabled]="!isAdmin">ÉDITER</button>
-				</a>
-			</nav>
+		<nav>
+			<a routerLink="/assignment/{{assignmentTransmis.id}}/edit">
+				<button mat-stroked-button color="primary" type="submit" [disabled]="!isAdmin">ÉDITER</button>
+			</a>
+		</nav>
 
-			<button mat-flat-button color="warn" (click)="onDelete()" [disabled]="!isAdmin">SUPPRIMER</button>
-		</mat-card-actions>
-	</mat-card>
-</div>
+		<button mat-flat-button color="warn" (click)="onDelete()" [disabled]="!isAdmin">SUPPRIMER</button>
+	</mat-card-actions>
+</mat-card>

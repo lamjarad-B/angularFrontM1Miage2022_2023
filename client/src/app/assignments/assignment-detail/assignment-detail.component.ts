@@ -4,6 +4,7 @@ import { AssignmentsService } from "src/app/shared/assignments.service";
 import { CoursesService } from "src/app/shared/courses.service";
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/shared/auth.service";
+import { Course } from "../../models/course.model";
 
 @Component( {
 	selector: "app-assignment-detail",
@@ -39,13 +40,17 @@ export class AssignmentDetailComponent implements OnInit
 		// Si l'utilisateur n'est pas connecté ou qu'il n'y a pas de devoir sélectionné, on ne fait rien.
 		if ( !this.assignmentTransmis ) return;
 
-		// On récupère le nom du cours et le nom du professeur.
-		this.coursesService.getCourse( this.assignmentTransmis.course as number )
-			.subscribe( course =>
+		// On récupère les informations à propos de la matière et du professeur.
+		this.coursesService.getCourses( 1, 10 )
+			.subscribe( data =>
 			{
-				this.courseName = course.nom;
-				this.teacherName = course.teacherName;
-				this.teacherAvatar = course.teacherAvatar;
+				// Filtrage des résultats avec le nom de la matière.
+				data.docs = data.docs.filter( ( course: Course ) => course.nom === this.assignmentTransmis?.course )[ 0 ];
+
+				// Définition des propriétés du composant.
+				this.courseName = data.docs.nom;
+				this.teacherName = data.docs.teacherName;
+				this.teacherAvatar = data.docs.teacherAvatar;
 			} );
 	}
 

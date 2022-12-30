@@ -44,7 +44,21 @@ table .mat-mdc-form-field {
 	width: 100%;
 }
 
+table .mat-mdc-row .mat-mdc-cell {
+	border-bottom: 1px solid transparent;
+	border-top: 1px solid transparent;
+	cursor: pointer;
+}
+
+table .mat-mdc-row:hover .mat-mdc-cell {
+	border-color: currentColor;
+}
+
 table .mat-mdc-no-data-row {
     margin: 1rem;
     display: inline-block;
+}
+
+tr.is-clicked {
+	font-weight: bold;
 }
