@@ -13,6 +13,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";// On r√©cup√
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatSelectModule } from "@angular/material/select";
 import { MatTableModule } from "@angular/material/table";
+import { MatSortModule } from "@angular/material/sort";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatStepperModule } from "@angular/material/stepper";
 import { AssignmentsComponent } from "./assignments/assignments.component";
@@ -71,6 +72,7 @@ const routes: Routes = [
 		MatSelectModule,
 		MatPaginatorModule,
 		MatTableModule,
+		MatSortModule,
 		MatStepperModule,
 
 		MatToolbarModule,

@@ -51,6 +51,7 @@ export class AssignmentsComponent implements OnInit
 	renduFilter!: boolean;
 	courses!: string[];
 	assignments!: Assignment[];
+	clickedRows = new Set<Assignment>();
 
 	// État de connexion
 	isLogged = this.authService.isLogged;
@@ -100,8 +101,8 @@ export class AssignmentsComponent implements OnInit
 
 					// Création du tableau de données.
 					this.dataSource = new MatTableDataSource( this.assignments );
-					this.dataSource.paginator = this.paginator;
 					this.dataSource.sort = this.sort;
+					this.dataSource.paginator = this.paginator;
 				} );
 		} );
 	}
