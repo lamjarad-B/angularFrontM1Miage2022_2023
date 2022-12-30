@@ -26,7 +26,7 @@
 				<mat-form-field appearance="fill">
 					<mat-label>Matière</mat-label>
 
-					<mat-select (selectionChange)="onChange($event.value)" formControlName="secondCtrl">
+					<mat-select (selectionChange)="onChange($event.value)" formControlName="secondCtrl" [compareWith]="compareById">
 						<mat-option *ngFor="let course of courses" [value]="course.id">
 							{{course.nom}}
 						</mat-option>

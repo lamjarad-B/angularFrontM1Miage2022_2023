@@ -40,6 +40,14 @@ export class EditAssignmentComponent implements OnInit
 
 	isLinear = true;
 
+	// Fonction de comparaison pour les matières.
+	// Celle par défaut semble ne pas fonctionner correctement (?)
+	// https://stackoverflow.com/a/48916318 / https://github.com/angular/components/issues/10214#issuecomment-369746958
+	compareById( object1: any, object2: any )
+	{
+		return object1 == object2;
+	}
+
 	// Constructeur.
 	constructor(
 		private _formBuilder: FormBuilder,
@@ -63,7 +71,7 @@ export class EditAssignmentComponent implements OnInit
 			this.firstFormGroup.setValue( { firstCtrl: assignment.nom } );
 			this.secondFormGroup.setValue( { secondCtrl: assignment.course.toString() } );
 			this.thirdFormGroup.setValue( { thirdCtrl: assignment.dateDeRendu.toString() } );
-			this.fourthFormGroup.setValue( { fourthCtrl: assignment.note.toString() } );
+			this.fourthFormGroup.setValue( { fourthCtrl: ( assignment.note || 0 ).toString() } );
 		} );
 
 		// Récupération de toutes les matières (avec pagination).
