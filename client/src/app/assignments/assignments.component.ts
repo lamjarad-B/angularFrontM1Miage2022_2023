@@ -17,7 +17,6 @@ export class AssignmentsComponent implements OnInit
 	note = 0;
 	rendu = false;
 	course = 0;
-	dateRendu!: Date;
 
 	// Devoir sélectionné par l'utilisateur.
 	assignmentSelectionne!: Assignment | undefined;

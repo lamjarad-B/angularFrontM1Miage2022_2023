@@ -1,3 +1,39 @@
+/* Conteneur principal */
+section {
+	display: flex;
+	flex-direction: column;
+}
+
+/* Premier conteneur secondaire */
+section header {
+	display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+/* Filtres de recherche */
+section > header nav {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+section > header nav .name_filter {
+	width: 200px;
+}
+
+/* Statistiques de la page */
+section > header aside {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+section > header aside p {
+	margin: 0;
+}
+
+/* Tableau des devoirs */
 .rendu {
 	color: green;
 	border: 1px solid black;
@@ -8,58 +44,7 @@
 	border: 1px solid black;
 }
 
-header {
-	background-color: aqua;
-}
-
-#toolbar {
-	display: flex;
-	justify-content: space-between;
-}
-
-mat-icon[fonticon = home] {
-	height: 50px;
-	width: 50px;
-	font-size: 3rem;
-}
-
-.name_filter {
-	width: 200px;
-}
-
-#sidenav {
-	width: auto;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-}
-
-#sidenav mat-list {
-	padding: 1rem;
-}
-
-#sidenav mat-nav-list {
-	padding: 0;
-}
-
-.menuNav {
-	display: inline-block;
-	margin-right: 2rem;
-}
-
 .nonSoumis {
 	background-color: red;
 	border: 1px solid black;
-
-}
-.container {
-	display: flex;
-	flex-direction: column;
-}
-.ajouterBtn {
-	align-self: flex-end;
-}
-
-.containerButtonPreviousNext {
-	text-align: center;
 }

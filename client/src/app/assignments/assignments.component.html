@@ -1,46 +1,33 @@
-<div id="toolbar">
-	<!-- Lien vers l'accueil -->
-	<a routerLink="/home"><mat-icon aria-hidden="false" fontIcon="home"></mat-icon></a>
-</div>
+<section>
+	<!-- En-tête du composant -->
+	<header>
+		<nav>
+			<!-- Filtre par nom (navigation) -->
+			<mat-form-field class="name_filter">
+				<mat-label>Filtrer par nom</mat-label>
+				<input matInput type="text" (ngModelChange)="onUpdateNameFilter($event)" [(ngModel)]="nameFilter">
 
-<!-- Ne devrait plus exister ?
-<mat-sidenav-container id="sidenav" mode="side" *ngIf="isLogged">
-	<mat-list>
-		<mat-nav-list class="menuNav"><a routerLink="/">Liste des devoirs</a></mat-nav-list>
-		<mat-nav-list class="menuNav"><a routerLink="/">Ajout d'un devoir</a></mat-nav-list>
-		<mat-nav-list class="menuNav"><a routerLink="/">Modification d'un devoir</a></mat-nav-list>
-		<mat-nav-list class="menuNav"><a routerLink="/">Suppression d'un devoir</a></mat-nav-list>
-		<mat-nav-list class="menuNav"><a routerLink="/">Génération de données de test</a></mat-nav-list>
-	</mat-list>
-</mat-sidenav-container> -->
+				<button *ngIf="nameFilter" matSuffix mat-icon-button aria-label="Clear" (click)="nameFilter=''; onUpdateNameFilter($event);">
+					<mat-icon>close</mat-icon>
+				</button>
+			</mat-form-field>
 
-<p>Nombre total de pages : <strong>{{totalPages}}</strong></p>
-<p>Nombre total de devoirs : <strong>{{totalDocs}}</strong></p>
+			<!-- Filtre par rendu/non-rendu -->
+			<mat-checkbox class="rendu_filter" (change)="onUpdateRenduFilter()" [(ngModel)]="renduFilter">Afficher seulement les devoirs rendus ?</mat-checkbox>
+		</nav>
 
-<main class="container">
-	<!-- Filtre par nom -->
-	<mat-form-field class="name_filter">
-		<mat-label>Filtrer par nom</mat-label>
-		<input matInput type="text" (ngModelChange)="onUpdateNameFilter($event)" [(ngModel)]="nameFilter">
+		<aside>
+			<!-- Statistiques de la page (contrôles annexes) -->
+			<p>Nombre total de pages : <strong>{{totalPages}}</strong></p>
+			<p>Nombre total de devoirs : <strong>{{totalDocs}}</strong></p>
 
-		<button *ngIf="nameFilter" matSuffix mat-icon-button aria-label="Clear" (click)="nameFilter=''; onUpdateNameFilter($event);">
-			<mat-icon>close</mat-icon>
-		</button>
-	</mat-form-field>
-
-	<!-- Filtre par rendu/non-rendu -->
-	<mat-checkbox class="rendu_filter" (change)="onUpdateRenduFilter()" [(ngModel)]="renduFilter">Afficher seulement les devoirs rendus ?</mat-checkbox>
-
-	<!-- Bouton pour afficher le formulaire -->
-	<div class="ajouterBtn" *ngIf="!formVisible">
-		<button class="ajouterBtn" mat-flat-button color="accent" (click)="onAddAssignmentBtnClick()" *ngIf="isLogged">Ajouter Assignment</button>
-	</div>
+			<!-- Bouton pour afficher le formulaire -->
+			<button class="ajouterBtn" mat-flat-button color="accent" (click)="onAddAssignmentBtnClick()" *ngIf="isLogged">Ajouter un nouveau devoir</button>
+		</aside>
+	</header>
 
 	<!-- Formulaire d'ajout d'un nouveau devoir -->
 	<app-add-assignment *ngIf="formVisible"></app-add-assignment>
-
-	<!-- Affichage de la date de rendu du devoir -->
-	<p *ngIf="dateRendu">{{nomDevoir}} date de rendu =  {{dateRendu | date:'dd/MM/yyyy'}}</p>
 
 	<!-- Listage des devoirs -->
 	<mat-list *ngFor="let assignment of assignments">
@@ -60,4 +47,4 @@
 			<mat-divider></mat-divider>
 		</nav>
 	</mat-list>
-</main>
+</section>

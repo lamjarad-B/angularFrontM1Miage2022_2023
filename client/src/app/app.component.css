@@ -1,49 +1,39 @@
-
-h1 {
-	text-decoration: underline;
-}
-
-section {
-	display: table;
-}
-
-.example-label {
-	display: table-cell;
-	font-size: 14px;
-	margin-left: 8px;
-	min-width: 120px;
-}
-
-.example-button-row {
-	display: table-cell;
-	width: 490px;
-}
-
-.example-button-row .mat-button-base {
-	margin: 8px 8px 8px 0;
-}
-
-.example-flex-container {
+/* Liens et mécanismes de connexion */
+main > header section:first-of-type {
 	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-.example-button-container {
+/* Titre et logo du site */
+main > header h1 {
+	display: inline-block;
+	font-size: 2rem;
+	margin-top: 0;
+}
+
+main > header mat-icon {
+	margin-right: 1rem;
+}
+
+/* Bouton de connexion/déconnexion */
+main > header section:first-of-type div {
 	display: flex;
-	justify-content: center;
-	width: 120px;
+	gap: 0.5rem;
+	flex-direction: column;
+	align-items: flex-end;
+	margin-bottom: 1rem;
 }
 
-.login mat-form-field + mat-form-field {
-	margin-left: 8px;
+/* Formulaire de connexion */
+main > header section:nth-of-type(2) {
+	gap: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
-.example-right-align {
-	text-align: right;
-}
-
-input.example-right-align::-webkit-outer-spin-button,
-input.example-right-align::-webkit-inner-spin-button {
-	display: none;
+/* Séparateur */
+main > hr {
+	margin-bottom: 1.25rem;
 }
