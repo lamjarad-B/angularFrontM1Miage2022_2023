@@ -5,9 +5,9 @@
 			<!-- Filtre par nom (navigation) -->
 			<mat-form-field class="name_filter">
 				<mat-label>Filtrer par nom</mat-label>
-				<input matInput type="text" (ngModelChange)="onUpdateNameFilter($event)" [(ngModel)]="nameFilter">
+				<input matInput type="text" (keyup)="applyFilter($event)" [(ngModel)]="nameFilter">
 
-				<button *ngIf="nameFilter" matSuffix mat-icon-button aria-label="Clear" (click)="nameFilter=''; onUpdateNameFilter($event);">
+				<button *ngIf="nameFilter" matSuffix mat-icon-button aria-label="Clear" (click)="nameFilter=''; applyFilter($event);">
 					<mat-icon>close</mat-icon>
 				</button>
 			</mat-form-field>
@@ -17,10 +17,6 @@
 		</nav>
 
 		<aside>
-			<!-- Statistiques de la page (contrôles annexes) -->
-			<p>Nombre total de pages : <strong>{{totalPages}}</strong></p>
-			<p>Nombre total de devoirs : <strong>{{totalDocs}}</strong></p>
-
 			<!-- Bouton pour afficher le formulaire -->
 			<button class="ajouterBtn" mat-flat-button color="accent" (click)="onAddAssignmentBtnClick()" *ngIf="isLogged">Ajouter un nouveau devoir</button>
 		</aside>
@@ -30,21 +26,65 @@
 	<app-add-assignment *ngIf="formVisible"></app-add-assignment>
 
 	<!-- Listage des devoirs -->
-	<mat-list *ngFor="let assignment of assignments">
-		<nav>
-			<h3 mat-subheader>{{assignment.dateDeRendu | date:'dd/MM/yyyy'}}</h3>
+	<section class="mat-elevation-z8">
+		<table mat-table [dataSource]="dataSource" matSort>
+			<!-- Identifiant du devoir -->
+			<ng-container matColumnDef="id">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>Identifiant</th>
+				<td mat-cell *matCellDef="let row">{{row.id}}</td>
+			</ng-container>
 
-			<mat-list-item (click)="assignmentClique(assignment)">
-				<li appRendu *ngIf="assignment.rendu; else nonSoumis">{{assignment.nom}}</li>
+			<!-- Nom du devoir -->
+			<ng-container matColumnDef="name">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
+				<td mat-cell *matCellDef="let row">{{row.nom}}</td>
+			</ng-container>
 
-				<ng-template #nonSoumis>
-					<li class="nonSoumis">{{assignment.nom}} <strong>NON RENDU</strong></li>
-				</ng-template>
-			</mat-list-item>
+			<!-- Auteur du devoir -->
+			<ng-container matColumnDef="author">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>Auteur</th>
+				<td mat-cell *matCellDef="let row">{{row.auteur}}</td>
+			</ng-container>
 
-			<app-assignment-detail [assignmentTransmis]="assignmentSelectionne" *ngIf="assignmentSelectionne === assignment"></app-assignment-detail>
+			<!-- Matière du devoir -->
+			<ng-container matColumnDef="course">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>Matière</th>
+				<td mat-cell *matCellDef="let row">{{row.course}}</td>
+			</ng-container>
 
-			<mat-divider></mat-divider>
-		</nav>
-	</mat-list>
+			<!-- Date de rendu du devoir -->
+			<ng-container matColumnDef="date">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>Date de rendu</th>
+				<td mat-cell *matCellDef="let row">{{row.dateDeRendu | date:'dd/MM/yyyy'}}</td>
+			</ng-container>
+
+			<!-- Remarque du devoir -->
+			<ng-container matColumnDef="remarque">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>Remarque</th>
+				<td mat-cell *matCellDef="let row">{{row.remarque}}</td>
+			</ng-container>
+
+			<!-- Note du devoir -->
+			<ng-container matColumnDef="note">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>Note/20</th>
+				<td mat-cell *matCellDef="let row">{{row.note}}</td>
+			</ng-container>
+
+			<!-- Devoir rendu ? -->
+			<ng-container matColumnDef="rendu">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>Rendu ?</th>
+				<td mat-cell *matCellDef="let row">{{row.rendu ? "Oui" : "Non"}}</td>
+			</ng-container>
+
+			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+			<!-- Aucune donnée disponible -->
+			<tr class="mat-row" *matNoDataRow>
+				<td class="mat-cell" colspan="4">Aucune donnée ne correspond au filtre sélectionné</td>
+			</tr>
+		</table>
+
+		<mat-paginator [pageSizeOptions]="[5, 10, 25, 50]" showFirstLastButtons aria-label="Sélection du nombre de résultats par page"></mat-paginator>
+	</section>
 </section>

@@ -40,7 +40,7 @@ export class AssignmentDetailComponent implements OnInit
 		if ( !this.assignmentTransmis ) return;
 
 		// On récupère le nom du cours et le nom du professeur.
-		this.coursesService.getCourse( this.assignmentTransmis.course )
+		this.coursesService.getCourse( this.assignmentTransmis.course as number )
 			.subscribe( course =>
 			{
 				this.courseName = course.nom;

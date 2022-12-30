@@ -15,7 +15,7 @@ import { CoursesService } from "./shared/courses.service";
 export class AppComponent
 {
 	// Titre du composant.
-	title = "Application de gestion des devoirs à rendre (Assignments)";
+	title = "Application de gestion des devoirs à rendre";
 
 	// Propriétés de l'email et du mot de passe.
 	email = "";

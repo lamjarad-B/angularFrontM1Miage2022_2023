@@ -1,7 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import { OnInit, ViewChild, Component } from "@angular/core";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
+import { MatTableDataSource } from "@angular/material/table";
 import { AuthService } from "../shared/auth.service";
 import { AssignmentsService } from "../shared/assignments.service";
+import { CoursesService } from "src/app/shared/courses.service";
 import { Assignment } from "../models/assignment.model";
+import { Course } from "../models/course.model";
 
 @Component( {
 	selector: "app-assignments",
@@ -11,22 +16,31 @@ import { Assignment } from "../models/assignment.model";
 
 export class AssignmentsComponent implements OnInit
 {
+	// Pagination et tri des résultats.
+	@ViewChild( MatPaginator )
+	paginator!: MatPaginator;
+
+	@ViewChild( MatSort )
+	sort!: MatSort;
+
 	// Propriétés du composant.
 	nomDevoir = "";
 	remarque = "";
 	note = 0;
 	rendu = false;
 	course = 0;
+	dataSource!: MatTableDataSource<Assignment>;
+	displayedColumns: string[] = [ "id", "name", "author", "course", "date", "remarque", "note", "rendu" ];
 
 	// Devoir sélectionné par l'utilisateur.
-	assignmentSelectionne!: Assignment | undefined;
+	selection!: Assignment | undefined;
 
 	// Affichage ou non du formulaire d'ajout d'un devoir.
 	formVisible = false;
 
 	// Pour la pagination des résultats.
 	page: number = 1;
-	limit: number = 10;
+	limit: number = 1000;
 	totalDocs!: number;
 	totalPages!: number;
 	hasPrevPage!: boolean;
@@ -35,6 +49,7 @@ export class AssignmentsComponent implements OnInit
 	nextPage!: number;
 	nameFilter!: string;
 	renduFilter!: boolean;
+	courses!: string[];
 	assignments!: Assignment[];
 
 	// État de connexion
@@ -46,40 +61,63 @@ export class AssignmentsComponent implements OnInit
 	// Constructeur.
 	constructor(
 		private authService: AuthService,
+		private coursesService: CoursesService,
 		private assignmentsService: AssignmentsService
 	) { }
 
 	// Méthode d'initialisation.
 	ngOnInit(): void
 	{
-		// Récupération de tous les devoirs (avec pagination).
-		this.assignmentsService.getAssignments( this.page, this.limit, this.nameFilter, this.renduFilter )
-			.subscribe( data =>
+		// Récupération de toutes les matières (avec pagination).
+		this.coursesService.getCourses( this.page, this.limit ).subscribe( courses =>
+		{
+			// Transformation des données pour n'avoir que le nom des matières.
+			this.courses = courses.docs.map( ( course: Course ) =>
 			{
-				this.assignments = data.docs;
-				this.page = data.page;
-				this.limit = data.limit;
-				this.totalDocs = data.totalDocs;
-				this.totalPages = data.totalPages;
-				this.hasPrevPage = data.hasPrevPage;
-				this.prevPage = data.prevPage;
-				this.hasNextPage = data.hasNextPage;
-				this.nextPage = data.nextPage;
+				return course.nom;
 			} );
+
+			// Récupération de tous les devoirs (avec pagination).
+			this.assignmentsService.getAssignments( this.page, this.limit, this.nameFilter, this.renduFilter )
+				.subscribe( assignments =>
+				{
+					this.assignments = assignments.docs;
+					this.page = assignments.page;
+					this.limit = assignments.limit;
+					this.totalDocs = assignments.totalDocs;
+					this.totalPages = assignments.totalPages;
+					this.hasPrevPage = assignments.hasPrevPage;
+					this.prevPage = assignments.prevPage;
+					this.hasNextPage = assignments.hasNextPage;
+					this.nextPage = assignments.nextPage;
+
+					// Modification des données pour n'avoir que le nom des matières.
+					this.assignments = this.assignments.map( ( assignment: Assignment ) =>
+					{
+						assignment.course = this.courses[ assignment.course as number - 1 ];
+						return assignment;
+					} );
+
+					// Création du tableau de données.
+					this.dataSource = new MatTableDataSource( this.assignments );
+					this.dataSource.paginator = this.paginator;
+					this.dataSource.sort = this.sort;
+				} );
+		} );
 	}
 
 	// Méthode pour sélectionner un devoir.
 	assignmentClique( assignment: Assignment )
 	{
-		if ( this.assignmentSelectionne === assignment )
+		if ( this.selection === assignment )
 		{
 			// Si le devoir est déjà sélectionné, on cache alors ses détails.
-			this.assignmentSelectionne = undefined;
+			this.selection = undefined;
 		}
 		else
 		{
 			// Dans le cas contraire, on met à jour les détails du devoir.
-			this.assignmentSelectionne = assignment;
+			this.selection = assignment;
 		}
 	}
 
@@ -96,16 +134,15 @@ export class AssignmentsComponent implements OnInit
 	}
 
 	// Méthode pour filtrer les résultats de la recherche (nom du devoir).
-	onUpdateNameFilter( event: any )
+	applyFilter( event: Event )
 	{
-		// Note : Angular semble avoir du mal à me donner une valeur à la première saisie...
-		// Source : https://www.angularjswiki.com/angular/ngmodelchange-change-angular/
-		if ( this.nameFilter !== "" )
-		{
-			this.nameFilter = event;
-		}
+		const filterValue = ( event.target as HTMLInputElement ).value;
+		this.dataSource.filter = filterValue ? filterValue.trim().toLowerCase() : "";
 
-		this.ngOnInit();
+		if ( this.dataSource.paginator )
+		{
+			this.dataSource.paginator.firstPage();
+		}
 	}
 
 	// Méthode pour filtrer les résultats des recherches (devoir rendu ou non).

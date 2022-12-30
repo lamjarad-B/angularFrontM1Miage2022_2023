@@ -11,11 +11,11 @@
 
 			<div>
 				<!-- Bouton de connexion/déconnexion -->
-				<button class="ajouterBtn" mat-flat-button color="accent" (click)="showLogin()" *ngIf="!loginVisible && !isLogged">Se connecter</button>
-				<button class="ajouterBtn" mat-flat-button color="accent" (click)="logout()" *ngIf="isLogged">Se déconnecter</button>
+				<button class="ajouterBtn" mat-flat-button color="primary" (click)="showLogin()" *ngIf="!loginVisible && !isLogged">Se connecter</button>
+				<button class="ajouterBtn" mat-flat-button color="primary" (click)="logout()" *ngIf="isLogged">Se déconnecter</button>
 
 				<!-- Bouton pour peupler la base de données -->
-				<button mat-flat-button color="primary" (click)="initialiserLaBaseAvecDonneesDeTest()">PeuplerBD</button>
+				<button mat-flat-button color="accent" (click)="initialiserLaBaseAvecDonneesDeTest()">Peupler BDD</button>
 			</div>
 		</section>
 
