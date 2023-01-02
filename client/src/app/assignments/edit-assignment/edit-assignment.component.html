@@ -78,6 +78,23 @@
 		</form>
 	</mat-step>
 
+	<!-- Remarque du devoir -->
+	<mat-step [stepControl]="fifthFormGroup">
+		<form [formGroup]="fifthFormGroup">
+			<ng-template matStepLabel>Indiquez la remarque</ng-template>
+
+			<mat-form-field appearance="fill">
+				<mat-label>Remarque du devoir</mat-label>
+				<input matInput placeholder="Remarque du devoir" formControlName="fifthCtrl" required>
+			</mat-form-field>
+
+			<div>
+				<button mat-button matStepperPrevious>Précédent</button>
+				<button mat-button matStepperNext>Suivant</button>
+			</div>
+		</form>
+	</mat-step>
+
 	<mat-step>
 		<ng-template matStepLabel>Terminé</ng-template>
 

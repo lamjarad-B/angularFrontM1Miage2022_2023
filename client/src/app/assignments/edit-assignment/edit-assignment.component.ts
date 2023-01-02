@@ -38,6 +38,10 @@ export class EditAssignmentComponent implements OnInit
 		fourthCtrl: [ "", Validators.required ], // Note du devoir.
 	} );
 
+	fifthFormGroup = this._formBuilder.group( {
+		fifthCtrl: [ "", Validators.required ], // Remarque du devoir.
+	} );
+
 	isLinear = true;
 
 	// Fonction de comparaison pour les matières.
@@ -72,6 +76,7 @@ export class EditAssignmentComponent implements OnInit
 			this.secondFormGroup.setValue( { secondCtrl: assignment.course.toString() } );
 			this.thirdFormGroup.setValue( { thirdCtrl: assignment.dateDeRendu.toString() } );
 			this.fourthFormGroup.setValue( { fourthCtrl: assignment.note.toString() } );
+			this.fifthFormGroup.setValue( { fifthCtrl: assignment.remarque } );
 
 			// On récupère les informations de la matière.
 			this.onChange( assignment.course as number );
@@ -100,7 +105,7 @@ export class EditAssignmentComponent implements OnInit
 	onSaveAssignment()
 	{
 		// Si le devoir n'existe pas ou si le formulaire n'est pas valide, on ne fait rien.
-		if ( !this.assignment || !this.firstFormGroup.value.firstCtrl || !this.secondFormGroup.value.secondCtrl || !this.thirdFormGroup.value.thirdCtrl || !this.fourthFormGroup.value.fourthCtrl )
+		if ( !this.assignment || !this.firstFormGroup.value.firstCtrl || !this.secondFormGroup.value.secondCtrl || !this.thirdFormGroup.value.thirdCtrl || !this.fourthFormGroup.value.fourthCtrl || !this.fifthFormGroup.value.fifthCtrl )
 		{
 			return;
 		}
@@ -110,6 +115,7 @@ export class EditAssignmentComponent implements OnInit
 		this.assignment.course = +this.secondFormGroup.value.secondCtrl;
 		this.assignment.dateDeRendu = new Date( this.thirdFormGroup.value.thirdCtrl );
 		this.assignment.note = Math.min( Math.max( +this.fourthFormGroup.value.fourthCtrl, 0 ), 20 );
+		this.assignment.remarque = this.fifthFormGroup.value.fifthCtrl;
 		this.assignment.rendu = true;
 		this.assignmentsService
 			.updateAssignment( this.assignment )
