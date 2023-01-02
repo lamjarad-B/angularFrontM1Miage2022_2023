@@ -5,6 +5,7 @@ export class Assignment
 	nom!: string;
 	auteur!: string;
 	course!: number | string;
+	_course?: string;
 	dateDeRendu!: Date | string;
 	remarque!: string;
 	note!: number;

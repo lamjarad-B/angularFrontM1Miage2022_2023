@@ -45,7 +45,7 @@ export class AssignmentDetailComponent implements OnInit
 			.subscribe( data =>
 			{
 				// Filtrage des résultats avec le nom de la matière.
-				data.docs = data.docs.filter( ( course: Course ) => course.nom === this.assignmentTransmis?.course )[ 0 ];
+				data.docs = data.docs.filter( ( course: Course ) => course.id === this.assignmentTransmis?.course )[ 0 ];
 
 				// Définition des propriétés du composant.
 				this.courseName = data.docs.nom;

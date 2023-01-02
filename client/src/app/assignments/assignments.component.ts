@@ -95,7 +95,7 @@ export class AssignmentsComponent implements OnInit
 					// Modification des données pour n'avoir que le nom des matières.
 					this.assignments = this.assignments.map( ( assignment: Assignment ) =>
 					{
-						assignment.course = this.courses[ assignment.course as number - 1 ];
+						assignment._course = this.courses[ assignment.course as number - 1 ];
 						return assignment;
 					} );
 
