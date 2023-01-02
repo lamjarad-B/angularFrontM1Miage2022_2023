@@ -16,3 +16,10 @@ Pour exécuter ce projet sur votre machine locale, voici ce que vous devez faire
 - Dans le dossier `client`, exécutez la commande `npm start` et patientez l'exécution automatique des scripts d'Angular.
 - Dans le dossier `server`, exécutez la commande `npm start` et patientez que le micro-programme appelé « *nodemon* » génère une instance du serveur NodeJS.
 - Vous pouvez vous lancer, la base de données sera automatiquement connectée !
+
+## Authentification
+
+Si vous voulez tester ce projet ou si vous êtes l'enseignant en charge de la notation de ce devoir, voici les identifiants pour accéder au compte administrateur :
+
+- <ins>Nom d'utilisateur</ins> : `brahim@gmail.com`
+- <ins>Mot de passe</ins> : `1234`
