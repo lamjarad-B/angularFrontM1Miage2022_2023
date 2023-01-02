@@ -71,7 +71,10 @@ export class EditAssignmentComponent implements OnInit
 			this.firstFormGroup.setValue( { firstCtrl: assignment.nom } );
 			this.secondFormGroup.setValue( { secondCtrl: assignment.course.toString() } );
 			this.thirdFormGroup.setValue( { thirdCtrl: assignment.dateDeRendu.toString() } );
-			this.fourthFormGroup.setValue( { fourthCtrl: ( assignment.note || 0 ).toString() } );
+			this.fourthFormGroup.setValue( { fourthCtrl: assignment.note.toString() } );
+
+			// On récupère les informations de la matière.
+			this.onChange( assignment.course as number );
 		} );
 
 		// Récupération de toutes les matières (avec pagination).
@@ -107,6 +110,7 @@ export class EditAssignmentComponent implements OnInit
 		this.assignment.course = +this.secondFormGroup.value.secondCtrl;
 		this.assignment.dateDeRendu = new Date( this.thirdFormGroup.value.thirdCtrl );
 		this.assignment.note = Math.min( Math.max( +this.fourthFormGroup.value.fourthCtrl, 0 ), 20 );
+		this.assignment.rendu = true;
 		this.assignmentsService
 			.updateAssignment( this.assignment )
 			.subscribe( () =>
