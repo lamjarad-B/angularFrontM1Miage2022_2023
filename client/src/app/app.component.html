@@ -9,13 +9,13 @@
 				<h1>{{title}}</h1>
 			</a>
 
-			<div>
+			<div class="btnConnexion">
 				<!-- Bouton de connexion/déconnexion -->
 				<button class="ajouterBtn" mat-flat-button color="primary" (click)="showLogin()" *ngIf="!loginVisible && !isLogged">Se connecter</button>
 				<button class="ajouterBtn" mat-flat-button color="primary" (click)="logout()" *ngIf="isLogged">Se déconnecter</button>
 
 				<!-- Bouton pour peupler la base de données -->
-				<button mat-flat-button color="accent" (click)="initialiserLaBaseAvecDonneesDeTest()">Peupler BDD</button>
+				<!-- <button mat-flat-button color="accent" (click)="initialiserLaBaseAvecDonneesDeTest()">Peupler BDD</button> -->
 			</div>
 		</section>
 

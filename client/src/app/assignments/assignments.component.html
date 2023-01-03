@@ -1,7 +1,7 @@
 <section>
 	<!-- En-tête du composant -->
 	<header>
-		<nav>
+		<!-- <nav class="filtre"> -->
 			<!-- Filtre par nom (navigation) -->
 			<mat-form-field class="name_filter">
 				<mat-label>Filtrer par nom</mat-label>
@@ -14,7 +14,7 @@
 
 			<!-- Filtre par rendu/non-rendu -->
 			<mat-checkbox class="rendu_filter" (change)="onUpdateRenduFilter()" [(ngModel)]="renduFilter">Afficher seulement les devoirs rendus ?</mat-checkbox>
-		</nav>
+		<!-- </nav> -->
 
 		<aside>
 			<!-- Bouton pour afficher le formulaire -->

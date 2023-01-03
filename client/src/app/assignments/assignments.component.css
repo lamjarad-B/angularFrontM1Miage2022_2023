@@ -13,10 +13,18 @@ section header {
 	align-items: center;
 }
 
+section > header{
+	display: flex;
+	justify-content: space-around;
+}
 /* Filtres de recherche */
 section > header nav {
-	display: flex;
-	flex-direction: column;
+	/* display: flex;
+	flex-direction: column; */
+
+	/* width: 100%; */
+	/* margin-left: auto;
+	margin-right: auto; */
 }
 
 section > header nav .name_filter {
@@ -61,4 +69,11 @@ table .mat-mdc-no-data-row {
 
 tr.is-clicked {
 	font-weight: bold;
+}
+
+table .mat-mdc-header-row{
+	background-color: #3F51B5;
+}
+table .mat-sort-header{
+	color: #fff;
 }
