@@ -3,6 +3,7 @@ import { Course } from "../models/course.model";
 import { forkJoin, Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { initialCourses } from "./data";
+import { environment } from "../../environments/environment";
 
 @Injectable( { // injecter tous les services qui ont provideIn root à la racine directement
 	// Permet d'éviter d'ajouter les services dans les modules
@@ -21,8 +22,7 @@ export class CoursesService
 
 	constructor( private http: HttpClient ) { }
 
-	url = "http://localhost:8010/api/courses";
-	//url = "https://api-cours-angular-2023.herokuapp.com/api/courses";
+	url = environment.production ? "https://assignments-gzwx.onrender.com/api/courses" : "http://localhost:8010/api/courses";
 
 	// Récupération de toutes les matières.
 	getCourses( page: number, limit: number ): Observable<any>

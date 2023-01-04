@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { initialAssignments } from "./data";
 import { Course } from "../models/course.model";
 import { CoursesService } from "./courses.service";
+import { environment } from "../../environments/environment";
 
 @Injectable( { // injecter tous les services qui ont provideIn root à la racine directement
 	// Permet d'éviter d'ajouter les services dans les modules
@@ -23,8 +24,7 @@ export class AssignmentsService
 
 	constructor( private http: HttpClient, private coursesService: CoursesService ) { }
 
-	url = "http://localhost:8010/api/assignments";
-	//url = "https://api-cours-angular-2023.herokuapp.com/api/assignments";
+	url = environment.production ? "https://assignments-gzwx.onrender.com/api/assignments" : "http://localhost:8010/api/assignments";
 
 	// Récupération de tous les devoirs.
 	getAssignments( page: number, limit: number, name: string, rendu: boolean ): Observable<any>

@@ -24,7 +24,7 @@ mongoose.connect( uri )
 
 // Autorisation des requêtes HTTP ayant des requêtes CORS.
 app.use( cors( {
-	origin: "http://localhost:4200", // Le serveur accepte uniquement les requêtes du domaine front.
+	origin: "*", // Le serveur accepte uniquement les requêtes du domaine front.
 	credentials: true, // La transmission d'informations de connexion est autorisée.
 	allowedHeaders: [ "Content-Type", "Authorization" ] // La transmission de certains types d'en-têtes est autorisée.
 } ) );

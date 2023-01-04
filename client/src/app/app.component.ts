@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { AuthService } from "./shared/auth.service";
 import { AssignmentsService } from "./shared/assignments.service";
 import { CoursesService } from "./shared/courses.service";
+import { environment } from "../environments/environment";
 
 @Component( {
 	selector: "app-root",
@@ -53,7 +54,7 @@ export class AppComponent
 		if ( token && expiration && Date.now() + this.authService.jwtDuration > +expiration )
 		{
 			// Si c'est un jeton valide alors on génère une nouvelle promesse afin de réaliser une requête HTTP à la base de données.
-			this.http.post<any>( "http://localhost:8010/api/auth/token", null, {
+			this.http.post<any>( environment.production ? "https://assignments-gzwx.onrender.com/api/auth/token" : "http://localhost:8010/api/auth/token", null, {
 				withCredentials: true,
 				headers: new HttpHeaders( {
 					"Authorization": "Bearer " + token,

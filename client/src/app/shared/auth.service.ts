@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { environment } from "../../environments/environment";
 
 @Injectable( {
 	providedIn: "root"
@@ -31,7 +32,7 @@ export class AuthService
 		// On active une nouvelle promesse afin de réaliser une requête HTTP à la base de données.
 		return new Promise( ( resolve, _reject ) =>
 		{
-			this.http.post<any>( "http://localhost:8010/api/auth/login", { email: email, password: password }, this.HttpOptions )
+			this.http.post<any>( environment.production ? "https://assignments-gzwx.onrender.com/api/auth/login" : "http://localhost:8010/api/auth/login", { email: email, password: password }, this.HttpOptions )
 				.subscribe( {
 					next: ( httpData ) =>
 					{
