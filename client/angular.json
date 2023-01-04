@@ -31,7 +31,7 @@
           "configurations": {
             "production": {
               "budgets": [
-                Replace ces 4 lignes par ça :
+                
 {
   "type": "initial",
   "maximumWarning": "2mb",
