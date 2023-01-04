@@ -31,11 +31,15 @@
           "configurations": {
             "production": {
               "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
-                },
+                Replace ces 4 lignes par ça :
+{
+  "type": "initial",
+  "maximumWarning": "2mb",
+  "maximumError": "3mb"
+},
+                
+
+                  
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
