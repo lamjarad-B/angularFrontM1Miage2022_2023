@@ -6,13 +6,13 @@ function getAssignments( request, result )
 	// Filtre de recherche.
 	const filter = {};
 
-	if ( request.query.name !== "undefined" && request.query.name !== "" )
+	if ( request.query.name !== "undefined" && request.query.name !== undefined && request.query.name !== "" )
 	{
 		// Recherche par nom.
 		filter.nom = { $regex: request.query.name };
 	}
 
-	if ( request.query.rendu !== "undefined" && request.query.rendu === "true" )
+	if ( request.query.rendu !== "undefined" && request.query.name !== undefined && request.query.rendu === "true" )
 	{
 		// Recherche par devoir rendu.
 		filter.rendu = true;
