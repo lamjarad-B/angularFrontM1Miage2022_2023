@@ -45,3 +45,17 @@ main > hr {
 .btnConnexion{
 	margin-top: 5rem;
 }
+
+
+/** STYLE SMARTPHONE **/
+@media (hover: none), (max-width: 860px){
+	h3{
+		font-size: 70%;
+	}
+	main > header h1 {
+		font-size: 1em;
+	}
+	.btnConnexion{
+		font-size: 0.8em;
+	}
+}

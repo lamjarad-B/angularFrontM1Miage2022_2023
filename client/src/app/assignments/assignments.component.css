@@ -77,3 +77,12 @@ table .mat-mdc-header-row{
 table .mat-sort-header{
 	color: #fff;
 }
+
+@media (hover: none), (max-width: 860px){
+	p,h3, a, label, td, span, th, .btnConnexion, input{
+		font-size: 80%;
+	}
+	td, th{
+		padding: 0 2px;
+	}
+}

@@ -8,3 +8,10 @@ footer{
     color: white;
     text-align: center;
 }
+
+/** STYLE SMARTPHONE **/
+@media (hover: none), (max-width: 860px){
+    #footer p{
+        font-size: 70%;
+    }
+}
