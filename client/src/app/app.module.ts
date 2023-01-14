@@ -34,6 +34,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { RouterModule, Routes } from "@angular/router";
 import { EditAssignmentComponent } from "./assignments/edit-assignment/edit-assignment.component";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { FooterComponent } from './footer/footer.component';
 
 const routes: Routes = [
 	//home page, ce qui sera affiché avec http://localhost:4200/
@@ -54,7 +55,8 @@ const routes: Routes = [
 		RenduDirective,
 		AssignmentDetailComponent,
 		AddAssignmentComponent,
-		EditAssignmentComponent
+		EditAssignmentComponent,
+  FooterComponent
 	],
 	imports: [
 		//Pour angular material

@@ -5,6 +5,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
 
 /* Définition des marges par défaut du corps de la page */
-body {
+main {
     margin: 20px;
 }
