@@ -23,3 +23,8 @@ Si vous voulez tester ce projet ou si vous êtes l'enseignant en charge de la no
 
 - <ins>Nom d'utilisateur</ins> : `brahim@gmail.com`
 - <ins>Mot de passe</ins> : `1234`
+
+Il y a aussi un compte utilisateur qui ne sert que pour ajouter un devoir, voici les identifiants pour accéder au compte utilisateur :
+
+- <ins>Nom d'utilisateur</ins> : `yannis@gmail.com`
+- <ins>Mot de passe</ins> : `1234`
