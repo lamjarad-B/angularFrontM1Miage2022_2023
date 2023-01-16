@@ -17,15 +17,7 @@ section > header{
 	display: flex;
 	justify-content: space-around;
 }
-/* Filtres de recherche */
-section > header nav {
-	/* display: flex;
-	flex-direction: column; */
 
-	/* width: 100%; */
-	/* margin-left: auto;
-	margin-right: auto; */
-}
 
 section > header nav .name_filter {
 	width: 200px;

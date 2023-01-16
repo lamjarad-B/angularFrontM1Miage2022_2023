@@ -29,7 +29,11 @@ export class AddAssignmentComponent implements OnInit
 	} );
 
 	thirdFormGroup = this._formBuilder.group( {
-		thirdCtrl: [ "", Validators.required ], // Date de rendu.
+		thirdCtrl: [ "", Validators.required ], // Auteur.
+	} );
+
+	fourthFormGroup = this._formBuilder.group( {
+		fourthCtrl: [ "", Validators.required ], // Date de rendu.
 	} );
 
 	isLinear = true;
@@ -67,7 +71,7 @@ export class AddAssignmentComponent implements OnInit
 	// Méthode pour ajouter un devoir.
 	onSubmit()
 	{
-		if ( !this.firstFormGroup.value.firstCtrl || !this.secondFormGroup.value.secondCtrl || !this.thirdFormGroup.value.thirdCtrl )
+		if ( !this.firstFormGroup.value.firstCtrl || !this.secondFormGroup.value.secondCtrl || !this.thirdFormGroup.value.thirdCtrl  || !this.fourthFormGroup.value.fourthCtrl )
 		{
 			return;
 		}
@@ -76,7 +80,8 @@ export class AddAssignmentComponent implements OnInit
 		newAssignment.id = Math.floor( Math.random() * 10000 );
 		newAssignment.nom = this.firstFormGroup.value.firstCtrl;
 		newAssignment.course = +this.secondFormGroup.value.secondCtrl;
-		newAssignment.dateDeRendu = new Date( this.thirdFormGroup.value.thirdCtrl );
+		newAssignment.auteur = this.thirdFormGroup.value.thirdCtrl;
+		newAssignment.dateDeRendu = new Date( this.fourthFormGroup.value.fourthCtrl );
 		newAssignment.rendu = false;
 
 		this.assignmentsService.addAssignment( newAssignment ).subscribe( () => { } );

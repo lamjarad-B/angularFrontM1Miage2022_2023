@@ -37,15 +37,32 @@
 		</form>
 	</mat-step>
 
-	<!-- Date de rendu -->
+	<!-- Auteur -->
 	<mat-step [stepControl]="thirdFormGroup">
 		<form [formGroup]="thirdFormGroup">
+			<ng-template matStepLabel>Indiquez l'auteur</ng-template>
+
+			<mat-form-field appearance="fill">
+				<mat-label>Auteur du devoir</mat-label>
+				<input matInput placeholder="Auteur du devoir" formControlName="thirdCtrl" required>
+			</mat-form-field>
+
+			<div>
+				<button mat-button matStepperPrevious>Précédent</button>
+				<button mat-button matStepperNext>Suivant</button>
+			</div>
+		</form>
+	</mat-step>
+
+	<!-- Date de rendu -->
+	<mat-step [stepControl]="fourthFormGroup">
+		<form [formGroup]="fourthFormGroup">
 			<ng-template matStepLabel>Indiquez la date de rendu</ng-template>
 
 			<mat-form-field appearance="fill">
 				<mat-label>Date de rendu</mat-label>
 
-				<input matInput [matDatepicker]="picker" name="date" formControlName="thirdCtrl" placeholder="Date de rendu" />
+				<input matInput [matDatepicker]="picker" name="date" formControlName="fourthCtrl" placeholder="Date de rendu" />
 
 				<mat-hint>DD/MM/YYYY</mat-hint>
 
