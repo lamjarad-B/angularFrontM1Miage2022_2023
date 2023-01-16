@@ -29,5 +29,5 @@ Il y a aussi un compte utilisateur qui ne sert que pour ajouter un devoir, voici
 - <ins>Nom d'utilisateur</ins> : `yannis@gmail.com`
 - <ins>Mot de passe</ins> : `1234`
 
-## Vidéo démonstrative de l'application
+## Vidéo démonstrative de l'application:
 - https://www.youtube.com/watch?v=ZGnC5KNqQDI
