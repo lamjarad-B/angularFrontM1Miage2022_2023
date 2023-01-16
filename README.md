@@ -17,6 +17,34 @@ Pour exécuter ce projet sur votre machine locale, voici ce que vous devez faire
 - Dans le dossier `server`, exécutez la commande `npm start` et patientez que le micro-programme appelé « *nodemon* » génère une instance du serveur NodeJS.
 - Vous pouvez vous lancer, la base de données sera automatiquement connectée !
 
+## Fonctionnalités
+
+<ins>Authentification</ins>
+
+- L'utilisateur peut s'authentifier grâce à son adresse électronique et son mot de passe attribué. Si l'utilisateur n'est pas authentifié, alors il peut seulement accéder au tableau de bord avec la liste des devoirs.
+
+- Il est possible que le site garde en mémoire la connexion de l'utilisateur afin de l'authentifier automatiquement lors de la prochaine visite.
+
+- Une fois connecté, un bouton présent dans l'en-tête permet de se déconnecter définitivement du site et bloquer le mécanisme de reconnexion automatique.
+
+<ins>Visualisation</ins>
+
+- En tant qu'utilisateur authentifié, l'utilisateur peut visualiser l'ensemble des devoirs et les informations associées en affichant les détails de chaque devoir (créateur, date de rendu, note, matière, remarque, etc...).
+
+- Si l'utilisateur est un administrateur, alors il peut marquer comme "rendu" le devoir ou effectuer des éditions sur un devoir spécifique (attention, un devoir rendu doit forcément avoir une note / 20).
+
+<ins>Gestion des utilisateurs</ins>
+
+- Il y a donc deux types d'utilisateurs : les utilisateurs "standard" et les utilisateurs "administrateurs" : les utilisateurs classiques ne peuvent pas modifier ou supprimer des devoirs (mais en ajouter ou visualiser des devoirs), alors qu'un administrateur peut effectuer toutes les actions possibles (ajout, modification, édition, suppression, visualisation).
+
+<ins>Gestion des devoirs</ins>
+
+- Une fois connecté, un bouton "Ajouter un devoir" apparaîtra dans l'en-tête de la page pour ajouter un nouveau devoir en offrant la possibilité de renseigner toutes les informations comme le nom, le créateur, la date de rendu, les remarques et la note.
+[22:48]
+- Une fois créé, le devoir sera accessible dans le tableau et pourra être recherché au travers deux filtres : affichage de tous les devoirs rendus ou recherche par nom du devoir. En cliquant sur un devoir, ses détails apparaîtront et il sera possible de modifier les informations ou tout simplement supprimer le devoir.
+
+- Il est important de noter une nouvelle fois qu'il est impossible de marquer comme "rendu" un devoir qui n'est pas noté.
+
 ## Authentification
 
 Si vous voulez tester ce projet ou si vous êtes l'enseignant en charge de la notation de ce devoir, voici les identifiants pour accéder au compte administrateur :
